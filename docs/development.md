@@ -250,3 +250,53 @@ The command reports requested/processed counts and missing CVEs. Database errors
 omit connection details; NVD failures report safe HTTP/error categories. Real
 PostgreSQL tests still require `TEST_DATABASE_URL`. See
 [the NVD decision](decisions/004-nvd-enrichment.md) for rationale and validation.
+
+## Streamlit dashboard
+
+Start PostgreSQL, set `DATABASE_URL`, and install the locked dependencies as
+described above. Apply migrations and ingest KEV first; EPSS and NVD enrichment
+are optional for startup but populate the score displays. Then run from the
+repository root:
+
+```bash
+uv run --locked streamlit run src/threatpulse/dashboard.py \
+  --server.address=127.0.0.1 --server.port=8501 \
+  --server.headless=true --browser.gatherUsageStats=false
+```
+
+On your own machine, open `localhost:8501` in your browser. Keep the terminal
+running; Ctrl+C stops Streamlit without stopping PostgreSQL or deleting data.
+Change the port flag if 8501 is already occupied. The cloud onboarding workspace
+can run and validate the service internally; it does not provide a browser
+preview link. A running process must be restarted in a new cloud task.
+
+The **Overview** tab shows total stored CVEs, CVSS/EPSS coverage, severity counts,
+and the range of latest available EPSS dates. The **Vulnerability explorer** tab
+supports case-insensitive literal text search, vendor/severity filters, and a
+minimum EPSS probability. Empty vendor/severity selections mean all values.
+Searching a complete CVE identifier matches that CVE only; other searches
+match literal text across the listed fields.
+The **Include CVEs without EPSS** checkbox controls whether missing scores remain
+visible independently of the probability threshold. Scores are displayed as
+percentages; percentile is labeled separately from probability. Unknown CVSS
+severity is `UNKNOWN`, and blank numeric scores are not treated as zero.
+
+Choose a CVE to inspect CISA remediation, due date, ransomware campaign use,
+NVD description/status/weaknesses, references, source timestamps, all CVSS source
+metrics, and EPSS history. Each CVE uses its own latest stored EPSS observation,
+so latest dates can differ. An EPSS chart shows probability over recorded dates;
+missing dates are not backfilled. Overview totals always cover the whole stored
+dataset, while table filters apply to the explorer.
+
+The dashboard issues read-only transactions and never ingests data or runs
+migrations. Reruns reload current data, and **Refresh data** triggers a rerun;
+there is no background polling or shared query cache. Database failures show
+actionable messages without connection credentials. No API key is needed to
+browse previously collected data. The app currently reads the full table into
+memory, appropriate for the initial KEV dataset; larger datasets will need
+server-side filtering and pagination.
+
+Run tests with `TEST_DATABASE_URL` set to a development database to exercise
+dashboard queries and Streamlit interactions against isolated schemas. The
+shared test fixture creates and drops those schemas without touching ingestion
+data. See [the dashboard decision](decisions/005-streamlit-dashboard.md).

@@ -375,9 +375,9 @@ The eventual goal is to produce an actionable remediation queue based on vulnera
 
 ### Phase 5 — Dashboard
 
-- [ ] Threat overview
-- [ ] Vulnerability explorer
-- [ ] CVE detail pages
+- [x] Threat overview
+- [x] Vulnerability explorer
+- [x] CVE detail pages
 - [ ] KEV analytics
 - [ ] EPSS analytics
 - [ ] Threat Velocity visualization
@@ -475,7 +475,17 @@ uv run --locked python -m threatpulse.storage ingest-nvd
 
 Ingestion creates or upgrades the schema automatically. Repeated runs update
 existing data without duplicate CVEs; EPSS retains observations by score date.
-The dashboard, prioritization engine, and scheduled automation are still planned.
+Launch the initial dashboard after configuring `DATABASE_URL`:
+
+```bash
+uv run --locked streamlit run src/threatpulse/dashboard.py \
+  --server.address=127.0.0.1 --server.port=8501 \
+  --server.headless=true --browser.gatherUsageStats=false
+```
+
+The dashboard provides an overview, filtered vulnerability explorer, and CVE
+details with EPSS history. Prioritization, deeper analytics, and scheduled
+automation are still planned.
 
 ---
 

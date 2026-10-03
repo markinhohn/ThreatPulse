@@ -1,40 +1,18 @@
 """Real PostgreSQL tests; each test uses a fresh, isolated schema."""
 
 import json
-import os
 from datetime import UTC, date, datetime
 from decimal import Decimal
 from pathlib import Path
-from uuid import uuid4
 
 import psycopg
 import pytest
-from psycopg import sql
 
 from threatpulse.epss import EPSS_URL, EpssBatch, EpssObservation
 from threatpulse.kev import CISA_KEV_URL, CollectedVulnerability, KevCatalog
 from threatpulse.models import parse_cisa_kev_record
 from threatpulse.nvd import NVD_URL, NvdBatch, parse_nvd_record
 from threatpulse.storage import ingest_catalog, ingest_epss, ingest_nvd, main, migrate
-
-
-@pytest.fixture
-def connection():
-    url = os.environ.get("TEST_DATABASE_URL")
-    if not url:
-        pytest.skip("Set TEST_DATABASE_URL to run real PostgreSQL integration tests")
-    schema = "test_" + uuid4().hex
-    with psycopg.connect(url, autocommit=True) as connection:
-        connection.execute(sql.SQL("CREATE SCHEMA {}").format(sql.Identifier(schema)))
-        try:
-            connection.execute(
-                sql.SQL("SET search_path TO {}").format(sql.Identifier(schema))
-            )
-            yield connection
-        finally:
-            connection.execute(
-                sql.SQL("DROP SCHEMA {} CASCADE").format(sql.Identifier(schema))
-            )
 
 
 @pytest.fixture
