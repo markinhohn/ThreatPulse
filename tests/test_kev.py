@@ -41,6 +41,7 @@ def test_collect_maps_entire_batch(record):
     assert len(catalog.records) == 2
     assert catalog.records[1].vulnerability.cve_id == second["cveID"]
     assert catalog.records[0].kev.raw_record == record
+    assert str(catalog.records[0].kev.source_url) == CISA_KEV_URL
     assert catalog.records[0].kev.ingested_at == catalog.records[1].kev.ingested_at
 
 
@@ -110,7 +111,9 @@ def test_cli_export(record, monkeypatch, tmp_path, capsys):
     output = tmp_path / "kev.json"
     assert main(["--output", str(output)]) == 0
     assert json.loads(output.read_text())["records"][0]["kev"]["raw_record"] == record
-    assert json.loads(capsys.readouterr().out)["records"] == 1
+    summary = json.loads(capsys.readouterr().out)
+    assert summary["records"] == 1
+    assert summary["source"] == CISA_KEV_URL
     assert main(["--output", str(output)]) == 1
     assert "Collection failed" in capsys.readouterr().err
     assert json.loads(output.read_text())["records"][0]["kev"]["raw_record"] == record

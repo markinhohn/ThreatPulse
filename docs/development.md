@@ -36,7 +36,7 @@ from threatpulse.models import parse_cisa_kev_record
 
 vulnerability, kev_entry = parse_cisa_kev_record(
     record,  # One dictionary from the catalog's vulnerabilities array.
-    source_url="https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+    source_url="https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json",
     ingested_at=datetime.now(UTC),
 )
 ```
@@ -78,5 +78,11 @@ records, empty catalogs, count mismatches, and duplicate CVEs reject the entire
 batch rather than silently returning incomplete data. There are no automatic
 retries; a caller or scheduler can rerun a failed collection.
 
-The environment must allow HTTPS access to `www.cisa.gov`. Tests use mock HTTP
+The environment must allow HTTPS access to `raw.githubusercontent.com`. Tests use mock HTTP
 responses and a synthetic CISA-format fixture, so they work without live access.
+
+The collector reads CISA's official `cisagov/kev-data` GitHub publication.
+The former `www.cisa.gov` endpoint returned an upstream HTTP 403 from this
+cloud environment even after its network allowance was enabled. See
+[the source decision](decisions/001-kev-catalog-source.md) for evidence,
+tradeoffs, and the exact modifications.

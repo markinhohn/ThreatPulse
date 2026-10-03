@@ -12,7 +12,7 @@ from pydantic import BaseModel, ValidationError
 from threatpulse.models import KevEntry, Vulnerability, parse_cisa_kev_record
 
 CISA_KEV_URL = (
-    "https://www.cisa.gov/sites/default/files/feeds/"
+    "https://raw.githubusercontent.com/cisagov/kev-data/main/"
     "known_exploited_vulnerabilities.json"
 )
 
