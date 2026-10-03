@@ -52,3 +52,31 @@ source fields, without trimming its values. Notes are optional. Direct model
 construction rejects unexpected fields to catch misspelled attributes. These
 models do not fetch data or persist it; database uniqueness and history will be
 implemented with storage.
+
+## CISA KEV collector
+
+Fetch and validate the official catalog:
+
+```bash
+uv run --locked python -m threatpulse.kev
+```
+
+Export normalized vulnerabilities, KEV observations, and original records:
+
+```bash
+mkdir -p data
+uv run --locked python -m threatpulse.kev --output data/kev.json --timeout 30
+```
+
+The command prints the source URL and validated record count. Exports use a
+new file; an existing destination is never overwritten. The `data/` directory
+is ignored by Git. No database writes happen yet.
+
+Requests retain TLS verification, follow redirects, and use a 30-second timeout
+per network operation. Failures exit with status 1. Malformed JSON, invalid
+records, empty catalogs, count mismatches, and duplicate CVEs reject the entire
+batch rather than silently returning incomplete data. There are no automatic
+retries; a caller or scheduler can rerun a failed collection.
+
+The environment must allow HTTPS access to `www.cisa.gov`. Tests use mock HTTP
+responses and a synthetic CISA-format fixture, so they work without live access.
