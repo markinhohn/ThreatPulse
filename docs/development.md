@@ -136,3 +136,46 @@ offline test run alone does not validate storage.
 
 See [the storage decision](decisions/002-postgresql-ingestion.md) for transaction,
 deduplication, migration, and retention choices.
+
+## EPSS enrichment and score history
+
+After KEV ingestion, enrich stored CVEs with FIRST's public EPSS API:
+
+```bash
+uv run --locked python -m threatpulse.storage ingest-epss
+uv run --locked python -m threatpulse.storage ingest-epss --date 2026-01-01
+```
+
+Migration 2 adds `epss_observations` without replacing existing KEV data. The
+command automatically migrates, reads stored CVEs, and requests scores in bounded
+chunks. Without `--date`, the first returned score selects the latest available
+date; subsequent requests explicitly use that date. An explicit date requests
+historical scores subject to FIRST's coverage and retention limits.
+
+EPSS estimates the probability of exploitation over the next 30 days;
+percentile is its relative rank among scored vulnerabilities. Both are stored as
+decimal fractions from 0 to 1, not percentages. The API's score date differs from
+our UTC ingestion timestamp. Each observation retains the original source record
+and the request URL, including its CVE filter and historical date when present.
+
+The command prints requested and processed counts and a `missing` list. A missing
+score is unknown, never an assumed zero, and existing observations are retained.
+Repeated `(cve_id, score_date)` observations update the existing row. Different
+dates add history. All fetched scores are validated before a single atomic write;
+an HTTP failure, inconsistent date, invalid score, duplicate response, or partial
+API page prevents any EPSS observations from being written.
+
+Allow HTTPS access to `api.first.org`; no API key is required. Requests retain
+TLS verification and have 30-second per-operation timeouts. There is no automatic
+retry or daily scheduler. Run enrichment on each desired date to build history;
+this does not automatically backfill dates or retain changes to KEV attributes.
+
+Inspect coverage by date:
+
+```bash
+docker compose exec db psql -U threatpulse -d threatpulse -c \
+  'SELECT score_date, count(*) FROM epss_observations GROUP BY score_date ORDER BY score_date;'
+```
+
+See [the EPSS decision](decisions/003-epss-enrichment.md) for the source,
+batching, missing-data, precision, history, and validation choices.

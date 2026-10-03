@@ -2,7 +2,8 @@
 
 import json
 import os
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
+from decimal import Decimal
 from pathlib import Path
 from uuid import uuid4
 
@@ -10,9 +11,10 @@ import psycopg
 import pytest
 from psycopg import sql
 
+from threatpulse.epss import EPSS_URL, EpssBatch, EpssObservation
 from threatpulse.kev import CISA_KEV_URL, CollectedVulnerability, KevCatalog
 from threatpulse.models import parse_cisa_kev_record
-from threatpulse.storage import ingest_catalog, main, migrate
+from threatpulse.storage import ingest_catalog, ingest_epss, main, migrate
 
 
 @pytest.fixture
@@ -50,9 +52,9 @@ def catalog():
 def test_migration_is_repeatable(connection):
     migrate(connection)
     migrate(connection)
-    assert connection.execute("SELECT version FROM schema_migrations").fetchall() == [
-        (1,)
-    ]
+    assert connection.execute(
+        "SELECT version FROM schema_migrations ORDER BY version"
+    ).fetchall() == [(1,), (2,)]
 
 
 def test_repeat_ingestion_updates_without_duplicates(connection, catalog):
@@ -131,3 +133,81 @@ def test_cli_requires_database_url(monkeypatch, capsys):
     monkeypatch.delenv("DATABASE_URL", raising=False)
     assert main(["migrate"]) == 1
     assert "Set DATABASE_URL" in capsys.readouterr().err
+
+
+@pytest.fixture
+def epss_batch(catalog):
+    return EpssBatch(
+        observations=[
+            EpssObservation(
+                cve_id=catalog.records[0].vulnerability.cve_id,
+                score_date=date(2026, 1, 1),
+                epss=Decimal("0.9"),
+                percentile=Decimal("0.99"),
+                source_url=EPSS_URL,
+                ingested_at=datetime(2026, 1, 2, tzinfo=UTC),
+                raw_record={"epss": "0.9"},
+            )
+        ],
+        missing_cves=[],
+    )
+
+
+def test_epss_repeat_update_and_history(connection, catalog, epss_batch):
+    migrate(connection)
+    ingest_catalog(connection, catalog)
+    assert ingest_epss(connection, epss_batch) == 1
+    ingest_epss(connection, epss_batch)
+    assert connection.execute("SELECT count(*) FROM epss_observations").fetchone() == (
+        1,
+    )
+    epss_batch.observations[0].epss = Decimal("0.8")
+    ingest_epss(connection, epss_batch)
+    assert connection.execute("SELECT epss FROM epss_observations").fetchone() == (
+        Decimal("0.8"),
+    )
+    epss_batch.observations[0].score_date = date(2026, 1, 2)
+    ingest_epss(connection, epss_batch)
+    assert connection.execute("SELECT count(*) FROM epss_observations").fetchone() == (
+        2,
+    )
+
+
+def test_epss_foreign_key_rolls_back_batch(connection, catalog, epss_batch):
+    migrate(connection)
+    ingest_catalog(connection, catalog)
+    missing = epss_batch.observations[0].model_copy(update={"cve_id": "CVE-2026-9999"})
+    epss_batch.observations.append(missing)
+    with pytest.raises(psycopg.errors.ForeignKeyViolation):
+        ingest_epss(connection, epss_batch)
+    assert connection.execute("SELECT count(*) FROM epss_observations").fetchone() == (
+        0,
+    )
+
+
+def test_epss_constraints_and_duplicate_batch(connection, catalog, epss_batch):
+    migrate(connection)
+    ingest_catalog(connection, catalog)
+    epss_batch.observations.append(epss_batch.observations[0])
+    with pytest.raises(ValueError, match="duplicate"):
+        ingest_epss(connection, epss_batch)
+    epss_batch.observations.pop()
+    ingest_epss(connection, epss_batch)
+    with pytest.raises(psycopg.errors.CheckViolation), connection.transaction():
+        connection.execute("UPDATE epss_observations SET epss = 2")
+
+
+def test_upgrade_from_migration_one_preserves_data(connection, catalog):
+    from importlib.resources import files
+
+    connection.execute(
+        files("threatpulse").joinpath("migrations/001_initial.sql").read_text()
+    )
+    connection.execute("CREATE TABLE schema_migrations (version INTEGER PRIMARY KEY)")
+    connection.execute("INSERT INTO schema_migrations VALUES (1)")
+    ingest_catalog(connection, catalog)
+    migrate(connection)
+    assert connection.execute("SELECT count(*) FROM vulnerabilities").fetchone() == (1,)
+    assert connection.execute("SELECT count(*) FROM epss_observations").fetchone() == (
+        0,
+    )

@@ -351,7 +351,7 @@ The eventual goal is to produce an actionable remediation queue based on vulnera
 ### Phase 2 — Vulnerability Data Pipeline
 
 - [ ] Integrate NVD data
-- [ ] Integrate EPSS
+- [x] Integrate EPSS
 - [x] Integrate CISA KEV
 - [x] Normalize vulnerability records
 - [x] Implement data validation

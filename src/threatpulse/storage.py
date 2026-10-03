@@ -4,16 +4,18 @@ import argparse
 import json
 import os
 import sys
+from datetime import date
 from importlib.resources import files
 
 import psycopg
 from psycopg.types.json import Jsonb
 
+from threatpulse.epss import EpssBatch, EpssCollectionError, collect_epss
 from threatpulse.kev import KevCatalog, KevCollectionError, collect_kev
 
 
 def migrate(connection: psycopg.Connection) -> None:
-    """Apply the initial packaged migration once, in a transaction."""
+    """Apply pending packaged migrations in one serialized transaction."""
     with connection.transaction():
         connection.execute("SELECT pg_advisory_xact_lock(734915001)")
         connection.execute(
@@ -25,14 +27,18 @@ def migrate(connection: psycopg.Connection) -> None:
             row[0]
             for row in connection.execute("SELECT version FROM schema_migrations")
         }
-        if versions - {1}:
+        migrations = {1: "001_initial.sql", 2: "002_epss.sql"}
+        if versions - migrations.keys():
             raise ValueError("Database has migrations newer than this application")
-        if 1 not in versions:
-            sql = (
-                files("threatpulse").joinpath("migrations/001_initial.sql").read_text()
-            )
-            connection.execute(sql)
-            connection.execute("INSERT INTO schema_migrations (version) VALUES (1)")
+        for version, filename in migrations.items():
+            if version not in versions:
+                sql = (
+                    files("threatpulse").joinpath(f"migrations/{filename}").read_text()
+                )
+                connection.execute(sql)
+                connection.execute(
+                    "INSERT INTO schema_migrations (version) VALUES (%s)", (version,)
+                )
 
 
 def ingest_catalog(connection: psycopg.Connection, catalog: KevCatalog) -> int:
@@ -98,10 +104,50 @@ def ingest_catalog(connection: psycopg.Connection, catalog: KevCatalog) -> int:
     return len(ids)
 
 
+def ingest_epss(connection: psycopg.Connection, batch: EpssBatch) -> int:
+    """Upsert same-date observations atomically, retaining other dates."""
+    keys = [(o.cve_id, o.score_date) for o in batch.observations]
+    if len(keys) != len(set(keys)):
+        raise ValueError("EPSS batch contains duplicate CVE/date observations")
+    with connection.transaction():
+        connection.execute("SELECT pg_advisory_xact_lock(734915003)")
+        with connection.cursor() as cursor:
+            cursor.executemany(
+                """
+                INSERT INTO epss_observations
+                    (cve_id, score_date, epss, percentile, source_url,
+                     ingested_at, raw_record)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
+                ON CONFLICT (cve_id, score_date) DO UPDATE SET
+                    epss = EXCLUDED.epss, percentile = EXCLUDED.percentile,
+                    source_url = EXCLUDED.source_url,
+                    ingested_at = EXCLUDED.ingested_at, raw_record = EXCLUDED.raw_record
+                """,
+                [
+                    (
+                        o.cve_id,
+                        o.score_date,
+                        o.epss,
+                        o.percentile,
+                        str(o.source_url),
+                        o.ingested_at,
+                        Jsonb(o.raw_record),
+                    )
+                    for o in batch.observations
+                ],
+            )
+    return len(keys)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=["migrate", "ingest-kev"])
+    parser.add_argument("command", choices=["migrate", "ingest-kev", "ingest-epss"])
+    parser.add_argument(
+        "--date", type=date.fromisoformat, help="EPSS score date (YYYY-MM-DD)"
+    )
     args = parser.parse_args(argv)
+    if args.date and args.command != "ingest-epss":
+        parser.error("--date is only supported for ingest-epss")
     database_url = os.environ.get("DATABASE_URL")
     if not database_url:
         print("Set DATABASE_URL before running this command.", file=sys.stderr)
@@ -114,7 +160,29 @@ def main(argv: list[str] | None = None) -> int:
         ) as connection:
             migrate(connection)
             count = ingest_catalog(connection, catalog) if catalog is not None else None
-    except (psycopg.Error, KevCollectionError, ValueError) as exc:
+            if args.command == "ingest-epss":
+                ids = [
+                    r[0]
+                    for r in connection.execute(
+                        "SELECT cve_id FROM vulnerabilities ORDER BY cve_id"
+                    )
+                ]
+                if not ids:
+                    raise ValueError("Ingest KEV before requesting EPSS enrichment")
+                batch = collect_epss(ids, score_date=args.date)
+                count = ingest_epss(connection, batch)
+                print(
+                    json.dumps(
+                        {
+                            "command": args.command,
+                            "requested": len(ids),
+                            "processed": count,
+                            "missing": batch.missing_cves,
+                        }
+                    )
+                )
+                return 0
+    except (psycopg.Error, KevCollectionError, EpssCollectionError, ValueError) as exc:
         # Driver messages may contain connection details; never print the DSN.
         print(f"Database command failed ({type(exc).__name__}).", file=sys.stderr)
         return 1
