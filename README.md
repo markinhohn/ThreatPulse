@@ -343,18 +343,18 @@ The eventual goal is to produce an actionable remediation queue based on vulnera
 ### Phase 1 — Foundation
 
 - [ ] Define architecture
-- [ ] Configure Docker Compose
-- [ ] Deploy PostgreSQL
-- [ ] Create database schema
-- [ ] Configure Python development environment
+- [x] Configure Docker Compose
+- [x] Deploy PostgreSQL
+- [x] Create database schema
+- [x] Configure Python development environment
 
 ### Phase 2 — Vulnerability Data Pipeline
 
 - [ ] Integrate NVD data
 - [ ] Integrate EPSS
-- [ ] Integrate CISA KEV
-- [ ] Normalize vulnerability records
-- [ ] Implement data validation
+- [x] Integrate CISA KEV
+- [x] Normalize vulnerability records
+- [x] Implement data validation
 - [ ] Store vulnerability history
 
 ### Phase 3 — Analytics
