@@ -508,8 +508,6 @@ ThreatPulse is an experiment in combining these signals into a more useful analy
 
 ## Author
 
-**Tony Anselmy**
-
 Cybersecurity | Threat Intelligence | Security Analytics | Detection & Incident Response
 
 This project is being developed as part of an ongoing effort to combine cybersecurity engineering, data analytics, threat intelligence, and security automation into practical defensive-security tools.
