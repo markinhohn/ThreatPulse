@@ -378,8 +378,8 @@ The eventual goal is to produce an actionable remediation queue based on vulnera
 - [x] Threat overview
 - [x] Vulnerability explorer
 - [x] CVE detail pages
-- [ ] KEV analytics
-- [ ] EPSS analytics
+- [x] KEV analytics
+- [x] EPSS analytics
 - [ ] Threat Velocity visualization
 
 ### Phase 6 — Threat Intelligence
@@ -483,8 +483,9 @@ uv run --locked streamlit run src/threatpulse/dashboard.py \
   --server.headless=true --browser.gatherUsageStats=false
 ```
 
-The dashboard provides an overview, filtered vulnerability explorer, and CVE
-details with EPSS history. Prioritization, deeper analytics, and scheduled
+The dashboard provides an overview, filtered vulnerability explorer, CVE
+details with EPSS history, and dedicated KEV/EPSS descriptive analytics.
+Prioritization, deeper analytics, and scheduled
 automation are still planned.
 
 ---

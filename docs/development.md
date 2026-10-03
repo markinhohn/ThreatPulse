@@ -300,3 +300,39 @@ Run tests with `TEST_DATABASE_URL` set to a development database to exercise
 dashboard queries and Streamlit interactions against isolated schemas. The
 shared test fixture creates and drops those schemas without touching ingestion
 data. See [the dashboard decision](decisions/005-streamlit-dashboard.md).
+
+## Dedicated KEV and EPSS analytics
+
+The existing Streamlit startup command also serves **KEV analytics** and
+**EPSS analytics** tabs. These cover all stored CVEs and do not inherit explorer
+filters; an empty explorer search result does not hide analytics.
+
+KEV charts count stored CVEs by vendor and by vendor/product pair, with top-ten
+charts and full count tables. Only records with a stored KEV entry participate.
+Vendor names and multi-product labels remain as published, without alias merging
+or splitting. Counts are not normalized for market share, installed assets, or
+vendor disclosure activity, so they are not vendor/product risk rankings.
+
+The EPSS distribution uses the latest available score per CVE in fixed 10-point
+probability bins. Each bin includes its lower bound and excludes its upper bound,
+except that 100% belongs to the last bin. Missing scores are counted separately.
+The CVSS-versus-EPSS scatter plot uses complete score pairs for a selected
+preferred CVSS version; its default is the most represented version. Tooltips
+show CVE, vendor, scores, and EPSS date. Versions are not pooled, and the chart
+does not calculate or claim statistical correlation or causation.
+
+Choose two recorded EPSS dates to compare scores. The table reports
+`(later_score - earlier_score) * 100` in percentage points, ordered from the
+largest increase to the largest decrease. For example, 10% to 20% is **+10
+percentage points**, not +10% growth. Only matched CVEs receive changes. Coverage
+metrics count CVEs observed on both dates, each date alone, and neither date.
+Scores from other dates do not substitute for missing selected-date observations.
+Changing the earlier date restricts later-date choices to subsequent dates.
+
+These views describe the stored KEV-based dataset; they do not establish a
+KEV/non-KEV comparison or generalize to all vulnerabilities. Dates may differ
+across latest-score distributions and scatter points. Historical comparisons do
+not normalize by elapsed days, interpolate gaps, or account for EPSS model
+version changes. They are descriptive deltas, not the planned Threat Velocity
+methodology. Current KEV membership and preferred NVD metrics are not historical
+snapshots. See [the analytics decision](decisions/006-kev-epss-analytics.md).

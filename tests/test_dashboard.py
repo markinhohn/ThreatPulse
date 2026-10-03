@@ -14,6 +14,8 @@ from streamlit.testing.v1 import AppTest
 from threatpulse.dashboard_data import (
     filter_vulnerabilities,
     load_cve_details,
+    load_epss_comparison,
+    load_epss_dates,
     load_vulnerabilities,
 )
 from threatpulse.epss import EPSS_URL, EpssBatch, EpssObservation
@@ -155,6 +157,86 @@ def test_dashboard_missing_configuration(monkeypatch):
     app = AppTest.from_file(APP).run()
     assert not app.exception
     assert "Set DATABASE_URL" in app.error[0].value
+
+
+def test_analytics_dates_coverage_and_interactions(dashboard_url, monkeypatch):
+    dates = load_epss_dates(dashboard_url)
+    assert dates == [date(2026, 1, 1), date(2026, 1, 2)]
+    compared = load_epss_comparison(dashboard_url, *dates)
+    assert len(compared) == 1
+    assert compared[0]["before"] == Decimal("0.9")
+    assert compared[0]["after"] == Decimal("0.8")
+    with pytest.raises(ValueError):
+        load_epss_comparison(dashboard_url, dates[1], dates[0])
+    monkeypatch.setenv("DATABASE_URL", dashboard_url)
+    app = AppTest.from_file(APP, default_timeout=20).run()
+    assert not app.exception and not app.error
+    assert [tab.label for tab in app.tabs] == [
+        "Overview",
+        "Vulnerability explorer",
+        "KEV analytics",
+        "EPSS analytics",
+    ]
+    changes = app.dataframe[-1].value
+    assert len(changes) == 1
+    assert changes.iloc[0]["Change (percentage points)"] == -10.0
+    assert any("1 stored CVEs are absent" in caption.value for caption in app.caption)
+    app.text_input[0].set_value("no-match").run()
+    assert not app.exception
+    assert app.dataframe[-1].value.iloc[0]["Change (percentage points)"] == -10.0
+
+
+def test_analytics_handles_one_sided_observations(dashboard_url, connection):
+    connection.execute(
+        "INSERT INTO epss_observations "
+        "SELECT 'CVE-2026-12345', score_date, epss, percentile, "
+        "source_url, ingested_at, raw_record "
+        "FROM epss_observations WHERE score_date = '2026-01-02'"
+    )
+    rows = load_epss_comparison(dashboard_url, date(2026, 1, 1), date(2026, 1, 2))
+    assert len(rows) == 2
+    missing = next(row for row in rows if row["cve_id"] == "CVE-2026-12345")
+    assert missing["before"] is None
+    assert missing["after"] == Decimal("0.8")
+
+
+def test_analytics_requires_two_dates(dashboard_url, connection, monkeypatch):
+    connection.execute("DELETE FROM epss_observations WHERE score_date = '2026-01-01'")
+    monkeypatch.setenv("DATABASE_URL", dashboard_url)
+    app = AppTest.from_file(APP, default_timeout=20).run()
+    assert not app.exception
+    assert any("at least two dates" in info.value for info in app.info)
+
+
+def test_analytics_date_controls_update_later_options(
+    dashboard_url, connection, monkeypatch
+):
+    connection.execute(
+        "INSERT INTO epss_observations "
+        "SELECT cve_id, '2026-01-03'::date, epss, percentile, "
+        "source_url, ingested_at, raw_record FROM epss_observations "
+        "WHERE score_date = '2026-01-02'"
+    )
+    monkeypatch.setenv("DATABASE_URL", dashboard_url)
+    app = AppTest.from_file(APP, default_timeout=20).run()
+    app.selectbox(key="analytics_earlier").set_value(date(2026, 1, 1)).run()
+    assert not app.exception
+    assert app.selectbox(key="analytics_later").options == ["2026-01-02", "2026-01-03"]
+    app.selectbox(key="analytics_earlier").set_value(date(2026, 1, 2)).run()
+    assert not app.exception
+    assert app.selectbox(key="analytics_later").options == ["2026-01-03"]
+
+
+def test_analytics_empty_scores_are_unknown(dashboard_url, connection, monkeypatch):
+    connection.execute("DELETE FROM epss_observations")
+    monkeypatch.setenv("DATABASE_URL", dashboard_url)
+    app = AppTest.from_file(APP, default_timeout=20).run()
+    assert not app.exception and not app.error
+    assert any(
+        metric.label == "Scored CVEs" and metric.value == "0" for metric in app.metric
+    )
+    assert any("2 CVEs lack EPSS" in caption.value for caption in app.caption)
+    assert any("No complete score pairs" in info.value for info in app.info)
 
 
 def test_dashboard_empty_and_database_error(monkeypatch):

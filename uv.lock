@@ -1186,6 +1186,7 @@ name = "threatpulse"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "altair" },
     { name = "cvss" },
     { name = "httpx" },
     { name = "pandas" },
@@ -1202,6 +1203,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "altair", specifier = ">=6,<7" },
     { name = "cvss", specifier = ">=3.4,<4" },
     { name = "httpx", specifier = ">=0.28,<1" },
     { name = "pandas", specifier = ">=2.2,<4" },

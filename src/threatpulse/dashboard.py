@@ -6,6 +6,7 @@ import pandas as pd
 import psycopg
 import streamlit as st
 
+from threatpulse.dashboard_analytics import show_epss_analytics, show_kev_analytics
 from threatpulse.dashboard_data import (
     filter_vulnerabilities,
     load_cve_details,
@@ -110,6 +111,37 @@ def show_details(database_url, cve_id):
             st.info("No CVSS metrics are available.")
 
 
+def show_explorer(rows, database_url):
+    search = st.text_input("Search CVE, vendor, product, name, or description")
+    vendors = st.multiselect("Vendor", sorted({r["vendor"] for r in rows}))
+    severities = st.multiselect(
+        "Severity", ["CRITICAL", "HIGH", "MEDIUM", "LOW", "NONE", "UNKNOWN"]
+    )
+    minimum = st.slider("Minimum EPSS probability (%)", 0.0, 100.0, 0.0, 0.1)
+    include_missing = st.checkbox("Include CVEs without EPSS", value=True)
+    filtered = filter_vulnerabilities(
+        rows,
+        search=search,
+        vendors=vendors,
+        severities=severities,
+        min_epss=minimum / 100,
+        include_missing_epss=include_missing,
+    )
+    st.caption(
+        f"Showing {len(filtered)} of {len(rows)} vulnerabilities. "
+        "Blank scores mean unknown."
+    )
+    if not filtered:
+        st.info("No vulnerabilities match these filters.")
+        return
+    st.dataframe(display_table(filtered), hide_index=True, width="stretch")
+    selected = st.selectbox("CVE details", [r["cve_id"] for r in filtered])
+    try:
+        show_details(database_url, selected)
+    except psycopg.Error:
+        st.error("Could not load CVE details. Check database access and refresh.")
+
+
 def main():
     st.set_page_config(page_title="ThreatPulse", page_icon="🛡️", layout="wide")
     st.title("ThreatPulse")
@@ -133,7 +165,9 @@ def main():
             "No vulnerabilities are stored yet. Run KEV ingestion to populate data."
         )
         return
-    overview, explorer = st.tabs(["Overview", "Vulnerability explorer"])
+    overview, explorer, kev_analytics, epss_analytics = st.tabs(
+        ["Overview", "Vulnerability explorer", "KEV analytics", "EPSS analytics"]
+    )
     with overview:
         columns = st.columns(3)
         columns[0].metric("Stored vulnerabilities", len(rows))
@@ -160,34 +194,16 @@ def main():
             "Scores across CVSS versions are not directly interchangeable."
         )
     with explorer:
-        search = st.text_input("Search CVE, vendor, product, name, or description")
-        vendors = st.multiselect("Vendor", sorted({r["vendor"] for r in rows}))
-        severities = st.multiselect(
-            "Severity", ["CRITICAL", "HIGH", "MEDIUM", "LOW", "NONE", "UNKNOWN"]
-        )
-        minimum = st.slider("Minimum EPSS probability (%)", 0.0, 100.0, 0.0, 0.1)
-        include_missing = st.checkbox("Include CVEs without EPSS", value=True)
-        filtered = filter_vulnerabilities(
-            rows,
-            search=search,
-            vendors=vendors,
-            severities=severities,
-            min_epss=minimum / 100,
-            include_missing_epss=include_missing,
-        )
-        st.caption(
-            f"Showing {len(filtered)} of {len(rows)} vulnerabilities. "
-            "Blank scores mean unknown."
-        )
-        if not filtered:
-            st.info("No vulnerabilities match these filters.")
-            return
-        st.dataframe(display_table(filtered), hide_index=True, width="stretch")
-        selected = st.selectbox("CVE details", [r["cve_id"] for r in filtered])
+        show_explorer(rows, database_url)
+    with kev_analytics:
+        show_kev_analytics(rows)
+    with epss_analytics:
         try:
-            show_details(database_url, selected)
+            show_epss_analytics(rows, database_url)
         except psycopg.Error:
-            st.error("Could not load CVE details. Check database access and refresh.")
+            st.error(
+                "Could not load EPSS analytics. Check database access and refresh."
+            )
 
 
 if __name__ == "__main__":

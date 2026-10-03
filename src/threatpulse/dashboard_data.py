@@ -98,3 +98,37 @@ def filter_vulnerabilities(
             or (row["epss"] is not None and row["epss"] >= min_epss)
         )
     ]
+
+
+def load_epss_dates(database_url):
+    with psycopg.connect(database_url, connect_timeout=10) as conn:
+        conn.execute("SET TRANSACTION READ ONLY")
+        return [
+            row[0]
+            for row in conn.execute(
+                "SELECT DISTINCT score_date FROM epss_observations ORDER BY score_date"
+            )
+        ]
+
+
+def load_epss_comparison(database_url, earlier, later):
+    """FULL JOIN preserves one-sided coverage; missing scores remain NULL."""
+    if earlier >= later:
+        raise ValueError("Earlier EPSS date must precede later date")
+    with psycopg.connect(
+        database_url, row_factory=dict_row, connect_timeout=10
+    ) as conn:
+        conn.execute("SET TRANSACTION READ ONLY")
+        return conn.execute(
+            """
+            WITH earlier AS (
+                SELECT cve_id, epss FROM epss_observations WHERE score_date = %s
+            ), later AS (
+                SELECT cve_id, epss FROM epss_observations WHERE score_date = %s
+            )
+            SELECT coalesce(earlier.cve_id, later.cve_id) AS cve_id,
+                   earlier.epss AS before, later.epss AS after
+            FROM earlier FULL JOIN later USING (cve_id) ORDER BY cve_id
+            """,
+            (earlier, later),
+        ).fetchall()
