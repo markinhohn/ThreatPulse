@@ -14,7 +14,8 @@ from psycopg import sql
 from threatpulse.epss import EPSS_URL, EpssBatch, EpssObservation
 from threatpulse.kev import CISA_KEV_URL, CollectedVulnerability, KevCatalog
 from threatpulse.models import parse_cisa_kev_record
-from threatpulse.storage import ingest_catalog, ingest_epss, main, migrate
+from threatpulse.nvd import NVD_URL, NvdBatch, parse_nvd_record
+from threatpulse.storage import ingest_catalog, ingest_epss, ingest_nvd, main, migrate
 
 
 @pytest.fixture
@@ -54,7 +55,7 @@ def test_migration_is_repeatable(connection):
     migrate(connection)
     assert connection.execute(
         "SELECT version FROM schema_migrations ORDER BY version"
-    ).fetchall() == [(1,), (2,)]
+    ).fetchall() == [(1,), (2,), (3,)]
 
 
 def test_repeat_ingestion_updates_without_duplicates(connection, catalog):
@@ -211,3 +212,100 @@ def test_upgrade_from_migration_one_preserves_data(connection, catalog):
     assert connection.execute("SELECT count(*) FROM epss_observations").fetchone() == (
         0,
     )
+
+
+@pytest.fixture
+def nvd_batch():
+    raw = json.loads((Path(__file__).parent / "fixtures" / "nvd_cve.json").read_text())
+    return NvdBatch(
+        records=[
+            parse_nvd_record(
+                raw, source_url=NVD_URL, ingested_at=datetime(2026, 1, 1, tzinfo=UTC)
+            )
+        ],
+        missing_cves=[],
+    )
+
+
+def test_nvd_repeat_update_and_provenance(connection, catalog, nvd_batch):
+    migrate(connection)
+    ingest_catalog(connection, catalog)
+    assert ingest_nvd(connection, nvd_batch) == 1
+    ingest_nvd(connection, nvd_batch)
+    assert connection.execute("SELECT count(*) FROM nvd_enrichments").fetchone() == (1,)
+    score, severity, vector, raw, source = connection.execute(
+        "SELECT base_score, severity, attack_vector, raw_record, source_url "
+        "FROM nvd_enrichments"
+    ).fetchone()
+    assert score == Decimal("9.8")
+    assert severity == "CRITICAL"
+    assert vector == "NETWORK"
+    assert raw == nvd_batch.records[0].raw_record
+    assert source == NVD_URL
+    nvd_batch.records[0].description = "Corrected NVD description"
+    ingest_nvd(connection, nvd_batch)
+    assert connection.execute("SELECT description FROM nvd_enrichments").fetchone() == (
+        "Corrected NVD description",
+    )
+    assert connection.execute("SELECT description FROM vulnerabilities").fetchone() == (
+        catalog.records[0].vulnerability.description,
+    )
+
+
+def test_nvd_missing_scores_and_stale_snapshot(connection, catalog, nvd_batch):
+    migrate(connection)
+    ingest_catalog(connection, catalog)
+    ingest_nvd(connection, nvd_batch)
+    record = nvd_batch.records[0]
+    record.modified_at = datetime(2025, 1, 1, tzinfo=UTC)
+    record.cvss_metrics = []
+    ingest_nvd(connection, nvd_batch)
+    assert connection.execute("SELECT base_score FROM nvd_enrichments").fetchone() == (
+        Decimal("9.8"),
+    )
+    record.modified_at = datetime(2026, 1, 2, tzinfo=UTC)
+    record.status = "Awaiting Analysis"
+    ingest_nvd(connection, nvd_batch)
+    assert connection.execute(
+        "SELECT base_score, severity, cvss_version FROM nvd_enrichments"
+    ).fetchone() == (None, None, None)
+
+
+def test_nvd_foreign_key_rolls_back_batch(connection, catalog, nvd_batch):
+    migrate(connection)
+    ingest_catalog(connection, catalog)
+    missing = nvd_batch.records[0].model_copy(update={"cve_id": "CVE-2026-9999"})
+    nvd_batch.records.append(missing)
+    with pytest.raises(psycopg.errors.ForeignKeyViolation):
+        ingest_nvd(connection, nvd_batch)
+    assert connection.execute("SELECT count(*) FROM nvd_enrichments").fetchone() == (0,)
+
+
+def test_nvd_duplicate_and_database_score_constraints(connection, catalog, nvd_batch):
+    migrate(connection)
+    ingest_catalog(connection, catalog)
+    nvd_batch.records.append(nvd_batch.records[0])
+    with pytest.raises(ValueError, match="duplicate"):
+        ingest_nvd(connection, nvd_batch)
+    nvd_batch.records.pop()
+    ingest_nvd(connection, nvd_batch)
+    with pytest.raises(psycopg.errors.CheckViolation), connection.transaction():
+        connection.execute("UPDATE nvd_enrichments SET base_score = 11")
+
+
+def test_upgrade_from_two_preserves_epss(connection, catalog, epss_batch):
+    from importlib.resources import files
+
+    for filename in ["001_initial.sql", "002_epss.sql"]:
+        connection.execute(
+            files("threatpulse").joinpath(f"migrations/{filename}").read_text()
+        )
+    connection.execute("CREATE TABLE schema_migrations (version INTEGER PRIMARY KEY)")
+    connection.execute("INSERT INTO schema_migrations VALUES (1), (2)")
+    ingest_catalog(connection, catalog)
+    ingest_epss(connection, epss_batch)
+    migrate(connection)
+    assert connection.execute("SELECT count(*) FROM epss_observations").fetchone() == (
+        1,
+    )
+    assert connection.execute("SELECT count(*) FROM nvd_enrichments").fetchone() == (0,)

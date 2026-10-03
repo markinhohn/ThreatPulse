@@ -350,7 +350,7 @@ The eventual goal is to produce an actionable remediation queue based on vulnera
 
 ### Phase 2 — Vulnerability Data Pipeline
 
-- [ ] Integrate NVD data
+- [x] Integrate NVD data
 - [x] Integrate EPSS
 - [x] Integrate CISA KEV
 - [x] Normalize vulnerability records
@@ -456,19 +456,26 @@ threatpulse/
 
 ## Running ThreatPulse
 
-ThreatPulse is currently under active development.
-
-The eventual goal is to launch the development environment with:
+The current command-line pipeline collects CISA KEV, stores it in PostgreSQL,
+and enriches stored CVEs with EPSS and NVD data. Python 3.12, uv, Docker Engine,
+and Docker Compose are required. See the [development guide](docs/development.md)
+to configure the database password, `DATABASE_URL`, and optional `NVD_API_KEY`
+securely before running ingestion.
 
 ```bash
-git clone https://github.com/<username>/threatpulse.git
-
-cd threatpulse
-
-docker compose up -d
+git clone https://github.com/markinhohn/ThreatPulse.git
+cd ThreatPulse
+uv sync --locked
+# Configure .env and export DATABASE_URL as described in the development guide.
+docker compose up -d --wait db
+uv run --locked python -m threatpulse.storage ingest-kev
+uv run --locked python -m threatpulse.storage ingest-epss
+uv run --locked python -m threatpulse.storage ingest-nvd
 ```
 
-Additional setup instructions will be added as development progresses.
+Ingestion creates or upgrades the schema automatically. Repeated runs update
+existing data without duplicate CVEs; EPSS retains observations by score date.
+The dashboard, prioritization engine, and scheduled automation are still planned.
 
 ---
 

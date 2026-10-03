@@ -179,3 +179,74 @@ docker compose exec db psql -U threatpulse -d threatpulse -c \
 
 See [the EPSS decision](decisions/003-epss-enrichment.md) for the source,
 batching, missing-data, precision, history, and validation choices.
+
+## NVD severity and technical context
+
+After ingesting KEV, run:
+
+```bash
+uv run --locked python -m threatpulse.storage ingest-nvd
+# Optional small sample from the first stored CVEs, ordered by ID:
+uv run --locked python -m threatpulse.storage ingest-nvd --limit 10
+```
+
+Allow HTTPS access to `services.nvd.nist.gov`. Configure `NVD_API_KEY` through
+secure environment settings in the cloud, or export it securely in your local
+shell. Do not paste keys into chat, commit them, or put them in a command URL.
+Python does not load `.env`. The collector sends the key only in NVD's `apiKey`
+header, and stored request URLs never include it.
+
+The official API supports 50 requests per rolling 30 seconds with a valid key,
+or 5 without one. Requests are spaced by at least 0.65 seconds in authenticated
+mode and 6.1 seconds in public mode, counting retries. Only one collector should
+run at a time; pacing is per process and cannot account for other clients sharing
+your key or public egress IP. Avoid rapid repeated CLI launches. Transient network
+errors and HTTP 429/500/502/503/504 receive at most three retries with backoff.
+`Retry-After` is honored; cooldowns above 60 seconds stop the batch and ask for
+a later retry. HTTP 401/403 fail immediately rather than silently discarding the
+key. Requests retain TLS verification and 30-second per-operation timeouts.
+
+To reduce API calls, collection first requests NVD's `hasKev` pages, up to 2,000
+CVEs per page, then performs `cveId` lookups only for stored CVEs absent from
+those pages. Only requested stored CVEs are persisted. `--limit` limits stored
+targets; it does not change the size of the initial KEV page request.
+
+Migration 3 stores the latest NVD snapshot separately from KEV attributes:
+publication and modification timestamps, analysis status, English description,
+reference URLs, CWE identifiers, all supported CVSS metrics, request provenance,
+ingestion time, and original JSONB data (including affected CPE configurations).
+CVSS versions 2.0, 3.0, 3.1, and 4.0 are supported. Vector syntax and base score,
+severity, and attack-vector consistency are checked using the `cvss` package.
+Legacy FTP references are preserved; reference URLs are metadata, not fetched.
+The normalized adjacent-network attack vector is `ADJACENT_NETWORK` across versions.
+
+The preferred CVSS metric selects the newest version, then `Primary` within that
+version, then source/vector order for deterministic ties. All metrics remain
+available for other choices. A CVE without CVSS data has NULL score/severity,
+not zero. Missing CVEs are reported and existing stored snapshots are retained.
+Repeated enrichment updates rather than duplicates. A snapshot older than the
+stored `modified_at` cannot overwrite newer data. All fetched records are
+validated before one atomic database write.
+
+Show severity alongside latest available EPSS per CVE:
+
+```sql
+SELECT v.cve_id, v.vendor, v.product,
+       n.cvss_version, n.base_score, n.severity, n.attack_vector,
+       e.score_date, e.epss, e.percentile
+FROM vulnerabilities v
+LEFT JOIN nvd_enrichments n USING (cve_id)
+LEFT JOIN LATERAL (
+    SELECT score_date, epss, percentile
+    FROM epss_observations
+    WHERE cve_id = v.cve_id
+    ORDER BY score_date DESC LIMIT 1
+) e ON true
+ORDER BY e.epss DESC NULLS LAST, v.cve_id
+LIMIT 20;
+```
+
+The command reports requested/processed counts and missing CVEs. Database errors
+omit connection details; NVD failures report safe HTTP/error categories. Real
+PostgreSQL tests still require `TEST_DATABASE_URL`. See
+[the NVD decision](decisions/004-nvd-enrichment.md) for rationale and validation.

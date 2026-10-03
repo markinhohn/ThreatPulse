@@ -12,6 +12,7 @@ from psycopg.types.json import Jsonb
 
 from threatpulse.epss import EpssBatch, EpssCollectionError, collect_epss
 from threatpulse.kev import KevCatalog, KevCollectionError, collect_kev
+from threatpulse.nvd import NvdBatch, NvdCollectionError, collect_nvd
 
 
 def migrate(connection: psycopg.Connection) -> None:
@@ -27,7 +28,7 @@ def migrate(connection: psycopg.Connection) -> None:
             row[0]
             for row in connection.execute("SELECT version FROM schema_migrations")
         }
-        migrations = {1: "001_initial.sql", 2: "002_epss.sql"}
+        migrations = {1: "001_initial.sql", 2: "002_epss.sql", 3: "003_nvd.sql"}
         if versions - migrations.keys():
             raise ValueError("Database has migrations newer than this application")
         for version, filename in migrations.items():
@@ -139,13 +140,80 @@ def ingest_epss(connection: psycopg.Connection, batch: EpssBatch) -> int:
     return len(keys)
 
 
+def ingest_nvd(connection: psycopg.Connection, batch: NvdBatch) -> int:
+    """Atomically replace the latest NVD snapshot, retaining KEV attributes."""
+    ids = [r.cve_id for r in batch.records]
+    if len(ids) != len(set(ids)):
+        raise ValueError("NVD batch contains duplicate CVEs")
+    values = []
+    for record in batch.records:
+        metric = record.preferred_cvss
+        values.append(
+            (
+                record.cve_id,
+                record.published_at,
+                record.modified_at,
+                record.status,
+                record.description,
+                Jsonb([str(url) for url in record.references]),
+                Jsonb(record.weaknesses),
+                Jsonb([m.model_dump(mode="json") for m in record.cvss_metrics]),
+                metric.version if metric else None,
+                metric.source if metric else None,
+                metric.base_score if metric else None,
+                metric.severity if metric else None,
+                metric.attack_vector if metric else None,
+                str(record.source_url),
+                record.ingested_at,
+                Jsonb(record.raw_record),
+            )
+        )
+    with connection.transaction():
+        connection.execute("SELECT pg_advisory_xact_lock(734915004)")
+        with connection.cursor() as cursor:
+            cursor.executemany(
+                """
+                INSERT INTO nvd_enrichments
+                    (cve_id, published_at, modified_at, status, description,
+                     reference_urls, weaknesses, cvss_metrics, cvss_version,
+                     cvss_source, base_score, severity, attack_vector,
+                     source_url, ingested_at, raw_record)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                ON CONFLICT (cve_id) DO UPDATE SET
+                    published_at = EXCLUDED.published_at,
+                    modified_at = EXCLUDED.modified_at, status = EXCLUDED.status,
+                    description = EXCLUDED.description,
+                    reference_urls = EXCLUDED.reference_urls,
+                    weaknesses = EXCLUDED.weaknesses,
+                    cvss_metrics = EXCLUDED.cvss_metrics,
+                    cvss_version = EXCLUDED.cvss_version,
+                    cvss_source = EXCLUDED.cvss_source,
+                    base_score = EXCLUDED.base_score, severity = EXCLUDED.severity,
+                    attack_vector = EXCLUDED.attack_vector,
+                    source_url = EXCLUDED.source_url,
+                    ingested_at = EXCLUDED.ingested_at,
+                    raw_record = EXCLUDED.raw_record
+                WHERE EXCLUDED.modified_at >= nvd_enrichments.modified_at
+                """,
+                values,
+            )
+    return len(ids)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=["migrate", "ingest-kev", "ingest-epss"])
+    parser.add_argument(
+        "command", choices=["migrate", "ingest-kev", "ingest-epss", "ingest-nvd"]
+    )
+    parser.add_argument(
+        "--limit", type=int, help="Maximum stored CVEs to enrich with NVD"
+    )
     parser.add_argument(
         "--date", type=date.fromisoformat, help="EPSS score date (YYYY-MM-DD)"
     )
     args = parser.parse_args(argv)
+    if args.limit is not None and (args.command != "ingest-nvd" or args.limit <= 0):
+        parser.error("--limit must be positive and used with ingest-nvd")
     if args.date and args.command != "ingest-epss":
         parser.error("--date is only supported for ingest-epss")
     database_url = os.environ.get("DATABASE_URL")
@@ -160,7 +228,7 @@ def main(argv: list[str] | None = None) -> int:
         ) as connection:
             migrate(connection)
             count = ingest_catalog(connection, catalog) if catalog is not None else None
-            if args.command == "ingest-epss":
+            if args.command in {"ingest-epss", "ingest-nvd"}:
                 ids = [
                     r[0]
                     for r in connection.execute(
@@ -169,8 +237,13 @@ def main(argv: list[str] | None = None) -> int:
                 ]
                 if not ids:
                     raise ValueError("Ingest KEV before requesting EPSS enrichment")
-                batch = collect_epss(ids, score_date=args.date)
-                count = ingest_epss(connection, batch)
+                if args.command == "ingest-epss":
+                    batch = collect_epss(ids, score_date=args.date)
+                    count = ingest_epss(connection, batch)
+                else:
+                    ids = ids[: args.limit] if args.limit else ids
+                    batch = collect_nvd(ids)
+                    count = ingest_nvd(connection, batch)
                 print(
                     json.dumps(
                         {
@@ -182,7 +255,15 @@ def main(argv: list[str] | None = None) -> int:
                     )
                 )
                 return 0
-    except (psycopg.Error, KevCollectionError, EpssCollectionError, ValueError) as exc:
+    except NvdCollectionError as exc:
+        print(f"NVD collection failed: {exc}", file=sys.stderr)
+        return 1
+    except (
+        psycopg.Error,
+        KevCollectionError,
+        EpssCollectionError,
+        ValueError,
+    ) as exc:
         # Driver messages may contain connection details; never print the DSN.
         print(f"Database command failed ({type(exc).__name__}).", file=sys.stderr)
         return 1
