@@ -1,0 +1,13 @@
+{
+  "cveID": "CVE-2021-44228",
+  "vendorProject": "Apache",
+  "product": "Log4j",
+  "vulnerabilityName": "Apache Log4j2 Remote Code Execution Vulnerability",
+  "dateAdded": "2021-12-10",
+  "shortDescription": "Apache Log4j2 allows remote code execution through crafted log messages.",
+  "requiredAction": "Apply updates per vendor instructions.",
+  "dueDate": "2021-12-24",
+  "knownRansomwareCampaignUse": "Known",
+  "notes": "Synthetic test fixture based on the CISA catalog format.",
+  "cwes": ["CWE-502"]
+}
