@@ -86,3 +86,53 @@ The former `www.cisa.gov` endpoint returned an upstream HTTP 403 from this
 cloud environment even after its network allowance was enabled. See
 [the source decision](decisions/001-kev-catalog-source.md) for evidence,
 tradeoffs, and the exact modifications.
+
+## PostgreSQL development and ingestion
+
+Docker Engine and Docker Compose are required. Python runs on the host for now;
+the database runs in a PostgreSQL 17 container. From the repository root:
+
+1. Copy `.env.example` to `.env` if `.env` does not already exist.
+2. Replace `POSTGRES_PASSWORD` with your own local password.
+3. Start PostgreSQL: `docker compose up -d --wait db`.
+4. Export `DATABASE_URL` in your shell using your password and configured port.
+   URL-encode special characters in the password. Do not commit credentials.
+
+```bash
+export DATABASE_URL='postgresql://threatpulse:YOUR_PASSWORD@127.0.0.1:5432/threatpulse'
+uv sync --locked
+uv run --locked python -m threatpulse.storage migrate
+uv run --locked python -m threatpulse.storage ingest-kev
+```
+
+Compose loads `.env`; Python does not. Changing `.env` does not change a
+password already stored in the database volume. The port binds only to loopback.
+The named volume preserves data across container restarts and `docker compose
+down`; `docker compose down -v` destroys the development database.
+
+`ingest-kev` fetches and validates the full live catalog before database writes,
+applies pending migrations, then upserts vulnerabilities and KEV entries in one
+transaction. Its `processed` count means records handled, not new rows inserted.
+The migration command is repeatable and does not fetch the catalog.
+
+Verify stored counts and inspect a record without printing credentials:
+
+```bash
+docker compose exec db psql -U threatpulse -d threatpulse -c \
+  'SELECT count(*) FROM vulnerabilities; SELECT count(*) FROM kev_entries;'
+```
+
+Run all tests with real database integration enabled:
+
+```bash
+export TEST_DATABASE_URL="$DATABASE_URL"
+uv run --locked pytest
+```
+
+Integration tests create and drop isolated schemas in that database, so the
+test user needs schema creation permission. Use a development database only.
+Without `TEST_DATABASE_URL`, database tests are explicitly skipped; a passing
+offline test run alone does not validate storage.
+
+See [the storage decision](decisions/002-postgresql-ingestion.md) for transaction,
+deduplication, migration, and retention choices.
