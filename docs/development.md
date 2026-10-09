@@ -386,3 +386,18 @@ Alternatively, supply `--study-id STUDY_UUID` with `DATABASE_URL` configured. Th
 minimum scored samples, tied-rank permutation tests, effect sizes, nominal
 bootstrap intervals, Holm correction, reproducible settings, and observational
 assumptions. The command reads existing data without collection or migration.
+
+## Prioritization and machine learning design
+
+[The baseline methodology](prioritization-methodology.md) specifies review tiers,
+source freshness, missing/conflicting evidence, proposed trend promotion, and
+worked examples. Its JSON policy/scenario references are documentation artifacts;
+the current application does not load them or assign priorities. Threat Velocity
+and the baseline engine are the next implementation milestones.
+
+[The ML study design](ml-study-design.md) defines the separate prospective
+non-KEV cohort, immutable available-at features, 30-day observed-listing labels,
+censoring, temporal validation, and advisory model adoption. Scikit-learn remains
+planned, with no fitted local model or training dataset yet. Follow the roadmap's
+explicit collection, dataset, training, validation, publication, integration,
+and monitoring tasks; baseline delivery does not depend on a learned model.

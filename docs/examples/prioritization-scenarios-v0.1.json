@@ -1,0 +1,838 @@
+{
+  "policy_version": "0.1",
+  "status": "synthetic_documentation_reference",
+  "merge_semantics": "Shallow top-level input overrides replace corresponding default fields. Inputs are normalized validation outcomes, not raw API payloads.",
+  "input_defaults": {
+    "decision_at": "2026-01-10T12:00:00Z",
+    "nvd_status": "Analyzed",
+    "confirmed_kev": "none",
+    "catalog_state": "fresh_complete_absence",
+    "unconfirmed_positive_exploitation": false,
+    "exploitation_source_conflict": false,
+    "epss": {
+      "probability": "0.005",
+      "percentile": null,
+      "quality": "fresh"
+    },
+    "cvss": {
+      "severity": "LOW",
+      "version": "3.1",
+      "quality": "fresh"
+    },
+    "cvss_preference_changed": false,
+    "trend": {
+      "status": "not_evaluated",
+      "reason": "history_unavailable"
+    },
+    "prior_effective_tier": null,
+    "downgrade_reviewed": false
+  },
+  "cases": [
+    {
+      "id": "confirmed_current_kev",
+      "input_overrides": {
+        "confirmed_kev": "current",
+        "catalog_state": "fresh_complete_presence",
+        "epss": {
+          "probability": null,
+          "percentile": null,
+          "quality": "missing"
+        },
+        "cvss": {
+          "severity": null,
+          "version": null,
+          "quality": "missing"
+        }
+      },
+      "expected": {
+        "candidate_tier": "P1",
+        "effective_tier": "P1",
+        "rule_id": "R1",
+        "reason_codes": [
+          "CONFIRMED_KEV"
+        ],
+        "quality_flags": [
+          "EPSS_UNKNOWN",
+          "CVSS_UNKNOWN"
+        ],
+        "needs_review": true
+      }
+    },
+    {
+      "id": "historical_kev_omitted",
+      "input_overrides": {
+        "confirmed_kev": "historical",
+        "epss": {
+          "probability": "0.002",
+          "percentile": null,
+          "quality": "fresh"
+        }
+      },
+      "expected": {
+        "candidate_tier": "P1",
+        "effective_tier": "P1",
+        "rule_id": "R1",
+        "reason_codes": [
+          "CONFIRMED_KEV"
+        ],
+        "quality_flags": [
+          "KEV_MEMBERSHIP_CHANGED"
+        ],
+        "needs_review": true
+      }
+    },
+    {
+      "id": "high_probability_boundary",
+      "input_overrides": {
+        "epss": {
+          "probability": "0.10",
+          "percentile": null,
+          "quality": "fresh"
+        },
+        "cvss": {
+          "severity": "MEDIUM",
+          "version": "3.1",
+          "quality": "fresh"
+        }
+      },
+      "expected": {
+        "candidate_tier": "P2",
+        "effective_tier": "P2",
+        "rule_id": "R2",
+        "reason_codes": [
+          "EPSS_HIGH"
+        ],
+        "quality_flags": [],
+        "needs_review": false
+      }
+    },
+    {
+      "id": "severe_elevated_boundary",
+      "input_overrides": {
+        "epss": {
+          "probability": "0.01",
+          "percentile": null,
+          "quality": "fresh"
+        },
+        "cvss": {
+          "severity": "HIGH",
+          "version": "3.1",
+          "quality": "fresh"
+        }
+      },
+      "expected": {
+        "candidate_tier": "P2",
+        "effective_tier": "P2",
+        "rule_id": "R3",
+        "reason_codes": [
+          "SEVERITY_AND_EPSS"
+        ],
+        "quality_flags": [],
+        "needs_review": false
+      }
+    },
+    {
+      "id": "elevated_probability_boundary",
+      "input_overrides": {
+        "epss": {
+          "probability": "0.01",
+          "percentile": null,
+          "quality": "fresh"
+        },
+        "cvss": {
+          "severity": "MEDIUM",
+          "version": "3.1",
+          "quality": "fresh"
+        }
+      },
+      "expected": {
+        "candidate_tier": "P3",
+        "effective_tier": "P3",
+        "rule_id": "R4",
+        "reason_codes": [
+          "EPSS_ELEVATED"
+        ],
+        "quality_flags": [],
+        "needs_review": false
+      }
+    },
+    {
+      "id": "severe_low_probability",
+      "input_overrides": {
+        "epss": {
+          "probability": "0.001",
+          "percentile": null,
+          "quality": "fresh"
+        },
+        "cvss": {
+          "severity": "HIGH",
+          "version": "3.1",
+          "quality": "fresh"
+        }
+      },
+      "expected": {
+        "candidate_tier": "P3",
+        "effective_tier": "P3",
+        "rule_id": "R5",
+        "reason_codes": [
+          "HIGH_SEVERITY"
+        ],
+        "quality_flags": [],
+        "needs_review": false
+      }
+    },
+    {
+      "id": "valid_zero_probability",
+      "input_overrides": {
+        "epss": {
+          "probability": "0",
+          "percentile": null,
+          "quality": "fresh"
+        }
+      },
+      "expected": {
+        "candidate_tier": "P4",
+        "effective_tier": "P4",
+        "rule_id": "R6",
+        "reason_codes": [
+          "LOWER_SIGNALS_COMPLETE"
+        ],
+        "quality_flags": [],
+        "needs_review": false
+      }
+    },
+    {
+      "id": "percentile_is_not_probability",
+      "input_overrides": {
+        "epss": {
+          "probability": "0.005",
+          "percentile": "0.99",
+          "quality": "fresh"
+        }
+      },
+      "expected": {
+        "candidate_tier": "P4",
+        "effective_tier": "P4",
+        "rule_id": "R6",
+        "reason_codes": [
+          "LOWER_SIGNALS_COMPLETE"
+        ],
+        "quality_flags": [],
+        "needs_review": false
+      }
+    },
+    {
+      "id": "severe_stale_epss",
+      "input_overrides": {
+        "epss": {
+          "probability": "0.002",
+          "percentile": null,
+          "quality": "stale"
+        },
+        "cvss": {
+          "severity": "HIGH",
+          "version": "3.1",
+          "quality": "fresh"
+        }
+      },
+      "expected": {
+        "candidate_tier": "P2",
+        "effective_tier": "P2",
+        "rule_id": "R5",
+        "reason_codes": [
+          "HIGH_SEVERITY",
+          "SEVERITY_WITH_UNKNOWN_EPSS"
+        ],
+        "quality_flags": [
+          "EPSS_UNKNOWN"
+        ],
+        "needs_review": true
+      }
+    },
+    {
+      "id": "low_probability_unknown_cvss",
+      "input_overrides": {
+        "epss": {
+          "probability": "0.001",
+          "percentile": null,
+          "quality": "fresh"
+        },
+        "cvss": {
+          "severity": null,
+          "version": null,
+          "quality": "missing"
+        }
+      },
+      "expected": {
+        "candidate_tier": "UNDETERMINED",
+        "effective_tier": "UNDETERMINED",
+        "rule_id": "R7",
+        "reason_codes": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "quality_flags": [
+          "CVSS_UNKNOWN"
+        ],
+        "needs_review": true
+      }
+    },
+    {
+      "id": "low_scores_unknown_catalog",
+      "input_overrides": {
+        "epss": {
+          "probability": "0.001",
+          "percentile": null,
+          "quality": "fresh"
+        },
+        "catalog_state": "unknown"
+      },
+      "expected": {
+        "candidate_tier": "UNDETERMINED",
+        "effective_tier": "UNDETERMINED",
+        "rule_id": "R7",
+        "reason_codes": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "quality_flags": [
+          "KEV_COVERAGE_UNKNOWN"
+        ],
+        "needs_review": true
+      }
+    },
+    {
+      "id": "unconfirmed_nvd_positive",
+      "input_overrides": {
+        "unconfirmed_positive_exploitation": true,
+        "exploitation_source_conflict": true
+      },
+      "expected": {
+        "candidate_tier": "P2",
+        "effective_tier": "P2",
+        "rule_id": "R7",
+        "reason_codes": [
+          "INSUFFICIENT_EVIDENCE",
+          "EXPLOITATION_CONFLICT"
+        ],
+        "quality_flags": [
+          "EXPLOITATION_CONFLICT"
+        ],
+        "needs_review": true
+      }
+    },
+    {
+      "id": "eligible_rising_trend",
+      "input_overrides": {
+        "epss": {
+          "probability": "0.06",
+          "percentile": null,
+          "quality": "fresh"
+        },
+        "cvss": {
+          "severity": "MEDIUM",
+          "version": "3.1",
+          "quality": "fresh"
+        },
+        "trend": {
+          "status": "eligible_rising",
+          "comparability": "known_same_regime",
+          "observations": [
+            {
+              "source_date": "2026-01-04",
+              "probability": "0"
+            },
+            {
+              "source_date": "2026-01-05",
+              "probability": "0.01"
+            },
+            {
+              "source_date": "2026-01-06",
+              "probability": "0.02"
+            },
+            {
+              "source_date": "2026-01-08",
+              "probability": "0.04"
+            },
+            {
+              "source_date": "2026-01-10",
+              "probability": "0.06"
+            }
+          ],
+          "expected_endpoint_change_pp": "6",
+          "expected_median_pairwise_slope_pp_per_day": "1"
+        }
+      },
+      "expected": {
+        "candidate_tier": "P2",
+        "effective_tier": "P2",
+        "rule_id": "R4",
+        "reason_codes": [
+          "EPSS_ELEVATED",
+          "TREND_RISING"
+        ],
+        "quality_flags": [],
+        "needs_review": false
+      }
+    },
+    {
+      "id": "ineligible_trend",
+      "input_overrides": {
+        "epss": {
+          "probability": "0.06",
+          "percentile": null,
+          "quality": "fresh"
+        },
+        "cvss": {
+          "severity": "MEDIUM",
+          "version": "3.1",
+          "quality": "fresh"
+        },
+        "trend": {
+          "status": "ineligible",
+          "comparability": "unknown",
+          "reason": "gap_and_unknown_model_regime",
+          "observations": [
+            {
+              "source_date": "2026-01-03",
+              "probability": "0"
+            },
+            {
+              "source_date": "2026-01-04",
+              "probability": "0.01"
+            },
+            {
+              "source_date": "2026-01-05",
+              "probability": "0.02"
+            },
+            {
+              "source_date": "2026-01-06",
+              "probability": "0.03"
+            },
+            {
+              "source_date": "2026-01-10",
+              "probability": "0.06"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "candidate_tier": "P3",
+        "effective_tier": "P3",
+        "rule_id": "R4",
+        "reason_codes": [
+          "EPSS_ELEVATED"
+        ],
+        "quality_flags": [],
+        "needs_review": false
+      }
+    },
+    {
+      "id": "future_epss_unusable",
+      "input_overrides": {
+        "epss": {
+          "probability": "0.80",
+          "percentile": null,
+          "quality": "future"
+        }
+      },
+      "expected": {
+        "candidate_tier": "UNDETERMINED",
+        "effective_tier": "UNDETERMINED",
+        "rule_id": "R7",
+        "reason_codes": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "quality_flags": [
+          "EPSS_UNKNOWN"
+        ],
+        "needs_review": true
+      }
+    },
+    {
+      "id": "proposed_downgrade",
+      "input_overrides": {
+        "prior_effective_tier": "P2"
+      },
+      "expected": {
+        "candidate_tier": "P4",
+        "effective_tier": "P2",
+        "rule_id": "R6",
+        "reason_codes": [
+          "LOWER_SIGNALS_COMPLETE"
+        ],
+        "quality_flags": [
+          "DOWNGRADE_REVIEW_REQUIRED"
+        ],
+        "needs_review": true
+      }
+    },
+    {
+      "id": "rejected_without_positive",
+      "input_overrides": {
+        "nvd_status": "Rejected",
+        "epss": {
+          "probability": null,
+          "percentile": null,
+          "quality": "missing"
+        },
+        "cvss": {
+          "severity": null,
+          "version": null,
+          "quality": "missing"
+        }
+      },
+      "expected": {
+        "candidate_tier": "OUT_OF_SCOPE",
+        "effective_tier": "OUT_OF_SCOPE",
+        "rule_id": "R0",
+        "reason_codes": [
+          "REJECTED_RECORD"
+        ],
+        "quality_flags": [],
+        "needs_review": false
+      }
+    },
+    {
+      "id": "rejected_with_confirmed_kev",
+      "input_overrides": {
+        "nvd_status": "Rejected",
+        "confirmed_kev": "historical",
+        "cvss": {
+          "severity": "LOW",
+          "version": "3.1",
+          "quality": "fresh"
+        }
+      },
+      "expected": {
+        "candidate_tier": "P1",
+        "effective_tier": "P1",
+        "rule_id": "R1",
+        "reason_codes": [
+          "CONFIRMED_KEV",
+          "EXPLOITATION_CONFLICT"
+        ],
+        "quality_flags": [
+          "CVSS_UNKNOWN",
+          "KEV_MEMBERSHIP_CHANGED",
+          "EXPLOITATION_CONFLICT"
+        ],
+        "needs_review": true
+      }
+    },
+    {
+      "id": "below_high_boundary",
+      "input_overrides": {
+        "epss": {
+          "probability": "0.0999",
+          "percentile": null,
+          "quality": "fresh"
+        },
+        "cvss": {
+          "severity": "MEDIUM",
+          "version": "3.1",
+          "quality": "fresh"
+        }
+      },
+      "expected": {
+        "candidate_tier": "P3",
+        "effective_tier": "P3",
+        "rule_id": "R4",
+        "reason_codes": [
+          "EPSS_ELEVATED"
+        ],
+        "quality_flags": [],
+        "needs_review": false
+      }
+    },
+    {
+      "id": "below_elevated_boundary",
+      "input_overrides": {
+        "epss": {
+          "probability": "0.0099",
+          "percentile": null,
+          "quality": "fresh"
+        },
+        "cvss": {
+          "severity": "MEDIUM",
+          "version": "3.1",
+          "quality": "fresh"
+        }
+      },
+      "expected": {
+        "candidate_tier": "P4",
+        "effective_tier": "P4",
+        "rule_id": "R6",
+        "reason_codes": [
+          "LOWER_SIGNALS_COMPLETE"
+        ],
+        "quality_flags": [],
+        "needs_review": false
+      }
+    },
+    {
+      "id": "critical_severity",
+      "input_overrides": {
+        "epss": {
+          "probability": "0.01",
+          "percentile": null,
+          "quality": "fresh"
+        },
+        "cvss": {
+          "severity": "CRITICAL",
+          "version": "4.0",
+          "quality": "fresh"
+        }
+      },
+      "expected": {
+        "candidate_tier": "P2",
+        "effective_tier": "P2",
+        "rule_id": "R3",
+        "reason_codes": [
+          "SEVERITY_AND_EPSS"
+        ],
+        "quality_flags": [],
+        "needs_review": false
+      }
+    },
+    {
+      "id": "high_epss_missing_cvss",
+      "input_overrides": {
+        "epss": {
+          "probability": "0.11",
+          "percentile": null,
+          "quality": "fresh"
+        },
+        "cvss": {
+          "severity": null,
+          "version": null,
+          "quality": "missing"
+        }
+      },
+      "expected": {
+        "candidate_tier": "P2",
+        "effective_tier": "P2",
+        "rule_id": "R2",
+        "reason_codes": [
+          "EPSS_HIGH"
+        ],
+        "quality_flags": [
+          "CVSS_UNKNOWN"
+        ],
+        "needs_review": true
+      }
+    },
+    {
+      "id": "unknown_cannot_lower_previous",
+      "input_overrides": {
+        "cvss": {
+          "severity": null,
+          "version": null,
+          "quality": "missing"
+        },
+        "prior_effective_tier": "P3"
+      },
+      "expected": {
+        "candidate_tier": "UNDETERMINED",
+        "effective_tier": "P3",
+        "rule_id": "R7",
+        "reason_codes": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "quality_flags": [
+          "CVSS_UNKNOWN",
+          "DOWNGRADE_REVIEW_REQUIRED"
+        ],
+        "needs_review": true
+      }
+    },
+    {
+      "id": "rejection_cannot_lower_previous",
+      "input_overrides": {
+        "nvd_status": "Rejected",
+        "epss": {
+          "probability": null,
+          "percentile": null,
+          "quality": "missing"
+        },
+        "cvss": {
+          "severity": null,
+          "version": null,
+          "quality": "missing"
+        },
+        "prior_effective_tier": "P2"
+      },
+      "expected": {
+        "candidate_tier": "OUT_OF_SCOPE",
+        "effective_tier": "P2",
+        "rule_id": "R0",
+        "reason_codes": [
+          "REJECTED_RECORD"
+        ],
+        "quality_flags": [
+          "DOWNGRADE_REVIEW_REQUIRED"
+        ],
+        "needs_review": true
+      }
+    },
+    {
+      "id": "reviewed_downgrade",
+      "input_overrides": {
+        "prior_effective_tier": "P2",
+        "downgrade_reviewed": true
+      },
+      "expected": {
+        "candidate_tier": "P4",
+        "effective_tier": "P4",
+        "rule_id": "R6",
+        "reason_codes": [
+          "LOWER_SIGNALS_COMPLETE"
+        ],
+        "quality_flags": [],
+        "needs_review": false
+      }
+    },
+    {
+      "id": "cvss_preference_change",
+      "input_overrides": {
+        "cvss_preference_changed": true
+      },
+      "expected": {
+        "candidate_tier": "P4",
+        "effective_tier": "P4",
+        "rule_id": "R6",
+        "reason_codes": [
+          "LOWER_SIGNALS_COMPLETE"
+        ],
+        "quality_flags": [
+          "CVSS_PREFERENCE_CHANGED"
+        ],
+        "needs_review": true
+      }
+    }
+  ],
+  "freshness_checks": [
+    {
+      "id": "epss_two_day_boundary",
+      "source": "epss",
+      "decision_at": "2026-01-10T12:00:00Z",
+      "source_date": "2026-01-08",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "expected_usable": true,
+      "expected_state": "fresh"
+    },
+    {
+      "id": "epss_three_days_old",
+      "source": "epss",
+      "decision_at": "2026-01-10T12:00:00Z",
+      "source_date": "2026-01-07",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "expected_usable": false,
+      "expected_state": "stale"
+    },
+    {
+      "id": "epss_future_date",
+      "source": "epss",
+      "decision_at": "2026-01-10T12:00:00Z",
+      "source_date": "2026-01-11",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "expected_usable": false,
+      "expected_state": "future"
+    },
+    {
+      "id": "epss_future_capture",
+      "source": "epss",
+      "decision_at": "2026-01-10T12:00:00Z",
+      "source_date": "2026-01-10",
+      "captured_at": "2026-01-10T12:00:01Z",
+      "expected_usable": false,
+      "expected_state": "future"
+    },
+    {
+      "id": "nvd_seven_day_boundary",
+      "source": "nvd",
+      "decision_at": "2026-01-10T12:00:00Z",
+      "captured_at": "2026-01-03T12:00:00Z",
+      "modified_at": "2020-01-01T00:00:00Z",
+      "expected_usable": true,
+      "expected_state": "fresh"
+    },
+    {
+      "id": "nvd_beyond_seven_days",
+      "source": "nvd",
+      "decision_at": "2026-01-10T12:00:00Z",
+      "captured_at": "2026-01-03T11:59:00Z",
+      "expected_usable": false,
+      "expected_state": "stale"
+    },
+    {
+      "id": "nvd_future_capture",
+      "source": "nvd",
+      "decision_at": "2026-01-10T12:00:00Z",
+      "captured_at": "2026-01-10T12:00:01Z",
+      "expected_usable": false,
+      "expected_state": "future"
+    },
+    {
+      "id": "nvd_future_modified_at",
+      "source": "nvd",
+      "decision_at": "2026-01-10T12:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "modified_at": "2026-01-11T00:00:00Z",
+      "expected_usable": false,
+      "expected_state": "future"
+    },
+    {
+      "id": "cisa_absence_48_hour_boundary",
+      "source": "cisa_absence",
+      "decision_at": "2026-01-10T12:00:00Z",
+      "captured_at": "2026-01-08T12:00:00Z",
+      "complete": true,
+      "expected_usable": true,
+      "expected_state": "fresh"
+    },
+    {
+      "id": "cisa_absence_beyond_48_hours",
+      "source": "cisa_absence",
+      "decision_at": "2026-01-10T12:00:00Z",
+      "captured_at": "2026-01-08T11:59:00Z",
+      "complete": true,
+      "expected_usable": false,
+      "expected_state": "stale"
+    },
+    {
+      "id": "cisa_incomplete_catalog",
+      "source": "cisa_absence",
+      "decision_at": "2026-01-10T12:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "complete": false,
+      "expected_usable": false,
+      "expected_state": "invalid"
+    },
+    {
+      "id": "cisa_confirmed_history_no_expiry",
+      "source": "confirmed_kev",
+      "decision_at": "2026-01-10T12:00:00Z",
+      "captured_at": "2020-01-01T00:00:00Z",
+      "validated": true,
+      "expected_usable": true,
+      "expected_state": "valid_historical"
+    },
+    {
+      "id": "cisa_unvalidated_positive",
+      "source": "confirmed_kev",
+      "decision_at": "2026-01-10T12:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "validated": false,
+      "expected_usable": false,
+      "expected_state": "invalid"
+    },
+    {
+      "id": "cisa_future_positive",
+      "source": "confirmed_kev",
+      "decision_at": "2026-01-10T12:00:00Z",
+      "captured_at": "2026-01-10T12:00:01Z",
+      "validated": true,
+      "expected_usable": false,
+      "expected_state": "future"
+    }
+  ]
+}

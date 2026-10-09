@@ -1,0 +1,54 @@
+{
+  "policy_version": "0.1",
+  "status": "design_only_provisional",
+  "purpose": "intelligence_review_tiers",
+  "engine_implemented": false,
+  "validated_risk_model": false,
+  "tier_order": ["P1", "P2", "P3", "P4"],
+  "non_ranked_states": ["UNDETERMINED", "OUT_OF_SCOPE"],
+  "epss_high_probability": "0.10",
+  "epss_elevated_probability": "0.01",
+  "severe_cvss_labels": ["HIGH", "CRITICAL"],
+  "accepted_cvss_versions": ["2.0", "3.0", "3.1", "4.0"],
+  "freshness": {
+    "boundary": "inclusive",
+    "epss_max_source_calendar_age_days_utc": 2,
+    "nvd_max_capture_age_hours": 168,
+    "cisa_absence_max_capture_age_hours": 48,
+    "confirmed_kev_evidence_expires_automatically": false,
+    "future_or_unvalidated_inputs": "unknown"
+  },
+  "ordered_rules": [
+    {"id": "R0", "condition": "rejected_without_positive_evidence_or_conflict", "tier": "OUT_OF_SCOPE", "reason": "REJECTED_RECORD"},
+    {"id": "R1", "condition": "confirmed_current_or_historical_kev", "tier": "P1", "reason": "CONFIRMED_KEV"},
+    {"id": "R2", "condition": "fresh_epss_at_least_high", "tier": "P2", "reason": "EPSS_HIGH"},
+    {"id": "R3", "condition": "fresh_epss_at_least_elevated_and_fresh_severe_cvss", "tier": "P2", "reason": "SEVERITY_AND_EPSS"},
+    {"id": "R4", "condition": "fresh_epss_at_least_elevated", "tier": "P3", "reason": "EPSS_ELEVATED"},
+    {"id": "R5", "condition": "fresh_severe_cvss", "tier": "P3", "reason": "HIGH_SEVERITY"},
+    {"id": "R6", "condition": "fresh_low_epss_nonsevere_cvss_complete_catalog_absence_no_conflict", "tier": "P4", "reason": "LOWER_SIGNALS_COMPLETE"},
+    {"id": "R7", "condition": "otherwise", "tier": "UNDETERMINED", "reason": "INSUFFICIENT_EVIDENCE"}
+  ],
+  "review_floors": [
+    {"condition": "unconfirmed_positive_exploitation_or_source_conflict", "maximum_tier_number": 2, "reason": "EXPLOITATION_CONFLICT"},
+    {"condition": "fresh_severe_cvss_unknown_epss", "maximum_tier_number": 2, "reason": "SEVERITY_WITH_UNKNOWN_EPSS"}
+  ],
+  "trend_promotion": {
+    "status": "contract_for_future_threat_velocity",
+    "lookback_calendar_days": 7,
+    "minimum_observed_dates": 5,
+    "minimum_span_calendar_days": 4,
+    "maximum_adjacent_gap_calendar_days": 2,
+    "requires_fresh_latest_score": true,
+    "requires_known_model_regime_comparability": true,
+    "minimum_latest_epss": "0.01",
+    "minimum_endpoint_change_pp": "5",
+    "minimum_median_pairwise_slope_pp_per_day": "0.5",
+    "promotion": {"P3": "P2"},
+    "automatic_trend_downgrades": false
+  },
+  "downgrade_guard": "retain_previous_ranked_tier_until_recorded_review",
+  "within_tier_display_order": "cve_identifier",
+  "unknown_scores_imputed": false,
+  "asset_context_included": false,
+  "learned_scores_override_confirmed_kev": false
+}
