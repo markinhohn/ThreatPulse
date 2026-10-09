@@ -359,12 +359,12 @@ The eventual goal is to produce an actionable remediation queue based on vulnera
 
 ### Phase 3 — Analytics
 
-- [ ] Exploratory data analysis
+- [x] Exploratory data analysis
 - [ ] KEV vs. non-KEV comparison
-- [ ] CVSS vs. EPSS analysis
+- [x] CVSS vs. EPSS analysis
 - [ ] Vulnerability trend analysis
 - [ ] Statistical testing
-- [ ] Historical EPSS analysis
+- [x] Historical EPSS analysis
 
 ### Phase 4 — Prioritization
 
@@ -487,8 +487,19 @@ The dashboard provides an overview, filtered vulnerability explorer, CVE
 details with EPSS history, and dedicated KEV/EPSS descriptive analytics.
 Run `uv run --locked python -m threatpulse.storage ingest-daily` for checkpointed
 daily collection with KEV/NVD snapshots. See [scheduling and recovery](docs/scheduling.md)
-for the systemd timer, retries, and run inspection. Prioritization and deeper
-analytics are still planned.
+for the systemd timer, retries, and run inspection.
+
+Generate a reproducible exploratory report from the stored data:
+
+```bash
+uv run --locked python -m threatpulse.exploration --output data/exploration
+```
+
+Open `data/exploration/report.html` for coverage, CVSS/EPSS distributions,
+version-specific associations, and historical EPSS changes. The export includes
+CSV tables, SVG/PNG figures, and an offline replay dataset. See
+[the analysis guide](docs/exploration.md) for dates, methods, and limitations.
+Prioritization and inferential statistical testing are still planned.
 
 ---
 

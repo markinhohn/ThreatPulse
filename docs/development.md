@@ -337,3 +337,18 @@ not normalize by elapsed days, interpolate gaps, or account for EPSS model
 version changes. They are descriptive deltas, not the planned Threat Velocity
 methodology. These analytics use current KEV membership and preferred NVD metrics; daily
 historical snapshots are stored separately. See [the analytics decision](decisions/006-kev-epss-analytics.md).
+
+## Reproducible exploratory reports
+
+Run `uv run --locked python -m threatpulse.exploration --output data/exploration`
+with DATABASE_URL configured to export a standalone report from existing data.
+See [the analysis guide](exploration.md) for common-date coverage, version-specific
+associations, historical comparisons, offline replay, and limitations. This
+command reads a consistent database snapshot and does not ingest or migrate.
+
+If the cloud home directory is read-only, use writable plotting caches:
+
+```bash
+export MPLCONFIGDIR=/tmp/threatpulse-mpl-cache
+export XDG_CACHE_HOME=/tmp/threatpulse-cache
+```
