@@ -1,8 +1,9 @@
 # Prioritization methodology v0.1
 
-Status: accepted design with provisional policy defaults. The priority engine,
-Threat Velocity calculation, and local ML models are not implemented by this
-document. [The policy reference](examples/prioritization-policy-v0.1.json) and
+Status: accepted design with provisional policy defaults. Threat Velocity now
+implements the trend contract below; see [the usage guide](threat-velocity.md).
+The priority engine and local ML models remain planned.
+[The policy reference](examples/prioritization-policy-v0.1.json) and
 [worked scenarios](examples/prioritization-scenarios-v0.1.json) are documentation
 artifacts, not executable configuration loaded by the current application.
 
@@ -149,11 +150,11 @@ policy, input version, and approved candidate; a matching valid record permits
 that candidate to take effect. The synthetic JSON represents this validated
 acknowledgement as a normalized boolean, not a real review authorization.
 
-## Proposed Threat Velocity contract
+## Threat Velocity contract
 
-The next implementation task will calculate a descriptive rate from a trailing
-seven-day EPSS window. This section specifies the promotion contract, not an
-already available score. The window spans source dates from `latest_date - 7`
+The implemented calculation provides a descriptive rate from a trailing
+seven-day EPSS window and an eligible rising signal for the future engine.
+The window spans source dates from `latest_date - 7`
 through `latest_date`, inclusive. Use only observations captured by the decision.
 
 A promotion-eligible `rising` signal requires all of:
@@ -171,8 +172,9 @@ For distinct source dates i < j, pairwise slope is
 limits sensitivity to one endpoint. Zero probabilities remain valid, missing
 dates stay missing, and relative percentage growth is not substituted for
 percentage points. The thresholds are provisional and are not a forecast.
-Current EPSS storage does not establish model-regime comparability; the upcoming
-implementation must explicitly record/audit it before enabling promotion.
+Current EPSS storage does not establish model-regime comparability. The
+implementation requires a bounded, evidence-backed operator model review before
+enabling the rising signal; unknown/boundary cases retain descriptive rates only.
 
 A qualifying rise promotes P3 to P2. P1 stays P1; P2 stays P2. An unavailable
 or falling trend never automatically lowers a tier. Membership/source conflicts
@@ -244,6 +246,6 @@ listing proxy, not the EPSS exploitation probability. The future model card must
 state that distinction and document training/evaluation data and limitations.
 
 See [decision 011](decisions/011-prioritization-methodology.md) for the design
-choice and roadmap dependencies. The next implementation is Threat Velocity,
-then the baseline priority engine; longitudinal cohort collection can proceed
-alongside them as its own newly added milestone.
+choice and roadmap dependencies. The next implementation is the baseline
+priority engine; longitudinal cohort collection can proceed
+alongside it as its own newly added milestone.

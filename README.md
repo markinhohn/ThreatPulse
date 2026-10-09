@@ -209,7 +209,8 @@ The analytics layer will investigate questions such as:
 
 ### Threat Velocity
 
-ThreatPulse will track changes in exploitation probability over time.
+ThreatPulse tracks dated EPSS observations and calculates changes in exploitation
+probability over time.
 
 Example:
 
@@ -227,9 +228,10 @@ Day 7     81%
 Threat Velocity: RISING (illustrative)
 ```
 
-The planned calculation will report EPSS change in percentage points per day,
-with coverage and model-regime comparability checks. The example assumes those
-checks pass. See [the proposed contract](docs/prioritization-methodology.md#proposed-threat-velocity-contract).
+The calculation reports EPSS change in percentage points per day, with coverage,
+freshness, and model-regime comparability checks. The example assumes those
+checks pass. See [the Threat Velocity guide](docs/threat-velocity.md) for the
+read-only command, model-review requirements, and reproducible outputs.
 
 ---
 
@@ -369,13 +371,15 @@ The eventual goal is to produce an actionable remediation queue based on vulnera
 ### Phase 4 — Prioritization
 
 - [x] Develop prioritization methodology
-- [ ] Implement Threat Velocity
+- [x] Implement Threat Velocity
 - [ ] Build prioritization engine
 - [x] Document baseline policy assumptions and limitations
 
-The methodology is a versioned design, not an implemented engine or a validated
-risk model. Threat Velocity is the next implementation task, followed by the
-baseline engine. See [the methodology](docs/prioritization-methodology.md).
+The methodology is a versioned design with provisional defaults. Threat Velocity
+now provides quality-gated, reproducible signals; the baseline prioritization
+engine is the next implementation task. See [the methodology](docs/prioritization-methodology.md)
+and [Threat Velocity](docs/threat-velocity.md). The engine and risk validation
+remain pending.
 
 ### Phase 4B — Machine Learning Research and Integration
 
@@ -539,8 +543,11 @@ intervals, and Holm correction across the five planned endpoints. See
 [the statistical guide](docs/statistical-testing.md) for sample requirements,
 coverage, reproducible plans, and observational assumptions.
 The [prioritization methodology](docs/prioritization-methodology.md) now specifies
-baseline decisions and data-quality handling. The engine and Threat Velocity
-are pending. [The ML study design](docs/ml-study-design.md) defines the separate
+baseline decisions and data-quality handling. Run
+`python -m threatpulse.velocity --output data/velocity` for EPSS change rates,
+coverage/freshness checks, audited model comparability, and offline replay.
+See [the Threat Velocity guide](docs/threat-velocity.md). The baseline engine
+is next. [The ML study design](docs/ml-study-design.md) defines the separate
 data collection, training, validation, and advisory integration milestones.
 
 ---

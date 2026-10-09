@@ -110,7 +110,7 @@ For every adjacent pair of nonempty score dates, matched CVEs receive
 neither, increases/decreases/unchanged, elapsed days, and whole unobserved days
 between the endpoints are retained. Changes across two days are not treated
 as daily changes. Summaries use linear quantiles, without significance tests,
-forecasts, or the planned Threat Velocity calculation.
+forecasts, or the separate [Threat Velocity calculation](threat-velocity.md).
 
 Daily missing lists describe a particular API request. Other/manual writes may
 later add scores, and an unrecorded date is not proof that FIRST lacked scores.

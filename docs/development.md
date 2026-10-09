@@ -334,7 +334,7 @@ These views describe the stored KEV-based dataset; they do not establish a
 KEV/non-KEV comparison or generalize to all vulnerabilities. Dates may differ
 across latest-score distributions and scatter points. Historical comparisons do
 not normalize by elapsed days, interpolate gaps, or account for EPSS model
-version changes. They are descriptive deltas, not the planned Threat Velocity
+version changes. They are descriptive deltas, not the separate Threat Velocity
 methodology. These analytics use current KEV membership and preferred NVD metrics; daily
 historical snapshots are stored separately. See [the analytics decision](decisions/006-kev-epss-analytics.md).
 
@@ -393,7 +393,7 @@ assumptions. The command reads existing data without collection or migration.
 source freshness, missing/conflicting evidence, proposed trend promotion, and
 worked examples. Its JSON policy/scenario references are documentation artifacts;
 the current application does not load them or assign priorities. Threat Velocity
-and the baseline engine are the next implementation milestones.
+implements the trend contract; the baseline engine is the next milestone.
 
 [The ML study design](ml-study-design.md) defines the separate prospective
 non-KEV cohort, immutable available-at features, 30-day observed-listing labels,
@@ -401,3 +401,14 @@ censoring, temporal validation, and advisory model adoption. Scikit-learn remain
 planned, with no fitted local model or training dataset yet. Follow the roadmap's
 explicit collection, dataset, training, validation, publication, integration,
 and monitoring tasks; baseline delivery does not depend on a learned model.
+
+## Threat Velocity reports
+
+Run `uv run --locked python -m threatpulse.velocity --output data/velocity`
+for descriptive EPSS rates and quality-gated rising signals. This reads stored
+history without collection/migration and exports frozen inputs, policy thresholds,
+JSON/CSV tables, a standalone HTML report, SVG/PNG charts, and an integrity manifest.
+[The guide](threat-velocity.md) documents reviewed model-regime declarations,
+source availability, UTC freshness, gaps, synthetic examples, and offline replay.
+An empty model registry permits descriptive output but disables promotion; the
+current EPSS tables cannot prove shared model identity or all earlier revisions.

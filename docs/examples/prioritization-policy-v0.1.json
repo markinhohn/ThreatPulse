@@ -33,7 +33,7 @@
     {"condition": "fresh_severe_cvss_unknown_epss", "maximum_tier_number": 2, "reason": "SEVERITY_WITH_UNKNOWN_EPSS"}
   ],
   "trend_promotion": {
-    "status": "contract_for_future_threat_velocity",
+    "status": "implemented_signal_for_future_priority_engine",
     "lookback_calendar_days": 7,
     "minimum_observed_dates": 5,
     "minimum_span_calendar_days": 4,

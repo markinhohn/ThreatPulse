@@ -1,0 +1,487 @@
+{
+  "dataset_kind": "threat_velocity",
+  "schema_version": 1,
+  "captured_at": "2026-01-10T12:00:00Z",
+  "label": "Synthetic Threat Velocity demonstration; scores and model regimes are invented",
+  "cohort": [
+    "CVE-2026-1001",
+    "CVE-2026-1002",
+    "CVE-2026-1003",
+    "CVE-2026-1004",
+    "CVE-2026-1005",
+    "CVE-2026-1006"
+  ],
+  "epss_observations": [
+    {
+      "cve_id": "CVE-2026-1001",
+      "score_date": "2026-01-06",
+      "epss": "0.01",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1001&date=2026-01-06",
+      "ingested_at": "2026-01-06T11:00:00Z",
+      "available_at": "2026-01-06T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1001",
+        "date": "2026-01-06",
+        "epss": "0.01",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1001",
+      "score_date": "2026-01-07",
+      "epss": "0.025",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1001&date=2026-01-07",
+      "ingested_at": "2026-01-07T11:00:00Z",
+      "available_at": "2026-01-07T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1001",
+        "date": "2026-01-07",
+        "epss": "0.025",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1001",
+      "score_date": "2026-01-08",
+      "epss": "0.04",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1001&date=2026-01-08",
+      "ingested_at": "2026-01-08T11:00:00Z",
+      "available_at": "2026-01-08T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1001",
+        "date": "2026-01-08",
+        "epss": "0.04",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1001",
+      "score_date": "2026-01-09",
+      "epss": "0.055",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1001&date=2026-01-09",
+      "ingested_at": "2026-01-09T11:00:00Z",
+      "available_at": "2026-01-09T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1001",
+        "date": "2026-01-09",
+        "epss": "0.055",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1001",
+      "score_date": "2026-01-10",
+      "epss": "0.07",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1001&date=2026-01-10",
+      "ingested_at": "2026-01-10T11:00:00Z",
+      "available_at": "2026-01-10T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1001",
+        "date": "2026-01-10",
+        "epss": "0.07",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1002",
+      "score_date": "2026-01-04",
+      "epss": "0",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1002&date=2026-01-04",
+      "ingested_at": "2026-01-04T11:00:00Z",
+      "available_at": "2026-01-04T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1002",
+        "date": "2026-01-04",
+        "epss": "0",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1002",
+      "score_date": "2026-01-07",
+      "epss": "0.03",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1002&date=2026-01-07",
+      "ingested_at": "2026-01-07T11:00:00Z",
+      "available_at": "2026-01-07T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1002",
+        "date": "2026-01-07",
+        "epss": "0.03",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1002",
+      "score_date": "2026-01-08",
+      "epss": "0.04",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1002&date=2026-01-08",
+      "ingested_at": "2026-01-08T11:00:00Z",
+      "available_at": "2026-01-08T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1002",
+        "date": "2026-01-08",
+        "epss": "0.04",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1002",
+      "score_date": "2026-01-09",
+      "epss": "0.05",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1002&date=2026-01-09",
+      "ingested_at": "2026-01-09T11:00:00Z",
+      "available_at": "2026-01-09T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1002",
+        "date": "2026-01-09",
+        "epss": "0.05",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1002",
+      "score_date": "2026-01-10",
+      "epss": "0.06",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1002&date=2026-01-10",
+      "ingested_at": "2026-01-10T11:00:00Z",
+      "available_at": "2026-01-10T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1002",
+        "date": "2026-01-10",
+        "epss": "0.06",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1003",
+      "score_date": "2026-01-03",
+      "epss": "0",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1003&date=2026-01-03",
+      "ingested_at": "2026-01-03T11:00:00Z",
+      "available_at": "2026-01-03T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1003",
+        "date": "2026-01-03",
+        "epss": "0",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1003",
+      "score_date": "2026-01-04",
+      "epss": "0.01",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1003&date=2026-01-04",
+      "ingested_at": "2026-01-04T11:00:00Z",
+      "available_at": "2026-01-04T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1003",
+        "date": "2026-01-04",
+        "epss": "0.01",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1003",
+      "score_date": "2026-01-05",
+      "epss": "0.02",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1003&date=2026-01-05",
+      "ingested_at": "2026-01-05T11:00:00Z",
+      "available_at": "2026-01-05T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1003",
+        "date": "2026-01-05",
+        "epss": "0.02",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1003",
+      "score_date": "2026-01-06",
+      "epss": "0.03",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1003&date=2026-01-06",
+      "ingested_at": "2026-01-06T11:00:00Z",
+      "available_at": "2026-01-06T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1003",
+        "date": "2026-01-06",
+        "epss": "0.03",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1003",
+      "score_date": "2026-01-07",
+      "epss": "0.04",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1003&date=2026-01-07",
+      "ingested_at": "2026-01-07T11:00:00Z",
+      "available_at": "2026-01-07T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1003",
+        "date": "2026-01-07",
+        "epss": "0.04",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1003",
+      "score_date": "2026-01-08",
+      "epss": "0.05",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1003&date=2026-01-08",
+      "ingested_at": "2026-01-08T11:00:00Z",
+      "available_at": "2026-01-08T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1003",
+        "date": "2026-01-08",
+        "epss": "0.05",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1003",
+      "score_date": "2026-01-09",
+      "epss": "0.06",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1003&date=2026-01-09",
+      "ingested_at": "2026-01-09T11:00:00Z",
+      "available_at": "2026-01-09T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1003",
+        "date": "2026-01-09",
+        "epss": "0.06",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1003",
+      "score_date": "2026-01-10",
+      "epss": "0.07",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1003&date=2026-01-10",
+      "ingested_at": "2026-01-10T11:00:00Z",
+      "available_at": "2026-01-10T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1003",
+        "date": "2026-01-10",
+        "epss": "0.07",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1004",
+      "score_date": "2026-01-06",
+      "epss": "0",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1004&date=2026-01-06",
+      "ingested_at": "2026-01-06T11:00:00Z",
+      "available_at": "2026-01-06T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1004",
+        "date": "2026-01-06",
+        "epss": "0",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1004",
+      "score_date": "2026-01-07",
+      "epss": "0",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1004&date=2026-01-07",
+      "ingested_at": "2026-01-07T11:00:00Z",
+      "available_at": "2026-01-07T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1004",
+        "date": "2026-01-07",
+        "epss": "0",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1004",
+      "score_date": "2026-01-08",
+      "epss": "0",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1004&date=2026-01-08",
+      "ingested_at": "2026-01-08T11:00:00Z",
+      "available_at": "2026-01-08T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1004",
+        "date": "2026-01-08",
+        "epss": "0",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1004",
+      "score_date": "2026-01-09",
+      "epss": "0",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1004&date=2026-01-09",
+      "ingested_at": "2026-01-09T11:00:00Z",
+      "available_at": "2026-01-09T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1004",
+        "date": "2026-01-09",
+        "epss": "0",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1004",
+      "score_date": "2026-01-10",
+      "epss": "0",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1004&date=2026-01-10",
+      "ingested_at": "2026-01-10T11:00:00Z",
+      "available_at": "2026-01-10T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1004",
+        "date": "2026-01-10",
+        "epss": "0",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1006",
+      "score_date": "2026-01-01",
+      "epss": "0.01",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1006&date=2026-01-01",
+      "ingested_at": "2026-01-01T11:00:00Z",
+      "available_at": "2026-01-01T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1006",
+        "date": "2026-01-01",
+        "epss": "0.01",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1006",
+      "score_date": "2026-01-02",
+      "epss": "0.02",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1006&date=2026-01-02",
+      "ingested_at": "2026-01-02T11:00:00Z",
+      "available_at": "2026-01-02T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1006",
+        "date": "2026-01-02",
+        "epss": "0.02",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1006",
+      "score_date": "2026-01-03",
+      "epss": "0.03",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1006&date=2026-01-03",
+      "ingested_at": "2026-01-03T11:00:00Z",
+      "available_at": "2026-01-03T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1006",
+        "date": "2026-01-03",
+        "epss": "0.03",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1006",
+      "score_date": "2026-01-04",
+      "epss": "0.04",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1006&date=2026-01-04",
+      "ingested_at": "2026-01-04T11:00:00Z",
+      "available_at": "2026-01-04T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1006",
+        "date": "2026-01-04",
+        "epss": "0.04",
+        "percentile": "0.9"
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1006",
+      "score_date": "2026-01-05",
+      "epss": "0.05",
+      "percentile": "0.9",
+      "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1006&date=2026-01-05",
+      "ingested_at": "2026-01-05T11:00:00Z",
+      "available_at": "2026-01-05T11:30:00Z",
+      "availability_basis": "validated_capture",
+      "raw_record": {
+        "cve": "CVE-2026-1006",
+        "date": "2026-01-05",
+        "epss": "0.05",
+        "percentile": "0.9"
+      }
+    }
+  ],
+  "model_registry": {
+    "schema_version": 1,
+    "regimes": [
+      {
+        "regime_id": "synthetic-a",
+        "score_date_start": "2026-01-01",
+        "score_date_end": "2026-01-03",
+        "reviewed_at": "2026-01-10T11:45:00Z",
+        "reviewer": "Synthetic fixture",
+        "evidence_url": "https://www.first.org/epss/model",
+        "evidence": "Synthetic demonstration only; this is not an assertion about actual FIRST model dates."
+      },
+      {
+        "regime_id": "synthetic-b",
+        "score_date_start": "2026-01-04",
+        "score_date_end": "2026-01-10",
+        "reviewed_at": "2026-01-10T11:45:00Z",
+        "reviewer": "Synthetic fixture",
+        "evidence_url": "https://www.first.org/epss/model",
+        "evidence": "Synthetic demonstration only; this is not an assertion about actual FIRST model dates."
+      }
+    ]
+  }
+}
