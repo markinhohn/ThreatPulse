@@ -1,11 +1,13 @@
 # Prioritization methodology v0.1
 
-Status: accepted design with provisional policy defaults. Threat Velocity now
-implements the trend contract below; see [the usage guide](threat-velocity.md).
-The priority engine and local ML models remain planned.
+Status: implemented baseline with provisional policy defaults. The
+[engine guide](prioritization.md) covers evaluation, review records, and replay;
+[Threat Velocity](threat-velocity.md) implements the trend contract below.
+Local ML models remain planned.
 [The policy reference](examples/prioritization-policy-v0.1.json) and
 [worked scenarios](examples/prioritization-scenarios-v0.1.json) are documentation
-artifacts, not executable configuration loaded by the current application.
+artifacts. The engine implements and tests those versioned rules, then exports
+its executable policy; it does not load these JSON files as runtime configuration.
 
 ## Purpose and scope
 
@@ -153,7 +155,7 @@ acknowledgement as a normalized boolean, not a real review authorization.
 ## Threat Velocity contract
 
 The implemented calculation provides a descriptive rate from a trailing
-seven-day EPSS window and an eligible rising signal for the future engine.
+seven-day EPSS window and an eligible rising signal for the baseline engine.
 The window spans source dates from `latest_date - 7`
 through `latest_date`, inclusive. Use only observations captured by the decision.
 
@@ -222,11 +224,12 @@ normalize audit times to UTC rather than local display dates.
 
 ## Validation, public outputs, and ML role
 
-The engine implementation must cover threshold/freshness boundaries, zero versus
+The engine tests cover threshold/freshness boundaries, zero versus
 missing values, retained KEV evidence, conflicts, rejected records, version
 changes, historical availability, trend eligibility, and blocked downgrades.
-Decisions should replay from a frozen input/definition with policy/source hashes.
-Publish a small synthetic demo and describe what a tier can and cannot imply.
+Decisions replay from a frozen input/definition with policy/source hashes.
+The [synthetic demo](../tests/fixtures/priority_dataset.json) exercises all six
+queues; [the guide](prioritization.md) describes what a tier can and cannot imply.
 
 Evaluate tier coverage, data-review volume, stability, prospective future KEV
 capture, and source/vendor/age differences before claiming practical improvement.
@@ -246,6 +249,6 @@ listing proxy, not the EPSS exploitation probability. The future model card must
 state that distinction and document training/evaluation data and limitations.
 
 See [decision 011](decisions/011-prioritization-methodology.md) for the design
-choice and roadmap dependencies. The next implementation is the baseline
-priority engine; longitudinal cohort collection can proceed
-alongside it as its own newly added milestone.
+choice and roadmap dependencies, and [decision 013](decisions/013-baseline-priority-engine.md)
+for the implementation. The next roadmap task is the defined NVD non-KEV cohort
+with immutable daily history. Model training still requires mature outcome labels.

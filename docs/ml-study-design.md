@@ -210,7 +210,7 @@ and subgroup/coverage caveats even if the model is not adopted.
 
 ## Engine integration and public usefulness
 
-The baseline engine can ship independently. Model integration waits for valid
+The [baseline engine](prioritization.md) is implemented independently. Model integration waits for valid
 data, mature labels, temporal evaluation, a versioned model/preprocessor artifact,
 and a public model card. Its initial role is **advisory**, separately displaying
 probability of the KEV-listing proxy and a research ranking. It cannot demote
@@ -234,7 +234,7 @@ evaluation before treating their scores as validated probabilities.
 
 The roadmap explicitly separates cohort tracking, dataset construction, training,
 validation, experiment/model publication, advisory integration, and monitoring.
-Collection may proceed alongside Threat Velocity and the baseline engine.
+Collection is the next roadmap task after the implemented baseline engine.
 Training needs mature labels; integration needs both accepted model evidence and
 a working baseline. See [the prioritization methodology](prioritization-methodology.md)
 and [decision 011](decisions/011-prioritization-methodology.md).

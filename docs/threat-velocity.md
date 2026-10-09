@@ -2,7 +2,8 @@
 
 Threat Velocity reports how a CVE's EPSS probability changes across source dates.
 It exports descriptive rates and a separate quality-gated `rising_signal` for
-the future priority engine. It does not assign priority tiers or train a model.
+the [baseline priority engine](prioritization.md). The standalone velocity report
+does not assign priority tiers or train a model.
 Thresholds implement [policy v0.1](prioritization-methodology.md) and remain
 provisional operational choices.
 
@@ -89,7 +90,7 @@ A `rising_signal` requires **all** of:
 Boundaries are inclusive. The report retains leading/intermediate missing dates,
 coverage fraction, maximum gap, freshness, descriptive direction, and every
 failed eligibility reason. A positive descriptive rate alone does not authorize
-promotion. The future engine can use eligible rises for P3 → P2; falling or
+promotion. The baseline engine uses eligible rises for P3 → P2; falling or
 unavailable history never authorizes an automatic downgrade.
 
 ## Model-comparability review
@@ -170,5 +171,9 @@ use unconnected markers. The full exports are authoritative. No reported change
 establishes observed attacks, causation, or calibrated vulnerability risk.
 
 See [decision 012](decisions/012-threat-velocity.md) for implementation choices.
-The next roadmap task is the baseline prioritization engine; Streamlit integration
-remains the separate dashboard visualization milestone.
+The baseline engine consumes eligible rises for P3-to-P2 promotion and can
+explicitly advance the evaluation clock on frozen evidence to check freshness
+and recorded reviews. This leaves capture/availability timestamps intact. The
+standalone velocity CLI keeps its original export-time decision limit. Missing
+percentile metadata is retained as null; probability alone supplies the rates.
+Streamlit integration remains the separate dashboard visualization milestone.

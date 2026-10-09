@@ -390,10 +390,10 @@ assumptions. The command reads existing data without collection or migration.
 ## Prioritization and machine learning design
 
 [The baseline methodology](prioritization-methodology.md) specifies review tiers,
-source freshness, missing/conflicting evidence, proposed trend promotion, and
-worked examples. Its JSON policy/scenario references are documentation artifacts;
-the current application does not load them or assign priorities. Threat Velocity
-implements the trend contract; the baseline engine is the next milestone.
+source freshness, missing/conflicting evidence, trend promotion, and worked
+examples. Its JSON references document the versioned rules implemented by
+`threatpulse.priority`; tests exercise every worked scenario. The engine freezes
+its executable policy in each report, rather than loading editable policy JSON.
 
 [The ML study design](ml-study-design.md) defines the separate prospective
 non-KEV cohort, immutable available-at features, 30-day observed-listing labels,
@@ -412,3 +412,24 @@ JSON/CSV tables, a standalone HTML report, SVG/PNG charts, and an integrity mani
 source availability, UTC freshness, gaps, synthetic examples, and offline replay.
 An empty model registry permits descriptive output but disables promotion; the
 current EPSS tables cannot prove shared model identity or all earlier revisions.
+
+## Baseline prioritization reports
+
+Run `uv run --locked python -m threatpulse.priority --output data/priority`
+to evaluate stored evidence in a consistent read-only transaction. It publishes
+six visible queues, full JSON/CSV decisions, frozen inputs, executable policy,
+and a checksum manifest. No schema migration, collector call, or new key is needed.
+
+Run the public synthetic example without a database:
+
+```sh
+uv run --locked python -m threatpulse.priority \
+  --input tests/fixtures/priority_dataset.json --output data/priority-demo
+```
+
+Supply `--previous PREVIOUS_REPORT/analysis.json` on each subsequent evaluation;
+priority state lives in report files rather than PostgreSQL. Historical CISA
+evidence is carried forward, missing prior-cohort CVEs stay visible, and weaker
+candidates retain the prior tier until an evidence-bound recorded review.
+[The engine guide](prioritization.md) covers review records, frozen-source replay,
+availability and freshness, audited source corrections, and operational limits.

@@ -1,0 +1,488 @@
+{
+  "captured_at": "2026-01-10T12:00:00Z",
+  "catalogs": [
+    {
+      "available_at": "2025-12-31T12:00:00Z",
+      "captured_at": "2025-12-31T12:00:00Z",
+      "complete": true,
+      "cve_ids": [
+        "CVE-2026-3008"
+      ],
+      "evidence_id": "catalog-old-3008",
+      "source_url": "https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json",
+      "validated": true
+    },
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "complete": true,
+      "cve_ids": [
+        "CVE-2026-3001",
+        "CVE-2026-9999"
+      ],
+      "evidence_id": "catalog-now",
+      "source_url": "https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json",
+      "validated": true
+    }
+  ],
+  "cohort": [
+    "CVE-2026-3001",
+    "CVE-2026-3002",
+    "CVE-2026-3003",
+    "CVE-2026-3004",
+    "CVE-2026-3005",
+    "CVE-2026-3006",
+    "CVE-2026-3007",
+    "CVE-2026-3008",
+    "CVE-2026-3009",
+    "CVE-2026-3010"
+  ],
+  "dataset_kind": "baseline_priority",
+  "epss_observations": [
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3002",
+      "epss": "0.10",
+      "evidence_id": "epss-now-3002",
+      "percentile": null,
+      "raw_record": {},
+      "score_date": "2026-01-10",
+      "source_url": "https://api.first.org/data/v1/epss"
+    },
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3003",
+      "epss": "0.01",
+      "evidence_id": "epss-now-3003",
+      "percentile": null,
+      "raw_record": {},
+      "score_date": "2026-01-10",
+      "source_url": "https://api.first.org/data/v1/epss"
+    },
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3004",
+      "epss": "0",
+      "evidence_id": "epss-now-3004",
+      "percentile": null,
+      "raw_record": {},
+      "score_date": "2026-01-10",
+      "source_url": "https://api.first.org/data/v1/epss"
+    },
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3005",
+      "epss": "0.001",
+      "evidence_id": "epss-now-3005",
+      "percentile": null,
+      "raw_record": {},
+      "score_date": "2026-01-10",
+      "source_url": "https://api.first.org/data/v1/epss"
+    },
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3007",
+      "epss": "0",
+      "evidence_id": "epss-2026-01-04-3007",
+      "percentile": null,
+      "raw_record": {},
+      "score_date": "2026-01-04",
+      "source_url": "https://api.first.org/data/v1/epss"
+    },
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3007",
+      "epss": "0.01",
+      "evidence_id": "epss-2026-01-05-3007",
+      "percentile": null,
+      "raw_record": {},
+      "score_date": "2026-01-05",
+      "source_url": "https://api.first.org/data/v1/epss"
+    },
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3007",
+      "epss": "0.02",
+      "evidence_id": "epss-2026-01-06-3007",
+      "percentile": null,
+      "raw_record": {},
+      "score_date": "2026-01-06",
+      "source_url": "https://api.first.org/data/v1/epss"
+    },
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3007",
+      "epss": "0.04",
+      "evidence_id": "epss-2026-01-08-3007",
+      "percentile": null,
+      "raw_record": {},
+      "score_date": "2026-01-08",
+      "source_url": "https://api.first.org/data/v1/epss"
+    },
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3007",
+      "epss": "0.06",
+      "evidence_id": "epss-2026-01-10-3007",
+      "percentile": null,
+      "raw_record": {},
+      "score_date": "2026-01-10",
+      "source_url": "https://api.first.org/data/v1/epss"
+    },
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3008",
+      "epss": "0.002",
+      "evidence_id": "epss-now-3008",
+      "percentile": null,
+      "raw_record": {},
+      "score_date": "2026-01-10",
+      "source_url": "https://api.first.org/data/v1/epss"
+    },
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3009",
+      "epss": "0.002",
+      "evidence_id": "epss-now-3009",
+      "percentile": null,
+      "raw_record": {},
+      "score_date": "2026-01-07",
+      "source_url": "https://api.first.org/data/v1/epss"
+    },
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3010",
+      "epss": "0.005",
+      "evidence_id": "epss-now-3010",
+      "percentile": null,
+      "raw_record": {},
+      "score_date": "2026-01-10",
+      "source_url": "https://api.first.org/data/v1/epss"
+    }
+  ],
+  "kev_entries": [],
+  "kev_withdrawals": [],
+  "label": "Synthetic baseline priority demonstration; all CVEs, scores, and model declarations are invented",
+  "model_registry": {
+    "regimes": [
+      {
+        "evidence": "Invented regime; synthetic example only.",
+        "evidence_url": "https://www.first.org/epss/model",
+        "regime_id": "synthetic",
+        "reviewed_at": "2026-01-10T11:30:00Z",
+        "reviewer": "Synthetic audit",
+        "score_date_end": "2026-01-10",
+        "score_date_start": "2026-01-01"
+      }
+    ],
+    "schema_version": 1
+  },
+  "nvd_records": [
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3001",
+      "evidence_id": "nvd-now-3001",
+      "record": {
+        "cve_id": "CVE-2026-3001",
+        "cvss_metrics": [],
+        "description": "Invented demonstration: confirmed_current_kev",
+        "ingested_at": "2026-01-10T11:00:00+00:00",
+        "modified_at": "2025-01-02T00:00:00Z",
+        "published_at": "2025-01-01T00:00:00Z",
+        "raw_record": {
+          "id": "CVE-2026-3001"
+        },
+        "references": [],
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+        "status": "Analyzed",
+        "weaknesses": []
+      },
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0"
+    },
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3002",
+      "evidence_id": "nvd-now-3002",
+      "record": {
+        "cve_id": "CVE-2026-3002",
+        "cvss_metrics": [
+          {
+            "attack_vector": "NETWORK",
+            "base_score": "4.6",
+            "metric_type": "Primary",
+            "severity": "MEDIUM",
+            "source": "synthetic@example.test",
+            "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:L/I:L/A:L",
+            "version": "3.1"
+          }
+        ],
+        "description": "Invented demonstration: high_probability_boundary",
+        "ingested_at": "2026-01-10T11:00:00+00:00",
+        "modified_at": "2025-01-02T00:00:00Z",
+        "published_at": "2025-01-01T00:00:00Z",
+        "raw_record": {
+          "id": "CVE-2026-3002"
+        },
+        "references": [],
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+        "status": "Analyzed",
+        "weaknesses": []
+      },
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0"
+    },
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3003",
+      "evidence_id": "nvd-now-3003",
+      "record": {
+        "cve_id": "CVE-2026-3003",
+        "cvss_metrics": [
+          {
+            "attack_vector": "NETWORK",
+            "base_score": "4.6",
+            "metric_type": "Primary",
+            "severity": "MEDIUM",
+            "source": "synthetic@example.test",
+            "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:L/I:L/A:L",
+            "version": "3.1"
+          }
+        ],
+        "description": "Invented demonstration: elevated_probability_boundary",
+        "ingested_at": "2026-01-10T11:00:00+00:00",
+        "modified_at": "2025-01-02T00:00:00Z",
+        "published_at": "2025-01-01T00:00:00Z",
+        "raw_record": {
+          "id": "CVE-2026-3003"
+        },
+        "references": [],
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+        "status": "Analyzed",
+        "weaknesses": []
+      },
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0"
+    },
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3004",
+      "evidence_id": "nvd-now-3004",
+      "record": {
+        "cve_id": "CVE-2026-3004",
+        "cvss_metrics": [
+          {
+            "attack_vector": "PHYSICAL",
+            "base_score": "1.6",
+            "metric_type": "Primary",
+            "severity": "LOW",
+            "source": "synthetic@example.test",
+            "vector": "CVSS:3.1/AV:P/AC:H/PR:H/UI:R/S:U/C:L/I:N/A:N",
+            "version": "3.1"
+          }
+        ],
+        "description": "Invented demonstration: valid_zero_probability",
+        "ingested_at": "2026-01-10T11:00:00+00:00",
+        "modified_at": "2025-01-02T00:00:00Z",
+        "published_at": "2025-01-01T00:00:00Z",
+        "raw_record": {
+          "id": "CVE-2026-3004"
+        },
+        "references": [],
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+        "status": "Analyzed",
+        "weaknesses": []
+      },
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0"
+    },
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3005",
+      "evidence_id": "nvd-now-3005",
+      "record": {
+        "cve_id": "CVE-2026-3005",
+        "cvss_metrics": [],
+        "description": "Invented demonstration: low_probability_unknown_cvss",
+        "ingested_at": "2026-01-10T11:00:00+00:00",
+        "modified_at": "2025-01-02T00:00:00Z",
+        "published_at": "2025-01-01T00:00:00Z",
+        "raw_record": {
+          "id": "CVE-2026-3005"
+        },
+        "references": [],
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+        "status": "Analyzed",
+        "weaknesses": []
+      },
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0"
+    },
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3006",
+      "evidence_id": "nvd-now-3006",
+      "record": {
+        "cve_id": "CVE-2026-3006",
+        "cvss_metrics": [],
+        "description": "Invented demonstration: rejected_without_positive",
+        "ingested_at": "2026-01-10T11:00:00+00:00",
+        "modified_at": "2025-01-02T00:00:00Z",
+        "published_at": "2025-01-01T00:00:00Z",
+        "raw_record": {
+          "id": "CVE-2026-3006"
+        },
+        "references": [],
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+        "status": "Rejected",
+        "weaknesses": []
+      },
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0"
+    },
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3007",
+      "evidence_id": "nvd-now-3007",
+      "record": {
+        "cve_id": "CVE-2026-3007",
+        "cvss_metrics": [
+          {
+            "attack_vector": "NETWORK",
+            "base_score": "4.6",
+            "metric_type": "Primary",
+            "severity": "MEDIUM",
+            "source": "synthetic@example.test",
+            "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:L/I:L/A:L",
+            "version": "3.1"
+          }
+        ],
+        "description": "Invented demonstration: eligible_rising_trend",
+        "ingested_at": "2026-01-10T11:00:00+00:00",
+        "modified_at": "2025-01-02T00:00:00Z",
+        "published_at": "2025-01-01T00:00:00Z",
+        "raw_record": {
+          "id": "CVE-2026-3007"
+        },
+        "references": [],
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+        "status": "Analyzed",
+        "weaknesses": []
+      },
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0"
+    },
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3008",
+      "evidence_id": "nvd-now-3008",
+      "record": {
+        "cve_id": "CVE-2026-3008",
+        "cvss_metrics": [
+          {
+            "attack_vector": "PHYSICAL",
+            "base_score": "1.6",
+            "metric_type": "Primary",
+            "severity": "LOW",
+            "source": "synthetic@example.test",
+            "vector": "CVSS:3.1/AV:P/AC:H/PR:H/UI:R/S:U/C:L/I:N/A:N",
+            "version": "3.1"
+          }
+        ],
+        "description": "Invented demonstration: historical_kev_omitted",
+        "ingested_at": "2026-01-10T11:00:00+00:00",
+        "modified_at": "2025-01-02T00:00:00Z",
+        "published_at": "2025-01-01T00:00:00Z",
+        "raw_record": {
+          "id": "CVE-2026-3008"
+        },
+        "references": [],
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+        "status": "Analyzed",
+        "weaknesses": []
+      },
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0"
+    },
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3009",
+      "evidence_id": "nvd-now-3009",
+      "record": {
+        "cve_id": "CVE-2026-3009",
+        "cvss_metrics": [
+          {
+            "attack_vector": "NETWORK",
+            "base_score": "8.1",
+            "metric_type": "Primary",
+            "severity": "HIGH",
+            "source": "synthetic@example.test",
+            "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+            "version": "3.1"
+          }
+        ],
+        "description": "Invented demonstration: severe_stale_epss",
+        "ingested_at": "2026-01-10T11:00:00+00:00",
+        "modified_at": "2025-01-02T00:00:00Z",
+        "published_at": "2025-01-01T00:00:00Z",
+        "raw_record": {
+          "id": "CVE-2026-3009"
+        },
+        "references": [],
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+        "status": "Analyzed",
+        "weaknesses": []
+      },
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0"
+    },
+    {
+      "available_at": "2026-01-10T11:00:00Z",
+      "captured_at": "2026-01-10T11:00:00Z",
+      "cve_id": "CVE-2026-3010",
+      "evidence_id": "nvd-now-3010",
+      "record": {
+        "cve_id": "CVE-2026-3010",
+        "cvss_metrics": [
+          {
+            "attack_vector": "PHYSICAL",
+            "base_score": "1.6",
+            "metric_type": "Primary",
+            "severity": "LOW",
+            "source": "synthetic@example.test",
+            "vector": "CVSS:3.1/AV:P/AC:H/PR:H/UI:R/S:U/C:L/I:N/A:N",
+            "version": "3.1"
+          }
+        ],
+        "description": "Invented demonstration: unconfirmed_nvd_positive",
+        "ingested_at": "2026-01-10T11:00:00+00:00",
+        "modified_at": "2025-01-02T00:00:00Z",
+        "published_at": "2025-01-01T00:00:00Z",
+        "raw_record": {
+          "cisaExploitAdd": "2026-01-01",
+          "id": "CVE-2026-3010"
+        },
+        "references": [],
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+        "status": "Analyzed",
+        "weaknesses": []
+      },
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0"
+    }
+  ],
+  "previous_decisions": [],
+  "reviews": [],
+  "schema_version": 1
+}

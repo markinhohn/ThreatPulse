@@ -24,7 +24,7 @@ from pydantic import (
     model_validator,
 )
 
-from threatpulse.epss import EpssObservation
+from threatpulse.epss import EpssObservation, Probability
 from threatpulse.models import CveId
 from threatpulse.trends import TrendDataset
 
@@ -49,6 +49,7 @@ class VelocityObservation(EpssObservation):
     """An EPSS value and a defensible upper bound on its availability."""
 
     model_config = ConfigDict(extra="forbid")
+    percentile: Probability | None
     available_at: AwareDatetime
     availability_basis: Literal[
         "database_export", "history_export", "validated_capture"
@@ -192,14 +193,14 @@ def _comparability(registry, first, latest, decision):
     return ("comparable" if len(ids) == 1 else "model_boundary"), ids
 
 
-def analyze(dataset: VelocityDataset, decision_at=None):
+def analyze(dataset: VelocityDataset, decision_at=None, *, allow_after_export=False):
     """Calculate exact rational rates; round only the exported display values."""
     dataset = VelocityDataset.model_validate(dataset.model_dump())
     decision = decision_at or dataset.captured_at
     if decision.tzinfo is None or decision.utcoffset() is None:
         raise ValueError("decision_at must include a timezone")
     decision = decision.astimezone(UTC)
-    if decision > dataset.captured_at:
+    if decision > dataset.captured_at and not allow_after_export:
         raise ValueError("decision_at cannot follow the frozen export")
     by_cve, excluded = defaultdict(list), defaultdict(list)
     for observation in dataset.epss_observations:

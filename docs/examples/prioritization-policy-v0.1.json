@@ -1,8 +1,8 @@
 {
   "policy_version": "0.1",
-  "status": "design_only_provisional",
+  "status": "implemented_baseline_provisional",
   "purpose": "intelligence_review_tiers",
-  "engine_implemented": false,
+  "engine_implemented": true,
   "validated_risk_model": false,
   "tier_order": ["P1", "P2", "P3", "P4"],
   "non_ranked_states": ["UNDETERMINED", "OUT_OF_SCOPE"],
@@ -33,7 +33,7 @@
     {"condition": "fresh_severe_cvss_unknown_epss", "maximum_tier_number": 2, "reason": "SEVERITY_WITH_UNKNOWN_EPSS"}
   ],
   "trend_promotion": {
-    "status": "implemented_signal_for_future_priority_engine",
+    "status": "implemented_baseline_promotion",
     "lookback_calendar_days": 7,
     "minimum_observed_dates": 5,
     "minimum_span_calendar_days": 4,

@@ -12,7 +12,7 @@ The signal does not assign priorities or claim calibrated exploitation risk.
 Require five observed dates, a four-day span, maximum adjacent gap of two days,
 fresh latest probability at least 1%, endpoint rise at least five percentage
 points, and slope at least 0.5 percentage points per day. An eligible rise is
-available to the future engine for P3-to-P2 promotion. There are no automatic
+consumed by the baseline engine for P3-to-P2 promotion. There are no automatic
 trend downgrades. Thresholds remain provisional policy choices.
 
 Model comparability is an explicit bounded review declaration with source-date
@@ -36,6 +36,7 @@ manifest. Preserve decision time and registry in replay inputs/metadata; require
 a new output directory. Test arithmetic, thresholds, coverage, model/availability
 gates, unknowns, empty reports, database isolation, and identical replay artifacts.
 
-The baseline prioritization engine is next. Dashboard integration, prospective
+The baseline prioritization engine is implemented in [decision 013](013-baseline-priority-engine.md).
+Dashboard integration, prospective
 threshold validation, immutable non-KEV history, and local ML training remain
 separate roadmap tasks. See [the usage guide](../threat-velocity.md).

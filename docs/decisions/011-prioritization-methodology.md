@@ -3,7 +3,9 @@
 Status: accepted design; defaults require prospective evaluation.
 
 Implementation follow-up: [decision 012](012-threat-velocity.md) records the
-completed Threat Velocity contract. The baseline priority engine remains next.
+completed Threat Velocity contract, and [decision 013](013-baseline-priority-engine.md)
+records the completed baseline engine. Policy defaults still require prospective
+evaluation.
 
 Complete Phase 4's methodology as a versioned decision specification before
 implementing Threat Velocity or the engine. Use intelligence review tiers and

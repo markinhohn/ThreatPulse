@@ -70,6 +70,19 @@ def row(dataset, decision=None):
     return analyze(dataset, decision)["cves"][0]
 
 
+def test_missing_percentile_and_explicit_forward_evaluation(dataset):
+    data = sample(dataset)
+    for observation in data.epss_observations:
+        observation.percentile = None
+    decision = DECISION + timedelta(days=3)
+    with pytest.raises(ValueError, match="cannot follow"):
+        analyze(data, decision)
+    result = analyze(data, decision, allow_after_export=True)["cves"][0]
+    assert not result["rising_signal"]
+    assert data.captured_at == DECISION
+    assert all(o.percentile is None for o in data.epss_observations)
+
+
 def test_known_linear_rate_coverage_and_fixture_gates(dataset):
     result = analyze(dataset)
     rows = {r["cve_id"]: r for r in result["cves"]}

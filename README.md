@@ -29,9 +29,10 @@ The initial development focus is:
 
 Future versions will introduce IOC intelligence, workflow automation, asset-aware prioritization, and automated security reporting.
 
-The baseline prioritization policy and ML study design are documented. The
-priority engine and locally trained ML models are still planned. Public-facing
-results will include source dates, coverage, decision reasons, and model limits.
+The baseline prioritization engine implements the documented policy with source
+freshness checks, quality flags, Threat Velocity promotion, and reviewed
+downgrades. Its replayable reports include decision reasons and limitations.
+Locally trained ML models remain planned.
 
 ---
 
@@ -244,7 +245,9 @@ exposure, and business criticality to support a remediation queue.
 
 [The prioritization methodology](docs/prioritization-methodology.md) defines
 transparent baseline tiers, data-quality rules, provisional trend promotion,
-and worked examples. A future learned score will be evaluated against this
+and worked examples. [The engine guide](docs/prioritization.md) explains database
+evaluation, the synthetic demo, offline replay, and recorded downgrade reviews.
+A future learned score will be evaluated against this
 baseline and EPSS before advisory integration. KEV inclusion predictions will
 be labeled separately from EPSS exploitation probabilities.
 
@@ -372,14 +375,14 @@ The eventual goal is to produce an actionable remediation queue based on vulnera
 
 - [x] Develop prioritization methodology
 - [x] Implement Threat Velocity
-- [ ] Build prioritization engine
+- [x] Build prioritization engine
 - [x] Document baseline policy assumptions and limitations
 
-The methodology is a versioned design with provisional defaults. Threat Velocity
-now provides quality-gated, reproducible signals; the baseline prioritization
-engine is the next implementation task. See [the methodology](docs/prioritization-methodology.md)
-and [Threat Velocity](docs/threat-velocity.md). The engine and risk validation
-remain pending.
+The engine applies versioned provisional rules and quality-gated Threat Velocity
+signals, preserving prior tiers until matching downgrade reviews. See
+[the engine guide](docs/prioritization.md) and
+[the methodology](docs/prioritization-methodology.md). Prospective risk validation
+remains pending; dashboard priority explanations remain in Phase 5.
 
 ### Phase 4B — Machine Learning Research and Integration
 
@@ -393,7 +396,8 @@ remain pending.
 - [ ] Integrate a validated advisory model with KEV overrides and baseline fallback
 - [ ] Monitor drift, coverage, calibration, and model availability
 
-Cohort collection can start after the study design, while baseline work proceeds.
+The next task is to track a defined NVD non-KEV cohort alongside KEV with immutable
+daily history. The baseline engine is available as a benchmark and fallback.
 Training depends on mature outcome labels; model adoption depends on held-out
 evaluation and an implemented baseline engine. See [the ML study design](docs/ml-study-design.md).
 
@@ -546,8 +550,12 @@ The [prioritization methodology](docs/prioritization-methodology.md) now specifi
 baseline decisions and data-quality handling. Run
 `python -m threatpulse.velocity --output data/velocity` for EPSS change rates,
 coverage/freshness checks, audited model comparability, and offline replay.
-See [the Threat Velocity guide](docs/threat-velocity.md). The baseline engine
-is next. [The ML study design](docs/ml-study-design.md) defines the separate
+See [the Threat Velocity guide](docs/threat-velocity.md). Run
+`python -m threatpulse.priority --output data/priority` for baseline intelligence
+review queues, data-quality reasons, provenance, and reproducible decisions.
+Use `--previous PRIOR_ANALYSIS_JSON` on subsequent runs to preserve downgrade
+review state. [The engine guide](docs/prioritization.md) includes the synthetic
+demo and approval workflow. [The ML study design](docs/ml-study-design.md) defines the separate
 data collection, training, validation, and advisory integration milestones.
 
 ---
