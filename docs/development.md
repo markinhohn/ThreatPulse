@@ -166,9 +166,10 @@ an HTTP failure, inconsistent date, invalid score, duplicate response, or partia
 API page prevents any EPSS observations from being written.
 
 Allow HTTPS access to `api.first.org`; no API key is required. Requests retain
-TLS verification and have 30-second per-operation timeouts. There is no automatic
-retry or daily scheduler. Run enrichment on each desired date to build history;
-this does not automatically backfill dates or retain changes to KEV attributes.
+TLS verification and have 30-second per-operation timeouts. The daily runner provides checkpointed retries through the documented scheduler;
+see [scheduling and recovery](scheduling.md). Run enrichment on each desired date to build history;
+this does not automatically backfill dates. The daily runner also retains KEV/NVD
+observations.
 
 Inspect coverage by date:
 
@@ -334,5 +335,5 @@ KEV/non-KEV comparison or generalize to all vulnerabilities. Dates may differ
 across latest-score distributions and scatter points. Historical comparisons do
 not normalize by elapsed days, interpolate gaps, or account for EPSS model
 version changes. They are descriptive deltas, not the planned Threat Velocity
-methodology. Current KEV membership and preferred NVD metrics are not historical
-snapshots. See [the analytics decision](decisions/006-kev-epss-analytics.md).
+methodology. These analytics use current KEV membership and preferred NVD metrics; daily
+historical snapshots are stored separately. See [the analytics decision](decisions/006-kev-epss-analytics.md).

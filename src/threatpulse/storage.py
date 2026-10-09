@@ -28,7 +28,12 @@ def migrate(connection: psycopg.Connection) -> None:
             row[0]
             for row in connection.execute("SELECT version FROM schema_migrations")
         }
-        migrations = {1: "001_initial.sql", 2: "002_epss.sql", 3: "003_nvd.sql"}
+        migrations = {
+            1: "001_initial.sql",
+            2: "002_epss.sql",
+            3: "003_nvd.sql",
+            4: "004_daily.sql",
+        }
         if versions - migrations.keys():
             raise ValueError("Database has migrations newer than this application")
         for version, filename in migrations.items():
@@ -203,7 +208,8 @@ def ingest_nvd(connection: psycopg.Connection, batch: NvdBatch) -> int:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "command", choices=["migrate", "ingest-kev", "ingest-epss", "ingest-nvd"]
+        "command",
+        choices=["migrate", "ingest-kev", "ingest-epss", "ingest-nvd", "ingest-daily"],
     )
     parser.add_argument(
         "--limit", type=int, help="Maximum stored CVEs to enrich with NVD"
@@ -214,51 +220,59 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if args.limit is not None and (args.command != "ingest-nvd" or args.limit <= 0):
         parser.error("--limit must be positive and used with ingest-nvd")
-    if args.date and args.command != "ingest-epss":
-        parser.error("--date is only supported for ingest-epss")
+    if args.date and args.command not in {"ingest-epss", "ingest-daily"}:
+        parser.error("--date is only supported for ingest-epss and ingest-daily")
     database_url = os.environ.get("DATABASE_URL")
     if not database_url:
         print("Set DATABASE_URL before running this command.", file=sys.stderr)
         return 1
+    from threatpulse.daily import IngestionBusyError, ingestion_lock, run_daily
+
     try:
-        # Fetch and validate before opening a transaction or modifying the database.
-        catalog = collect_kev() if args.command == "ingest-kev" else None
         with psycopg.connect(
             database_url, autocommit=True, connect_timeout=10
         ) as connection:
             migrate(connection)
-            count = ingest_catalog(connection, catalog) if catalog is not None else None
-            if args.command in {"ingest-epss", "ingest-nvd"}:
-                ids = [
-                    r[0]
-                    for r in connection.execute(
-                        "SELECT cve_id FROM vulnerabilities ORDER BY cve_id"
-                    )
-                ]
-                if not ids:
-                    raise ValueError("Ingest KEV before requesting EPSS enrichment")
-                if args.command == "ingest-epss":
-                    batch = collect_epss(ids, score_date=args.date)
-                    count = ingest_epss(connection, batch)
-                else:
-                    ids = ids[: args.limit] if args.limit else ids
-                    batch = collect_nvd(ids)
-                    count = ingest_nvd(connection, batch)
-                print(
-                    json.dumps(
-                        {
-                            "command": args.command,
-                            "requested": len(ids),
-                            "processed": count,
-                            "missing": batch.missing_cves,
-                        }
-                    )
+            with ingestion_lock(connection):
+                if args.command == "ingest-daily":
+                    print(json.dumps(run_daily(connection, args.date)))
+                    return 0
+                catalog = collect_kev() if args.command == "ingest-kev" else None
+                count = (
+                    ingest_catalog(connection, catalog) if catalog is not None else None
                 )
-                return 0
+                if args.command in {"ingest-epss", "ingest-nvd"}:
+                    ids = [
+                        r[0]
+                        for r in connection.execute(
+                            "SELECT cve_id FROM vulnerabilities ORDER BY cve_id"
+                        )
+                    ]
+                    if not ids:
+                        raise ValueError("Ingest KEV before requesting EPSS enrichment")
+                    if args.command == "ingest-epss":
+                        batch = collect_epss(ids, score_date=args.date)
+                        count = ingest_epss(connection, batch)
+                    else:
+                        ids = ids[: args.limit] if args.limit else ids
+                        batch = collect_nvd(ids)
+                        count = ingest_nvd(connection, batch)
+                    print(
+                        json.dumps(
+                            {
+                                "command": args.command,
+                                "requested": len(ids),
+                                "processed": count,
+                                "missing": batch.missing_cves,
+                            }
+                        )
+                    )
+                    return 0
     except NvdCollectionError as exc:
         print(f"NVD collection failed: {exc}", file=sys.stderr)
         return 1
     except (
+        IngestionBusyError,
         psycopg.Error,
         KevCollectionError,
         EpssCollectionError,

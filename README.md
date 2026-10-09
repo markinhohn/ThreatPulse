@@ -355,7 +355,7 @@ The eventual goal is to produce an actionable remediation queue based on vulnera
 - [x] Integrate CISA KEV
 - [x] Normalize vulnerability records
 - [x] Implement data validation
-- [ ] Store vulnerability history
+- [x] Store vulnerability history
 
 ### Phase 3 — Analytics
 
@@ -393,7 +393,7 @@ The eventual goal is to produce an actionable remediation queue based on vulnera
 ### Phase 7 — Automation
 
 - [ ] Deploy n8n
-- [ ] Automate ingestion
+- [x] Automate ingestion
 - [ ] Build alert workflows
 - [ ] Generate daily threat summaries
 
@@ -485,8 +485,10 @@ uv run --locked streamlit run src/threatpulse/dashboard.py \
 
 The dashboard provides an overview, filtered vulnerability explorer, CVE
 details with EPSS history, and dedicated KEV/EPSS descriptive analytics.
-Prioritization, deeper analytics, and scheduled
-automation are still planned.
+Run `uv run --locked python -m threatpulse.storage ingest-daily` for checkpointed
+daily collection with KEV/NVD snapshots. See [scheduling and recovery](docs/scheduling.md)
+for the systemd timer, retries, and run inspection. Prioritization and deeper
+analytics are still planned.
 
 ---
 

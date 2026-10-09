@@ -33,7 +33,7 @@ def test_migration_is_repeatable(connection):
     migrate(connection)
     assert connection.execute(
         "SELECT version FROM schema_migrations ORDER BY version"
-    ).fetchall() == [(1,), (2,), (3,)]
+    ).fetchall() == [(1,), (2,), (3,), (4,)]
 
 
 def test_repeat_ingestion_updates_without_duplicates(connection, catalog):
