@@ -362,7 +362,7 @@ The eventual goal is to produce an actionable remediation queue based on vulnera
 - [x] Exploratory data analysis
 - [x] KEV vs. non-KEV comparison
 - [x] CVSS vs. EPSS analysis
-- [ ] Vulnerability trend analysis
+- [x] Vulnerability trend analysis
 - [ ] Statistical testing
 - [x] Historical EPSS analysis
 
@@ -503,6 +503,11 @@ Collect a defined NVD publication-window cohort and compare KEV/non-KEV
 CVSS and same-date EPSS distributions with `python -m threatpulse.comparison`.
 See [the comparison guide](docs/comparison.md) for collection, frozen study
 storage, coverage, offline replay, and selection bias.
+Generate snapshot and multi-date EPSS trends with
+`python -m threatpulse.trends --output data/trends`. The report tracks observed
+KEV membership changes, comparable preferred CVSS changes, calendar gaps,
+matched EPSS changes, and a balanced EPSS panel. See
+[the trend guide](docs/trends.md) for reproducible exports and limitations.
 Prioritization and inferential statistical testing are still planned.
 
 ---

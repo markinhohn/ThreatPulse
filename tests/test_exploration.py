@@ -1,6 +1,7 @@
 """Check exact-date cohort semantics, correlations, replay, and database reads."""
 
 import json
+import os
 from datetime import date
 from pathlib import Path
 
@@ -145,7 +146,7 @@ def test_read_only_snapshot(connection, catalog, epss_batch, nvd_batch):
         assert initial.vulnerabilities[0].base_score is not None
         # A concurrent writer cannot change the report's database snapshot.
         schema = connection.execute("SELECT current_schema()").fetchone()[0]
-        with psycopg.connect(connection.info.dsn, autocommit=True) as other:
+        with psycopg.connect(os.environ["TEST_DATABASE_URL"], autocommit=True) as other:
             other.execute(
                 sql.SQL("SET search_path TO {}").format(sql.Identifier(schema))
             )

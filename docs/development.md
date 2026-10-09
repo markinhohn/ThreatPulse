@@ -360,3 +360,14 @@ one-date EPSS enrichment for both groups, separate frozen PostgreSQL study
 storage, distribution reports, and offline replay. Collection uses the same
 ingestion lock as daily/manual commands. The current dashboard cohort is kept
 separate from study data.
+
+## Historical vulnerability trends
+
+Run `uv run --locked python -m threatpulse.trends --output data/trends` after
+collecting history with the daily runner. This reads KEV/NVD snapshots and all
+stored EPSS dates in one consistent read-only transaction; it never collects
+data or runs migrations. The [trend guide](trends.md) documents date windows,
+coverage, metric comparability, missing calendar dates, standalone charts, and
+offline replay. An empty database produces an explicit insufficient-history
+report. The checked roadmap item means the analysis workflow is implemented;
+real conclusions still require repeated source captures and adequate coverage.

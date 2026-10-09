@@ -1,5 +1,6 @@
 """Daily recovery, history, and concurrency against isolated PostgreSQL schemas."""
 
+import os
 from datetime import date
 
 import psycopg
@@ -66,7 +67,7 @@ def test_failure_resumes_committed_step(
 
 
 def test_overlap_and_release(connection):
-    with psycopg.connect(connection.info.dsn, autocommit=True) as other:
+    with psycopg.connect(os.environ["TEST_DATABASE_URL"], autocommit=True) as other:
         with ingestion_lock(connection):
             with pytest.raises(IngestionBusyError), ingestion_lock(other):
                 pass

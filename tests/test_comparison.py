@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import os
 from datetime import date
 from decimal import Decimal
 from pathlib import Path
@@ -254,7 +255,8 @@ def cli_database(connection, monkeypatch):
         conn.execute(sql.SQL("SET search_path TO {}").format(sql.Identifier(schema)))
         return conn
 
-    monkeypatch.setenv("DATABASE_URL", connection.info.dsn)
+    # Connection.info.dsn omits passwords needed for a new session.
+    monkeypatch.setenv("DATABASE_URL", os.environ["TEST_DATABASE_URL"])
     monkeypatch.setattr("threatpulse.comparison.psycopg.connect", isolated_connect)
     return connection
 
