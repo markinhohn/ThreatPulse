@@ -1,0 +1,1057 @@
+{
+  "schema_version": 1,
+  "study_id": "be884eb1-9f12-4f79-af36-f265067d422c",
+  "label": "SYNTHETIC TEST DATA — illustrative only; not real vulnerability findings",
+  "definition": {
+    "published_start": "2026-01-01",
+    "published_end": "2026-02-01",
+    "score_date": "2026-02-02",
+    "max_records": 10000
+  },
+  "collected_at": "2026-02-03T00:00:00Z",
+  "kev_snapshot_at": "2026-02-03T00:00:00Z",
+  "kev_source_url": "https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json",
+  "kev_ids": [
+    "CVE-2020-1234",
+    "CVE-2026-1000",
+    "CVE-2026-1001",
+    "CVE-2026-1002",
+    "CVE-2026-1003",
+    "CVE-2026-1009"
+  ],
+  "nvd_records": [
+    {
+      "cve_id": "CVE-2026-1000",
+      "published_at": "2026-01-02T00:00:00Z",
+      "modified_at": "2026-02-01T00:00:00Z",
+      "status": "Analyzed",
+      "description": "Synthetic fixture only",
+      "references": [
+        "https://example.com/advisory"
+      ],
+      "weaknesses": [
+        "CWE-502"
+      ],
+      "cvss_metrics": [
+        {
+          "version": "3.1",
+          "source": "nvd@nist.gov",
+          "metric_type": "Primary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "base_score": "9.8",
+          "severity": "CRITICAL",
+          "attack_vector": "NETWORK"
+        }
+      ],
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+      "ingested_at": "2026-02-03T00:00:00Z",
+      "raw_record": {
+        "id": "CVE-2026-1000",
+        "sourceIdentifier": "security@example.com",
+        "published": "2026-01-02T00:00:00.000",
+        "lastModified": "2026-02-01T00:00:00.000",
+        "vulnStatus": "Analyzed",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Synthetic fixture only"
+          }
+        ],
+        "metrics": {
+          "cvssMetricV31": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "cvssData": {
+                "version": "3.1",
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                "baseScore": 9.8,
+                "baseSeverity": "CRITICAL",
+                "attackVector": "NETWORK"
+              }
+            }
+          ]
+        },
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-502"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://example.com/advisory",
+            "tags": [
+              "Vendor Advisory"
+            ]
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "cpeMatch": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1001",
+      "published_at": "2026-01-03T00:00:00Z",
+      "modified_at": "2026-02-01T00:00:00Z",
+      "status": "Analyzed",
+      "description": "Synthetic fixture only",
+      "references": [
+        "https://example.com/advisory"
+      ],
+      "weaknesses": [
+        "CWE-502"
+      ],
+      "cvss_metrics": [
+        {
+          "version": "3.1",
+          "source": "nvd@nist.gov",
+          "metric_type": "Primary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+          "base_score": "7.3",
+          "severity": "HIGH",
+          "attack_vector": "NETWORK"
+        }
+      ],
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+      "ingested_at": "2026-02-03T00:00:00Z",
+      "raw_record": {
+        "id": "CVE-2026-1001",
+        "sourceIdentifier": "security@example.com",
+        "published": "2026-01-03T00:00:00.000",
+        "lastModified": "2026-02-01T00:00:00.000",
+        "vulnStatus": "Analyzed",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Synthetic fixture only"
+          }
+        ],
+        "metrics": {
+          "cvssMetricV31": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "cvssData": {
+                "version": "3.1",
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+                "baseScore": 7.3,
+                "baseSeverity": "HIGH",
+                "attackVector": "NETWORK"
+              }
+            }
+          ]
+        },
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-502"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://example.com/advisory",
+            "tags": [
+              "Vendor Advisory"
+            ]
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "cpeMatch": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1002",
+      "published_at": "2026-01-04T00:00:00Z",
+      "modified_at": "2026-02-01T00:00:00Z",
+      "status": "Analyzed",
+      "description": "Synthetic fixture only",
+      "references": [
+        "https://example.com/advisory"
+      ],
+      "weaknesses": [
+        "CWE-502"
+      ],
+      "cvss_metrics": [
+        {
+          "version": "3.1",
+          "source": "nvd@nist.gov",
+          "metric_type": "Primary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N",
+          "base_score": "0.0",
+          "severity": "NONE",
+          "attack_vector": "NETWORK"
+        }
+      ],
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+      "ingested_at": "2026-02-03T00:00:00Z",
+      "raw_record": {
+        "id": "CVE-2026-1002",
+        "sourceIdentifier": "security@example.com",
+        "published": "2026-01-04T00:00:00.000",
+        "lastModified": "2026-02-01T00:00:00.000",
+        "vulnStatus": "Analyzed",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Synthetic fixture only"
+          }
+        ],
+        "metrics": {
+          "cvssMetricV31": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "cvssData": {
+                "version": "3.1",
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N",
+                "baseScore": 0.0,
+                "baseSeverity": "NONE",
+                "attackVector": "NETWORK"
+              }
+            }
+          ]
+        },
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-502"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://example.com/advisory",
+            "tags": [
+              "Vendor Advisory"
+            ]
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "cpeMatch": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1003",
+      "published_at": "2026-01-05T00:00:00Z",
+      "modified_at": "2026-02-01T00:00:00Z",
+      "status": "Analyzed",
+      "description": "Synthetic fixture only",
+      "references": [
+        "https://example.com/advisory"
+      ],
+      "weaknesses": [
+        "CWE-502"
+      ],
+      "cvss_metrics": [],
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+      "ingested_at": "2026-02-03T00:00:00Z",
+      "raw_record": {
+        "id": "CVE-2026-1003",
+        "sourceIdentifier": "security@example.com",
+        "published": "2026-01-05T00:00:00.000",
+        "lastModified": "2026-02-01T00:00:00.000",
+        "vulnStatus": "Analyzed",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Synthetic fixture only"
+          }
+        ],
+        "metrics": {},
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-502"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://example.com/advisory",
+            "tags": [
+              "Vendor Advisory"
+            ]
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "cpeMatch": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1004",
+      "published_at": "2026-01-06T00:00:00Z",
+      "modified_at": "2026-02-01T00:00:00Z",
+      "status": "Analyzed",
+      "description": "Synthetic fixture only",
+      "references": [
+        "https://example.com/advisory"
+      ],
+      "weaknesses": [
+        "CWE-502"
+      ],
+      "cvss_metrics": [
+        {
+          "version": "3.1",
+          "source": "nvd@nist.gov",
+          "metric_type": "Primary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "base_score": "9.8",
+          "severity": "CRITICAL",
+          "attack_vector": "NETWORK"
+        }
+      ],
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+      "ingested_at": "2026-02-03T00:00:00Z",
+      "raw_record": {
+        "id": "CVE-2026-1004",
+        "sourceIdentifier": "security@example.com",
+        "published": "2026-01-06T00:00:00.000",
+        "lastModified": "2026-02-01T00:00:00.000",
+        "vulnStatus": "Analyzed",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Synthetic fixture only"
+          }
+        ],
+        "metrics": {
+          "cvssMetricV31": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "cvssData": {
+                "version": "3.1",
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                "baseScore": 9.8,
+                "baseSeverity": "CRITICAL",
+                "attackVector": "NETWORK"
+              }
+            }
+          ]
+        },
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-502"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://example.com/advisory",
+            "tags": [
+              "Vendor Advisory"
+            ]
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "cpeMatch": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1005",
+      "published_at": "2026-01-07T00:00:00Z",
+      "modified_at": "2026-02-01T00:00:00Z",
+      "status": "Analyzed",
+      "description": "Synthetic fixture only",
+      "references": [
+        "https://example.com/advisory"
+      ],
+      "weaknesses": [
+        "CWE-502"
+      ],
+      "cvss_metrics": [
+        {
+          "version": "3.1",
+          "source": "nvd@nist.gov",
+          "metric_type": "Primary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+          "base_score": "7.3",
+          "severity": "HIGH",
+          "attack_vector": "NETWORK"
+        }
+      ],
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+      "ingested_at": "2026-02-03T00:00:00Z",
+      "raw_record": {
+        "id": "CVE-2026-1005",
+        "sourceIdentifier": "security@example.com",
+        "published": "2026-01-07T00:00:00.000",
+        "lastModified": "2026-02-01T00:00:00.000",
+        "vulnStatus": "Analyzed",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Synthetic fixture only"
+          }
+        ],
+        "metrics": {
+          "cvssMetricV31": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "cvssData": {
+                "version": "3.1",
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+                "baseScore": 7.3,
+                "baseSeverity": "HIGH",
+                "attackVector": "NETWORK"
+              }
+            }
+          ]
+        },
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-502"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://example.com/advisory",
+            "tags": [
+              "Vendor Advisory"
+            ]
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "cpeMatch": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1006",
+      "published_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-02-01T00:00:00Z",
+      "status": "Analyzed",
+      "description": "Synthetic fixture only",
+      "references": [
+        "https://example.com/advisory"
+      ],
+      "weaknesses": [
+        "CWE-502"
+      ],
+      "cvss_metrics": [
+        {
+          "version": "3.1",
+          "source": "nvd@nist.gov",
+          "metric_type": "Primary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N",
+          "base_score": "0.0",
+          "severity": "NONE",
+          "attack_vector": "NETWORK"
+        }
+      ],
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+      "ingested_at": "2026-02-03T00:00:00Z",
+      "raw_record": {
+        "id": "CVE-2026-1006",
+        "sourceIdentifier": "security@example.com",
+        "published": "2026-01-08T00:00:00.000",
+        "lastModified": "2026-02-01T00:00:00.000",
+        "vulnStatus": "Analyzed",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Synthetic fixture only"
+          }
+        ],
+        "metrics": {
+          "cvssMetricV31": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "cvssData": {
+                "version": "3.1",
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N",
+                "baseScore": 0.0,
+                "baseSeverity": "NONE",
+                "attackVector": "NETWORK"
+              }
+            }
+          ]
+        },
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-502"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://example.com/advisory",
+            "tags": [
+              "Vendor Advisory"
+            ]
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "cpeMatch": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1007",
+      "published_at": "2026-01-09T00:00:00Z",
+      "modified_at": "2026-02-01T00:00:00Z",
+      "status": "Analyzed",
+      "description": "Synthetic fixture only",
+      "references": [
+        "https://example.com/advisory"
+      ],
+      "weaknesses": [
+        "CWE-502"
+      ],
+      "cvss_metrics": [],
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+      "ingested_at": "2026-02-03T00:00:00Z",
+      "raw_record": {
+        "id": "CVE-2026-1007",
+        "sourceIdentifier": "security@example.com",
+        "published": "2026-01-09T00:00:00.000",
+        "lastModified": "2026-02-01T00:00:00.000",
+        "vulnStatus": "Analyzed",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Synthetic fixture only"
+          }
+        ],
+        "metrics": {},
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-502"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://example.com/advisory",
+            "tags": [
+              "Vendor Advisory"
+            ]
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "cpeMatch": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1008",
+      "published_at": "2026-01-10T00:00:00Z",
+      "modified_at": "2026-02-01T00:00:00Z",
+      "status": "Analyzed",
+      "description": "Synthetic fixture only",
+      "references": [
+        "https://example.com/advisory"
+      ],
+      "weaknesses": [
+        "CWE-502"
+      ],
+      "cvss_metrics": [
+        {
+          "version": "2.0",
+          "source": "nvd@nist.gov",
+          "metric_type": "Primary",
+          "vector": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+          "base_score": "7.5",
+          "severity": "HIGH",
+          "attack_vector": "NETWORK"
+        }
+      ],
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+      "ingested_at": "2026-02-03T00:00:00Z",
+      "raw_record": {
+        "id": "CVE-2026-1008",
+        "sourceIdentifier": "security@example.com",
+        "published": "2026-01-10T00:00:00.000",
+        "lastModified": "2026-02-01T00:00:00.000",
+        "vulnStatus": "Analyzed",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Synthetic fixture only"
+          }
+        ],
+        "metrics": {
+          "cvssMetricV2": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "baseSeverity": "HIGH",
+              "cvssData": {
+                "version": "2.0",
+                "vectorString": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+                "baseScore": 7.5,
+                "accessVector": "NETWORK"
+              }
+            }
+          ]
+        },
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-502"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://example.com/advisory",
+            "tags": [
+              "Vendor Advisory"
+            ]
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "cpeMatch": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1009",
+      "published_at": "2026-01-11T00:00:00Z",
+      "modified_at": "2026-02-01T00:00:00Z",
+      "status": "Analyzed",
+      "description": "Synthetic fixture only",
+      "references": [
+        "https://example.com/advisory"
+      ],
+      "weaknesses": [
+        "CWE-502"
+      ],
+      "cvss_metrics": [
+        {
+          "version": "2.0",
+          "source": "nvd@nist.gov",
+          "metric_type": "Primary",
+          "vector": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+          "base_score": "7.5",
+          "severity": "HIGH",
+          "attack_vector": "NETWORK"
+        }
+      ],
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+      "ingested_at": "2026-02-03T00:00:00Z",
+      "raw_record": {
+        "id": "CVE-2026-1009",
+        "sourceIdentifier": "security@example.com",
+        "published": "2026-01-11T00:00:00.000",
+        "lastModified": "2026-02-01T00:00:00.000",
+        "vulnStatus": "Analyzed",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Synthetic fixture only"
+          }
+        ],
+        "metrics": {
+          "cvssMetricV2": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "baseSeverity": "HIGH",
+              "cvssData": {
+                "version": "2.0",
+                "vectorString": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+                "baseScore": 7.5,
+                "accessVector": "NETWORK"
+              }
+            }
+          ]
+        },
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-502"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://example.com/advisory",
+            "tags": [
+              "Vendor Advisory"
+            ]
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "cpeMatch": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1010",
+      "published_at": "2026-01-12T00:00:00Z",
+      "modified_at": "2026-02-01T00:00:00Z",
+      "status": "Rejected",
+      "description": "Synthetic fixture only",
+      "references": [
+        "https://example.com/advisory"
+      ],
+      "weaknesses": [
+        "CWE-502"
+      ],
+      "cvss_metrics": [],
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+      "ingested_at": "2026-02-03T00:00:00Z",
+      "raw_record": {
+        "id": "CVE-2026-1010",
+        "sourceIdentifier": "security@example.com",
+        "published": "2026-01-12T00:00:00.000",
+        "lastModified": "2026-02-01T00:00:00.000",
+        "vulnStatus": "Rejected",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Synthetic fixture only"
+          }
+        ],
+        "metrics": {},
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-502"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://example.com/advisory",
+            "tags": [
+              "Vendor Advisory"
+            ]
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "cpeMatch": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve_id": "CVE-2026-1011",
+      "published_at": "2026-01-13T00:00:00Z",
+      "modified_at": "2026-02-01T00:00:00Z",
+      "status": "Analyzed",
+      "description": "Synthetic fixture only",
+      "references": [
+        "https://example.com/advisory"
+      ],
+      "weaknesses": [
+        "CWE-502"
+      ],
+      "cvss_metrics": [],
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+      "ingested_at": "2026-02-03T00:00:00Z",
+      "raw_record": {
+        "id": "CVE-2026-1011",
+        "sourceIdentifier": "security@example.com",
+        "published": "2026-01-13T00:00:00.000",
+        "lastModified": "2026-02-01T00:00:00.000",
+        "vulnStatus": "Analyzed",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Synthetic fixture only"
+          }
+        ],
+        "metrics": {},
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-502"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://example.com/advisory",
+            "tags": [
+              "Vendor Advisory"
+            ]
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "cpeMatch": []
+              }
+            ]
+          }
+        ],
+        "cisaExploitAdd": "2026-01-13"
+      }
+    }
+  ],
+  "epss": {
+    "observations": [
+      {
+        "cve_id": "CVE-2026-1000",
+        "score_date": "2026-02-02",
+        "epss": "0.9",
+        "percentile": "0.5",
+        "source_url": "https://api.first.org/data/v1/epss",
+        "ingested_at": "2026-02-03T00:00:00Z",
+        "raw_record": {
+          "cve": "CVE-2026-1000",
+          "date": "2026-02-02",
+          "epss": "0.9",
+          "percentile": "0.5"
+        }
+      },
+      {
+        "cve_id": "CVE-2026-1001",
+        "score_date": "2026-02-02",
+        "epss": "0.4",
+        "percentile": "0.5",
+        "source_url": "https://api.first.org/data/v1/epss",
+        "ingested_at": "2026-02-03T00:00:00Z",
+        "raw_record": {
+          "cve": "CVE-2026-1001",
+          "date": "2026-02-02",
+          "epss": "0.4",
+          "percentile": "0.5"
+        }
+      },
+      {
+        "cve_id": "CVE-2026-1002",
+        "score_date": "2026-02-02",
+        "epss": "0",
+        "percentile": "0.5",
+        "source_url": "https://api.first.org/data/v1/epss",
+        "ingested_at": "2026-02-03T00:00:00Z",
+        "raw_record": {
+          "cve": "CVE-2026-1002",
+          "date": "2026-02-02",
+          "epss": "0",
+          "percentile": "0.5"
+        }
+      },
+      {
+        "cve_id": "CVE-2026-1004",
+        "score_date": "2026-02-02",
+        "epss": "0.1",
+        "percentile": "0.5",
+        "source_url": "https://api.first.org/data/v1/epss",
+        "ingested_at": "2026-02-03T00:00:00Z",
+        "raw_record": {
+          "cve": "CVE-2026-1004",
+          "date": "2026-02-02",
+          "epss": "0.1",
+          "percentile": "0.5"
+        }
+      },
+      {
+        "cve_id": "CVE-2026-1005",
+        "score_date": "2026-02-02",
+        "epss": "0.01",
+        "percentile": "0.5",
+        "source_url": "https://api.first.org/data/v1/epss",
+        "ingested_at": "2026-02-03T00:00:00Z",
+        "raw_record": {
+          "cve": "CVE-2026-1005",
+          "date": "2026-02-02",
+          "epss": "0.01",
+          "percentile": "0.5"
+        }
+      },
+      {
+        "cve_id": "CVE-2026-1006",
+        "score_date": "2026-02-02",
+        "epss": "0",
+        "percentile": "0.5",
+        "source_url": "https://api.first.org/data/v1/epss",
+        "ingested_at": "2026-02-03T00:00:00Z",
+        "raw_record": {
+          "cve": "CVE-2026-1006",
+          "date": "2026-02-02",
+          "epss": "0",
+          "percentile": "0.5"
+        }
+      },
+      {
+        "cve_id": "CVE-2026-1008",
+        "score_date": "2026-02-02",
+        "epss": "0.001",
+        "percentile": "0.5",
+        "source_url": "https://api.first.org/data/v1/epss",
+        "ingested_at": "2026-02-03T00:00:00Z",
+        "raw_record": {
+          "cve": "CVE-2026-1008",
+          "date": "2026-02-02",
+          "epss": "0.001",
+          "percentile": "0.5"
+        }
+      },
+      {
+        "cve_id": "CVE-2026-1009",
+        "score_date": "2026-02-02",
+        "epss": "0.8",
+        "percentile": "0.5",
+        "source_url": "https://api.first.org/data/v1/epss",
+        "ingested_at": "2026-02-03T00:00:00Z",
+        "raw_record": {
+          "cve": "CVE-2026-1009",
+          "date": "2026-02-02",
+          "epss": "0.8",
+          "percentile": "0.5"
+        }
+      }
+    ],
+    "missing_cves": [
+      "CVE-2026-1003",
+      "CVE-2026-1007"
+    ]
+  }
+}

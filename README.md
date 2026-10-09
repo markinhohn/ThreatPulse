@@ -360,7 +360,7 @@ The eventual goal is to produce an actionable remediation queue based on vulnera
 ### Phase 3 — Analytics
 
 - [x] Exploratory data analysis
-- [ ] KEV vs. non-KEV comparison
+- [x] KEV vs. non-KEV comparison
 - [x] CVSS vs. EPSS analysis
 - [ ] Vulnerability trend analysis
 - [ ] Statistical testing
@@ -499,6 +499,10 @@ Open `data/exploration/report.html` for coverage, CVSS/EPSS distributions,
 version-specific associations, and historical EPSS changes. The export includes
 CSV tables, SVG/PNG figures, and an offline replay dataset. See
 [the analysis guide](docs/exploration.md) for dates, methods, and limitations.
+Collect a defined NVD publication-window cohort and compare KEV/non-KEV
+CVSS and same-date EPSS distributions with `python -m threatpulse.comparison`.
+See [the comparison guide](docs/comparison.md) for collection, frozen study
+storage, coverage, offline replay, and selection bias.
 Prioritization and inferential statistical testing are still planned.
 
 ---

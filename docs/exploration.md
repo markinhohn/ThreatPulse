@@ -126,3 +126,6 @@ scope; broader datasets will need bounded export or database-side aggregation.
 
 Run all tests with TEST_DATABASE_URL set to a development database to verify
 read-only snapshot isolation as well as calculation and offline replay tests.
+
+For a defined KEV/non-KEV comparison using a separate NVD publication-window
+cohort, see [comparison studies](comparison.md).

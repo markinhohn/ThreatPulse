@@ -352,3 +352,11 @@ If the cloud home directory is read-only, use writable plotting caches:
 export MPLCONFIGDIR=/tmp/threatpulse-mpl-cache
 export XDG_CACHE_HOME=/tmp/threatpulse-cache
 ```
+
+## KEV versus non-KEV studies
+
+The [comparison guide](comparison.md) documents NVD publication-window collection,
+one-date EPSS enrichment for both groups, separate frozen PostgreSQL study
+storage, distribution reports, and offline replay. Collection uses the same
+ingestion lock as daily/manual commands. The current dashboard cohort is kept
+separate from study data.
