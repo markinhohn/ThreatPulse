@@ -157,7 +157,9 @@ The CISA snapshot is not a historical KEV census at the score date. EPSS model
 revisions can affect scores. KEV records represent known exploitation, making
 membership unsuitable as an independent, unbiased prediction-validation outcome.
 No causal, population-significance, or operational-risk claims follow from these
-plots. Statistical testing remains a separate roadmap task.
+plots. The separate [statistical workflow](statistical-testing.md) adds exploratory
+rank tests, effect sizes, nominal confidence intervals, and fixed-family Holm
+correction to frozen studies, with explicit data requirements and assumptions.
 
 NVD does not supply transactional pagination. Stable totals and duplicate checks
 detect common changes but cannot rule out equal-sized substitutions during a

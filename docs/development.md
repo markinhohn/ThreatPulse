@@ -371,3 +371,18 @@ coverage, metric comparability, missing calendar dates, standalone charts, and
 offline replay. An empty database produces an explicit insufficient-history
 report. The checked roadmap item means the analysis workflow is implemented;
 real conclusions still require repeated source captures and adequate coverage.
+
+## Statistical comparison reports
+
+Run this command on a frozen comparison study:
+
+```bash
+uv run --locked python -m threatpulse.statistics \
+  --input SOURCE_JSON --output data/statistical-comparison
+```
+
+Alternatively, supply `--study-id STUDY_UUID` with `DATABASE_URL` configured. The
+[statistical guide](statistical-testing.md) documents the five planned endpoints,
+minimum scored samples, tied-rank permutation tests, effect sizes, nominal
+bootstrap intervals, Holm correction, reproducible settings, and observational
+assumptions. The command reads existing data without collection or migration.

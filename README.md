@@ -363,7 +363,7 @@ The eventual goal is to produce an actionable remediation queue based on vulnera
 - [x] KEV vs. non-KEV comparison
 - [x] CVSS vs. EPSS analysis
 - [x] Vulnerability trend analysis
-- [ ] Statistical testing
+- [x] Statistical testing
 - [x] Historical EPSS analysis
 
 ### Phase 4 — Prioritization
@@ -508,7 +508,12 @@ Generate snapshot and multi-date EPSS trends with
 KEV membership changes, comparable preferred CVSS changes, calendar gaps,
 matched EPSS changes, and a balanced EPSS panel. See
 [the trend guide](docs/trends.md) for reproducible exports and limitations.
-Prioritization and inferential statistical testing are still planned.
+Run `python -m threatpulse.statistics --input SOURCE_JSON --output data/statistics`
+for exploratory permutation tests, effect sizes, nominal bootstrap confidence
+intervals, and Holm correction across the five planned endpoints. See
+[the statistical guide](docs/statistical-testing.md) for sample requirements,
+coverage, reproducible plans, and observational assumptions. Prioritization
+methodology and Threat Velocity remain planned.
 
 ---
 
