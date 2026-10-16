@@ -524,7 +524,7 @@ ThreatPulse is an experiment in combining these signals into a more useful analy
 
 ---
 
-## Author
+## Notes
 
 Cybersecurity | Threat Intelligence | Security Analytics | Detection & Incident Response
 
