@@ -176,9 +176,10 @@ requires a separate matching downgrade acknowledgement. Preserve corrections in
 subsequent frozen inputs as long as the corresponding source evidence is present.
 
 The database cohort is historically KEV-based. Existing comparison studies remain
-separate; their non-KEV CVEs are not silently incorporated. Public comparisons and
-learned models need the next roadmap task: immutable daily tracking of a defined
-NVD non-KEV cohort. The engine currently loads stored history into memory;
+separate; their non-KEV CVEs are not silently incorporated. The separate
+[longitudinal collector](longitudinal-tracking.md) now supplies immutable daily
+research history; versioned features and censored outcome labels are next.
+The engine currently loads stored history into memory;
 large-scale incremental state, authorization, dashboard integration, and prospective
 threshold validation remain separate work. See
 [decision 013](decisions/013-baseline-priority-engine.md) for implementation choices.

@@ -10,7 +10,6 @@ from datetime import UTC, date, datetime, timedelta
 from fractions import Fraction
 from itertools import combinations
 from pathlib import Path
-from statistics import median
 from typing import Literal
 
 import psycopg
@@ -193,6 +192,18 @@ def _comparability(registry, first, latest, decision):
     return ("comparable" if len(ids) == 1 else "model_boundary"), ids
 
 
+def _exact_median(values):
+    # Preserve Fraction arithmetic and avoid importing the top-level statistics
+    # module, which Streamlit's script directory can shadow with our own module.
+    ordered = sorted(values)
+    middle = len(ordered) // 2
+    return (
+        ordered[middle]
+        if len(ordered) % 2
+        else (ordered[middle - 1] + ordered[middle]) / 2
+    )
+
+
 def analyze(dataset: VelocityDataset, decision_at=None, *, allow_after_export=False):
     """Calculate exact rational rates; round only the exported display values."""
     dataset = VelocityDataset.model_validate(dataset.model_dump())
@@ -238,7 +249,7 @@ def analyze(dataset: VelocityDataset, decision_at=None, *, allow_after_export=Fa
             100 * (probabilities[j] - probabilities[i]) / (dates[j] - dates[i]).days
             for i, j in combinations(range(len(used)), 2)
         ]
-        slope = median(slopes) if slopes else None
+        slope = _exact_median(slopes) if slopes else None
         comparable, regime_ids = _comparability(
             dataset.model_registry, dates[0] if dates else None, latest, decision
         )

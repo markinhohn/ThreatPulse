@@ -27,6 +27,11 @@ from threatpulse.storage import ingest_catalog, ingest_epss, ingest_nvd, migrate
 APP = str(Path(__file__).parents[1] / "src" / "threatpulse" / "dashboard.py")
 
 
+def intelligence_app():
+    app = AppTest.from_file(APP, default_timeout=20).run()
+    return app.radio(key="workspace").set_value("Vulnerability intelligence").run()
+
+
 class RedactedDsn(str):
     """Keep credentials out of pytest fixture/local-variable diagnostics."""
 
@@ -133,7 +138,7 @@ def test_exact_cve_search_ignores_mentions_in_other_descriptions(dashboard_url):
 
 def test_dashboard_real_database_and_interactions(dashboard_url, monkeypatch):
     monkeypatch.setenv("DATABASE_URL", dashboard_url)
-    app = AppTest.from_file(APP, default_timeout=20).run()
+    app = intelligence_app()
     assert not app.exception and not app.error
     assert app.metric[0].value == "2"
     assert app.metric[1].value == "1/2"
@@ -154,7 +159,7 @@ def test_dashboard_real_database_and_interactions(dashboard_url, monkeypatch):
 
 def test_dashboard_missing_configuration(monkeypatch):
     monkeypatch.delenv("DATABASE_URL", raising=False)
-    app = AppTest.from_file(APP).run()
+    app = intelligence_app()
     assert not app.exception
     assert "Set DATABASE_URL" in app.error[0].value
 
@@ -169,7 +174,7 @@ def test_analytics_dates_coverage_and_interactions(dashboard_url, monkeypatch):
     with pytest.raises(ValueError):
         load_epss_comparison(dashboard_url, dates[1], dates[0])
     monkeypatch.setenv("DATABASE_URL", dashboard_url)
-    app = AppTest.from_file(APP, default_timeout=20).run()
+    app = intelligence_app()
     assert not app.exception and not app.error
     assert [tab.label for tab in app.tabs] == [
         "Overview",
@@ -203,7 +208,7 @@ def test_analytics_handles_one_sided_observations(dashboard_url, connection):
 def test_analytics_requires_two_dates(dashboard_url, connection, monkeypatch):
     connection.execute("DELETE FROM epss_observations WHERE score_date = '2026-01-01'")
     monkeypatch.setenv("DATABASE_URL", dashboard_url)
-    app = AppTest.from_file(APP, default_timeout=20).run()
+    app = intelligence_app()
     assert not app.exception
     assert any("at least two dates" in info.value for info in app.info)
 
@@ -218,7 +223,7 @@ def test_analytics_date_controls_update_later_options(
         "WHERE score_date = '2026-01-02'"
     )
     monkeypatch.setenv("DATABASE_URL", dashboard_url)
-    app = AppTest.from_file(APP, default_timeout=20).run()
+    app = intelligence_app()
     app.selectbox(key="analytics_earlier").set_value(date(2026, 1, 1)).run()
     assert not app.exception
     assert app.selectbox(key="analytics_later").options == ["2026-01-02", "2026-01-03"]
@@ -230,7 +235,7 @@ def test_analytics_date_controls_update_later_options(
 def test_analytics_empty_scores_are_unknown(dashboard_url, connection, monkeypatch):
     connection.execute("DELETE FROM epss_observations")
     monkeypatch.setenv("DATABASE_URL", dashboard_url)
-    app = AppTest.from_file(APP, default_timeout=20).run()
+    app = intelligence_app()
     assert not app.exception and not app.error
     assert any(
         metric.label == "Scored CVEs" and metric.value == "0" for metric in app.metric
@@ -244,7 +249,7 @@ def test_dashboard_empty_and_database_error(monkeypatch):
     monkeypatch.setattr(
         "threatpulse.dashboard_data.load_vulnerabilities", lambda url: []
     )
-    app = AppTest.from_file(APP).run()
+    app = intelligence_app()
     assert not app.exception
     assert "No vulnerabilities" in app.info[0].value
 

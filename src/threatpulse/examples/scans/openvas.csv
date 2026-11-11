@@ -1,0 +1,3 @@
+IP,Hostname,Port,Port Protocol,CVSS,Severity,NVT Name,NVT OID,CVEs,QoD,Solution Description
+192.0.2.30,lab-app.example.test,443/tcp,tcp,1.6,Low,Invented lower signal finding,1.3.6.1.4.1.25623.1.0.990001,CVE-2026-3004,80,Review the lab package.
+192.0.2.30,,general/tcp,tcp,7.5,High,Invented incomplete finding,1.3.6.1.4.1.25623.1.0.990002,CVE-2026-3005,70,Verify the lab package.

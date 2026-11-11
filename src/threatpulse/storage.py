@@ -34,6 +34,8 @@ def migrate(connection: psycopg.Connection) -> None:
             3: "003_nvd.sql",
             4: "004_daily.sql",
             5: "005_comparison.sql",
+            6: "006_longitudinal.sql",
+            7: "007_scans.sql",
         }
         if versions - migrations.keys():
             raise ValueError("Database has migrations newer than this application")

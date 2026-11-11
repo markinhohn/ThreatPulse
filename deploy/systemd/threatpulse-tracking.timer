@@ -1,0 +1,10 @@
+[Unit]
+Description=Track ThreatPulse research cohorts daily at 07:00 UTC
+
+[Timer]
+OnCalendar=*-*-* 07:00:00 UTC
+Persistent=true
+Unit=threatpulse-tracking.service
+
+[Install]
+WantedBy=timers.target

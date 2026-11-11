@@ -1,0 +1,1413 @@
+{
+  "captured_at": "2026-01-14T12:01:18+00:00",
+  "dataset_kind": "longitudinal_tracking",
+  "schema_version": 1,
+  "tables": {
+    "attempts": [
+      {
+        "attempt_id": "1082004e-3d40-4296-8a1c-ea233e893baa",
+        "error_type": null,
+        "finished_at": "2026-01-10T12:00:30+00:00",
+        "requested_ids": [
+          "CVE-2026-1002",
+          "CVE-2026-1005"
+        ],
+        "run_id": 1,
+        "stage": "nvd",
+        "started_at": "2026-01-10T12:00:23+00:00",
+        "status": "succeeded"
+      },
+      {
+        "attempt_id": "1ac6fba1-69ae-40a0-bddf-9b652866b08c",
+        "error_type": null,
+        "finished_at": "2026-01-10T12:00:08+00:00",
+        "requested_ids": [],
+        "run_id": 1,
+        "stage": "census",
+        "started_at": "2026-01-10T12:00:03+00:00",
+        "status": "succeeded"
+      },
+      {
+        "attempt_id": "3e07bee3-5d1e-40a9-88ec-b17e8ee9d660",
+        "error_type": null,
+        "finished_at": "2026-01-14T12:00:45+00:00",
+        "requested_ids": [],
+        "run_id": 2,
+        "stage": "discovery",
+        "started_at": "2026-01-14T12:00:40+00:00",
+        "status": "succeeded"
+      },
+      {
+        "attempt_id": "51d05ca3-6693-45c3-9e8f-5a6fb3fc7ccc",
+        "error_type": null,
+        "finished_at": "2026-01-10T12:00:36+00:00",
+        "requested_ids": [],
+        "run_id": 1,
+        "stage": "final_kev",
+        "started_at": "2026-01-10T12:00:31+00:00",
+        "status": "succeeded"
+      },
+      {
+        "attempt_id": "5579435c-2dee-484b-a33b-309d56b81bba",
+        "error_type": "EpssCollectionError",
+        "finished_at": "2026-01-14T12:00:51+00:00",
+        "requested_ids": [
+          "CVE-2026-1001",
+          "CVE-2026-1002",
+          "CVE-2026-1005",
+          "CVE-2026-1006"
+        ],
+        "run_id": 2,
+        "stage": "epss",
+        "started_at": "2026-01-14T12:00:48+00:00",
+        "status": "failed"
+      },
+      {
+        "attempt_id": "6d8a4500-136c-4423-afc1-24410c6b134e",
+        "error_type": null,
+        "finished_at": "2026-01-10T12:00:22+00:00",
+        "requested_ids": [
+          "CVE-2026-1001",
+          "CVE-2026-1002",
+          "CVE-2026-1005",
+          "CVE-2026-1006"
+        ],
+        "run_id": 1,
+        "stage": "epss",
+        "started_at": "2026-01-10T12:00:17+00:00",
+        "status": "succeeded"
+      },
+      {
+        "attempt_id": "c06b1239-be0c-4d13-a945-c1646854a45e",
+        "error_type": null,
+        "finished_at": "2026-01-14T12:01:00+00:00",
+        "requested_ids": [
+          "CVE-2026-1001",
+          "CVE-2026-1002",
+          "CVE-2026-1005",
+          "CVE-2026-1006"
+        ],
+        "run_id": 2,
+        "stage": "epss",
+        "started_at": "2026-01-14T12:00:55+00:00",
+        "status": "succeeded"
+      },
+      {
+        "attempt_id": "c2ef2647-bb9c-49f9-9258-5608a822994f",
+        "error_type": null,
+        "finished_at": "2026-01-10T12:00:14+00:00",
+        "requested_ids": [],
+        "run_id": 1,
+        "stage": "discovery",
+        "started_at": "2026-01-10T12:00:09+00:00",
+        "status": "succeeded"
+      },
+      {
+        "attempt_id": "d737aaea-bc61-4345-a3aa-a969cd206e43",
+        "error_type": null,
+        "finished_at": "2026-01-14T12:01:16+00:00",
+        "requested_ids": [],
+        "run_id": 2,
+        "stage": "final_kev",
+        "started_at": "2026-01-14T12:01:11+00:00",
+        "status": "succeeded"
+      },
+      {
+        "attempt_id": "de9b5814-d165-43f5-89d4-ac007fc10eb6",
+        "error_type": null,
+        "finished_at": "2026-01-10T12:00:16+00:00",
+        "requested_ids": [
+          "CVE-2026-1001",
+          "CVE-2026-1002",
+          "CVE-2026-1005",
+          "CVE-2026-1006"
+        ],
+        "run_id": 1,
+        "stage": "plan",
+        "started_at": "2026-01-10T12:00:15+00:00",
+        "status": "succeeded"
+      },
+      {
+        "attempt_id": "e2b313ea-8792-47b9-b809-536e8f72cf53",
+        "error_type": null,
+        "finished_at": "2026-01-14T12:00:47+00:00",
+        "requested_ids": [
+          "CVE-2026-1001",
+          "CVE-2026-1002",
+          "CVE-2026-1005",
+          "CVE-2026-1006"
+        ],
+        "run_id": 2,
+        "stage": "plan",
+        "started_at": "2026-01-14T12:00:46+00:00",
+        "status": "succeeded"
+      },
+      {
+        "attempt_id": "ed993132-5dc0-4a55-bcf0-3fd80f5174b7",
+        "error_type": null,
+        "finished_at": "2026-01-14T12:01:10+00:00",
+        "requested_ids": [
+          "CVE-2026-1001",
+          "CVE-2026-1002",
+          "CVE-2026-1005",
+          "CVE-2026-1006"
+        ],
+        "run_id": 2,
+        "stage": "nvd",
+        "started_at": "2026-01-14T12:01:01+00:00",
+        "status": "succeeded"
+      }
+    ],
+    "checkpoints": [
+      {
+        "attempt_id": "1ac6fba1-69ae-40a0-bddf-9b652866b08c",
+        "available_at": "2026-01-10T12:00:08+00:00",
+        "metadata": {
+          "complete_catalog": false,
+          "complete_publication_census": true,
+          "missing": 0,
+          "observed": 2
+        },
+        "run_id": 1,
+        "stage": "census"
+      },
+      {
+        "attempt_id": "c2ef2647-bb9c-49f9-9258-5608a822994f",
+        "available_at": "2026-01-10T12:00:14+00:00",
+        "metadata": {
+          "complete_catalog": true,
+          "complete_publication_census": false,
+          "missing": 0,
+          "observed": 1
+        },
+        "run_id": 1,
+        "stage": "discovery"
+      },
+      {
+        "attempt_id": "6d8a4500-136c-4423-afc1-24410c6b134e",
+        "available_at": "2026-01-10T12:00:22+00:00",
+        "metadata": {
+          "complete_catalog": false,
+          "complete_publication_census": false,
+          "missing": 1,
+          "observed": 3,
+          "score_date": "2026-01-10"
+        },
+        "run_id": 1,
+        "stage": "epss"
+      },
+      {
+        "attempt_id": "51d05ca3-6693-45c3-9e8f-5a6fb3fc7ccc",
+        "available_at": "2026-01-10T12:00:36+00:00",
+        "metadata": {
+          "complete_catalog": true,
+          "complete_publication_census": false,
+          "historical_kev_evidence": [
+            {
+              "basis": "tracking_observation",
+              "cve_id": "CVE-2026-1002",
+              "observation_id": 3
+            },
+            {
+              "available_at": "2026-01-10T12:00:31+00:00",
+              "basis": "legacy_kev_entry_export",
+              "captured_at": "2026-01-10T12:00:00+00:00",
+              "cve_id": "CVE-2026-1005",
+              "raw_record": {
+                "cveID": "CVE-2026-1005",
+                "cwes": [
+                  "CWE-502"
+                ],
+                "dateAdded": "2026-01-01",
+                "dueDate": "2026-02-01",
+                "knownRansomwareCampaignUse": "Known",
+                "notes": "Synthetic test fixture based on the CISA catalog format.",
+                "product": "Log4j",
+                "requiredAction": "Apply updates per vendor instructions.",
+                "shortDescription": "Apache Log4j2 allows remote code execution through crafted log messages.",
+                "vendorProject": "Apache",
+                "vulnerabilityName": "Apache Log4j2 Remote Code Execution Vulnerability"
+              },
+              "raw_sha256": "0164b00bf198d57216ed7e2e845d93731a9465fd07ef1fb42b60698d2d35eb55",
+              "source_url": "https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json"
+            }
+          ],
+          "historical_kev_ids": [
+            "CVE-2026-1002",
+            "CVE-2026-1005"
+          ],
+          "missing": 0,
+          "observed": 1
+        },
+        "run_id": 1,
+        "stage": "final_kev"
+      },
+      {
+        "attempt_id": "1082004e-3d40-4296-8a1c-ea233e893baa",
+        "available_at": "2026-01-10T12:00:30+00:00",
+        "metadata": {
+          "complete_catalog": false,
+          "complete_publication_census": false,
+          "missing": 0,
+          "observed": 2
+        },
+        "run_id": 1,
+        "stage": "nvd"
+      },
+      {
+        "attempt_id": "de9b5814-d165-43f5-89d4-ac007fc10eb6",
+        "available_at": "2026-01-10T12:00:16+00:00",
+        "metadata": {
+          "request_cap": 20000,
+          "requested": 4
+        },
+        "run_id": 1,
+        "stage": "plan"
+      },
+      {
+        "attempt_id": "3e07bee3-5d1e-40a9-88ec-b17e8ee9d660",
+        "available_at": "2026-01-14T12:00:45+00:00",
+        "metadata": {
+          "complete_catalog": true,
+          "complete_publication_census": false,
+          "missing": 0,
+          "observed": 2
+        },
+        "run_id": 2,
+        "stage": "discovery"
+      },
+      {
+        "attempt_id": "c06b1239-be0c-4d13-a945-c1646854a45e",
+        "available_at": "2026-01-14T12:01:00+00:00",
+        "metadata": {
+          "complete_catalog": false,
+          "complete_publication_census": false,
+          "missing": 1,
+          "observed": 3,
+          "score_date": "2026-01-14"
+        },
+        "run_id": 2,
+        "stage": "epss"
+      },
+      {
+        "attempt_id": "d737aaea-bc61-4345-a3aa-a969cd206e43",
+        "available_at": "2026-01-14T12:01:16+00:00",
+        "metadata": {
+          "complete_catalog": true,
+          "complete_publication_census": false,
+          "historical_kev_evidence": [
+            {
+              "basis": "tracking_observation",
+              "cve_id": "CVE-2026-1001",
+              "observation_id": 12
+            },
+            {
+              "basis": "tracking_observation",
+              "cve_id": "CVE-2026-1002",
+              "observation_id": 11
+            },
+            {
+              "available_at": "2026-01-14T12:01:11+00:00",
+              "basis": "legacy_kev_entry_export",
+              "captured_at": "2026-01-10T12:00:00+00:00",
+              "cve_id": "CVE-2026-1005",
+              "raw_record": {
+                "cveID": "CVE-2026-1005",
+                "cwes": [
+                  "CWE-502"
+                ],
+                "dateAdded": "2026-01-01",
+                "dueDate": "2026-02-01",
+                "knownRansomwareCampaignUse": "Known",
+                "notes": "Synthetic test fixture based on the CISA catalog format.",
+                "product": "Log4j",
+                "requiredAction": "Apply updates per vendor instructions.",
+                "shortDescription": "Apache Log4j2 allows remote code execution through crafted log messages.",
+                "vendorProject": "Apache",
+                "vulnerabilityName": "Apache Log4j2 Remote Code Execution Vulnerability"
+              },
+              "raw_sha256": "0164b00bf198d57216ed7e2e845d93731a9465fd07ef1fb42b60698d2d35eb55",
+              "source_url": "https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json"
+            }
+          ],
+          "historical_kev_ids": [
+            "CVE-2026-1001",
+            "CVE-2026-1002",
+            "CVE-2026-1005"
+          ],
+          "missing": 0,
+          "observed": 2
+        },
+        "run_id": 2,
+        "stage": "final_kev"
+      },
+      {
+        "attempt_id": "ed993132-5dc0-4a55-bcf0-3fd80f5174b7",
+        "available_at": "2026-01-14T12:01:10+00:00",
+        "metadata": {
+          "complete_catalog": false,
+          "complete_publication_census": false,
+          "missing": 0,
+          "observed": 4
+        },
+        "run_id": 2,
+        "stage": "nvd"
+      },
+      {
+        "attempt_id": "e2b313ea-8792-47b9-b809-536e8f72cf53",
+        "available_at": "2026-01-14T12:00:47+00:00",
+        "metadata": {
+          "request_cap": 20000,
+          "requested": 4
+        },
+        "run_id": 2,
+        "stage": "plan"
+      }
+    ],
+    "cohorts": [
+      {
+        "cohort_id": "5afd48bf-d3dc-5378-9222-8faf1a563e9e",
+        "created_at": "2026-01-10T12:00:01+00:00",
+        "definition": {
+          "eligibility_policy": "non_kev_enrollment_v1",
+          "max_records": 10000,
+          "minimum_followup_days": 32,
+          "published_end": "2026-01-02",
+          "published_start": "2026-01-01",
+          "sampling": "complete_publication_census",
+          "schema_version": 1,
+          "target": "kev_inclusion_30d_v1"
+        },
+        "definition_sha256": "d9fa740675003a06354763b9ca23e3b9adecb45f62a2a099fbec23599d1d67b4",
+        "label": "Synthetic tracking demo; all CVEs, scores, and responses are invented"
+      }
+    ],
+    "memberships": [
+      {
+        "baseline_at": "2026-01-10T12:00:36+00:00",
+        "baseline_attempt_id": "51d05ca3-6693-45c3-9e8f-5a6fb3fc7ccc",
+        "census_observation_id": 1,
+        "cohort_id": "5afd48bf-d3dc-5378-9222-8faf1a563e9e",
+        "cve_id": "CVE-2026-1001",
+        "eligibility": "eligible",
+        "exclusion_reasons": []
+      },
+      {
+        "baseline_at": "2026-01-10T12:00:36+00:00",
+        "baseline_attempt_id": "51d05ca3-6693-45c3-9e8f-5a6fb3fc7ccc",
+        "census_observation_id": 2,
+        "cohort_id": "5afd48bf-d3dc-5378-9222-8faf1a563e9e",
+        "cve_id": "CVE-2026-1006",
+        "eligibility": "eligible",
+        "exclusion_reasons": []
+      }
+    ],
+    "observations": [
+      {
+        "attempt_id": "1ac6fba1-69ae-40a0-bddf-9b652866b08c",
+        "available_at": "2026-01-10T12:00:08+00:00",
+        "captured_at": "2026-01-10T12:00:04+00:00",
+        "cve_id": "CVE-2026-1001",
+        "observation": {
+          "cve_id": "CVE-2026-1001",
+          "cvss_metrics": [],
+          "description": "Invented synthetic vulnerability",
+          "ingested_at": "2026-01-10T12:00:04Z",
+          "modified_at": "2026-01-02T00:00:00Z",
+          "published_at": "2026-01-01T00:00:00Z",
+          "raw_record": {
+            "descriptions": [
+              {
+                "lang": "en",
+                "value": "Invented synthetic vulnerability"
+              }
+            ],
+            "id": "CVE-2026-1001",
+            "lastModified": "2026-01-02T00:00:00.000",
+            "metrics": {},
+            "published": "2026-01-01T00:00:00.000",
+            "vulnStatus": "Analyzed"
+          },
+          "references": [],
+          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-01-01T00%3A00%3A00.000%2B00%3A00&pubEndDate=2026-01-01T23%3A59%3A59.999%2B00%3A00&resultsPerPage=2000&startIndex=0",
+          "status": "Analyzed",
+          "weaknesses": []
+        },
+        "observation_id": 1,
+        "observation_sha256": "389c6223f7a6def4e96c1bf5ea5c72f8a8325bdaa4c720b44bad59a317d60066",
+        "raw_sha256": "a3bc6cc32a818a000e50e684c3d81e72bd4ab47dfcd08ebf0f8400acca75bf5d",
+        "source": "nvd",
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-01-01T00%3A00%3A00.000%2B00%3A00&pubEndDate=2026-01-01T23%3A59%3A59.999%2B00%3A00&resultsPerPage=2000&startIndex=0",
+        "state": "observed"
+      },
+      {
+        "attempt_id": "1ac6fba1-69ae-40a0-bddf-9b652866b08c",
+        "available_at": "2026-01-10T12:00:08+00:00",
+        "captured_at": "2026-01-10T12:00:04+00:00",
+        "cve_id": "CVE-2026-1006",
+        "observation": {
+          "cve_id": "CVE-2026-1006",
+          "cvss_metrics": [],
+          "description": "Invented synthetic vulnerability",
+          "ingested_at": "2026-01-10T12:00:04Z",
+          "modified_at": "2026-01-02T00:00:00Z",
+          "published_at": "2026-01-01T00:00:00Z",
+          "raw_record": {
+            "descriptions": [
+              {
+                "lang": "en",
+                "value": "Invented synthetic vulnerability"
+              }
+            ],
+            "id": "CVE-2026-1006",
+            "lastModified": "2026-01-02T00:00:00.000",
+            "published": "2026-01-01T00:00:00.000",
+            "vulnStatus": "Analyzed"
+          },
+          "references": [],
+          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-01-01T00%3A00%3A00.000%2B00%3A00&pubEndDate=2026-01-01T23%3A59%3A59.999%2B00%3A00&resultsPerPage=2000&startIndex=0",
+          "status": "Analyzed",
+          "weaknesses": []
+        },
+        "observation_id": 2,
+        "observation_sha256": "2ddc2a2c18bd52694ff86d62849ad8df398eaeb721d98487f10d7a8af5e50ec7",
+        "raw_sha256": "a3e887ca0256d32fde42fe9abf83e168efe3b96cbbf182b8411bf540d6b56c18",
+        "source": "nvd",
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-01-01T00%3A00%3A00.000%2B00%3A00&pubEndDate=2026-01-01T23%3A59%3A59.999%2B00%3A00&resultsPerPage=2000&startIndex=0",
+        "state": "observed"
+      },
+      {
+        "attempt_id": "c2ef2647-bb9c-49f9-9258-5608a822994f",
+        "available_at": "2026-01-10T12:00:14+00:00",
+        "captured_at": "2026-01-10T12:00:12+00:00",
+        "cve_id": "CVE-2026-1002",
+        "observation": {
+          "kev": {
+            "cve_id": "CVE-2026-1002",
+            "date_added": "2026-01-01",
+            "due_date": "2026-02-01",
+            "ingested_at": "2026-01-10T12:00:12Z",
+            "notes": "Synthetic test fixture based on the CISA catalog format.",
+            "ransomware_use": "Known",
+            "raw_record": {
+              "cveID": "CVE-2026-1002",
+              "cwes": [
+                "CWE-502"
+              ],
+              "dateAdded": "2026-01-01",
+              "dueDate": "2026-02-01",
+              "knownRansomwareCampaignUse": "Known",
+              "notes": "Synthetic test fixture based on the CISA catalog format.",
+              "product": "Log4j",
+              "requiredAction": "Apply updates per vendor instructions.",
+              "shortDescription": "Apache Log4j2 allows remote code execution through crafted log messages.",
+              "vendorProject": "Apache",
+              "vulnerabilityName": "Apache Log4j2 Remote Code Execution Vulnerability"
+            },
+            "required_action": "Apply updates per vendor instructions.",
+            "source_url": "https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json"
+          },
+          "vulnerability": {
+            "cve_id": "CVE-2026-1002",
+            "description": "Apache Log4j2 allows remote code execution through crafted log messages.",
+            "name": "Apache Log4j2 Remote Code Execution Vulnerability",
+            "product": "Log4j",
+            "vendor": "Apache"
+          }
+        },
+        "observation_id": 3,
+        "observation_sha256": "a50bb11b5643fa048943fddc5bfaeebe6853a69e7f79258a93ad9a3946ce9bff",
+        "raw_sha256": "41c838c668c45ac6d3b3a2bf5aec6d5b4d6eb24ee920b06d38ba34f28d0da5f7",
+        "source": "kev",
+        "source_url": "https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json",
+        "state": "observed"
+      },
+      {
+        "attempt_id": "6d8a4500-136c-4423-afc1-24410c6b134e",
+        "available_at": "2026-01-10T12:00:22+00:00",
+        "captured_at": "2026-01-10T12:00:18+00:00",
+        "cve_id": "CVE-2026-1002",
+        "observation": {
+          "cve_id": "CVE-2026-1002",
+          "epss": "0.20",
+          "ingested_at": "2026-01-10T12:00:18Z",
+          "percentile": "0.5",
+          "raw_record": {
+            "cve": "CVE-2026-1002",
+            "date": "2026-01-10",
+            "epss": "0.20",
+            "percentile": "0.5"
+          },
+          "score_date": "2026-01-10",
+          "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1001%2CCVE-2026-1002%2CCVE-2026-1005%2CCVE-2026-1006&limit=4"
+        },
+        "observation_id": 4,
+        "observation_sha256": "346b652a635395e069bd0ef198d55661197aeeeee6ae4f2e53c3284a55e5295a",
+        "raw_sha256": "f681d56b10ccde8ff5fb18fe45e1dfaeb4e1fd397ea30b3f502e74189d3ddebf",
+        "source": "epss",
+        "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1001%2CCVE-2026-1002%2CCVE-2026-1005%2CCVE-2026-1006&limit=4",
+        "state": "observed"
+      },
+      {
+        "attempt_id": "6d8a4500-136c-4423-afc1-24410c6b134e",
+        "available_at": "2026-01-10T12:00:22+00:00",
+        "captured_at": "2026-01-10T12:00:18+00:00",
+        "cve_id": "CVE-2026-1005",
+        "observation": {
+          "cve_id": "CVE-2026-1005",
+          "epss": "0.20",
+          "ingested_at": "2026-01-10T12:00:18Z",
+          "percentile": "0.5",
+          "raw_record": {
+            "cve": "CVE-2026-1005",
+            "date": "2026-01-10",
+            "epss": "0.20",
+            "percentile": "0.5"
+          },
+          "score_date": "2026-01-10",
+          "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1001%2CCVE-2026-1002%2CCVE-2026-1005%2CCVE-2026-1006&limit=4"
+        },
+        "observation_id": 5,
+        "observation_sha256": "f01ecca89a0fb21c8122399a5dbf12ff4a5d8a53df3fb2e683254ec3e8fdd70e",
+        "raw_sha256": "7f03366a151ca3800f3699bad3ca13a8edfb6c53085a8684e3843f172772fdcd",
+        "source": "epss",
+        "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1001%2CCVE-2026-1002%2CCVE-2026-1005%2CCVE-2026-1006&limit=4",
+        "state": "observed"
+      },
+      {
+        "attempt_id": "6d8a4500-136c-4423-afc1-24410c6b134e",
+        "available_at": "2026-01-10T12:00:22+00:00",
+        "captured_at": "2026-01-10T12:00:18+00:00",
+        "cve_id": "CVE-2026-1006",
+        "observation": {
+          "cve_id": "CVE-2026-1006",
+          "epss": "0",
+          "ingested_at": "2026-01-10T12:00:18Z",
+          "percentile": "0.5",
+          "raw_record": {
+            "cve": "CVE-2026-1006",
+            "date": "2026-01-10",
+            "epss": "0",
+            "percentile": "0.5"
+          },
+          "score_date": "2026-01-10",
+          "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1001%2CCVE-2026-1002%2CCVE-2026-1005%2CCVE-2026-1006&limit=4"
+        },
+        "observation_id": 6,
+        "observation_sha256": "c584366a2c990c5f082bab82a3a4ad93f6db17da9fb5243a1d03cbb60531754b",
+        "raw_sha256": "95d47265fc26f4f2539d84d777afc86b9269619661cb296055ac16a8fd22a2d9",
+        "source": "epss",
+        "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1001%2CCVE-2026-1002%2CCVE-2026-1005%2CCVE-2026-1006&limit=4",
+        "state": "observed"
+      },
+      {
+        "attempt_id": "6d8a4500-136c-4423-afc1-24410c6b134e",
+        "available_at": "2026-01-10T12:00:22+00:00",
+        "captured_at": "2026-01-10T12:00:22+00:00",
+        "cve_id": "CVE-2026-1001",
+        "observation": null,
+        "observation_id": 7,
+        "observation_sha256": null,
+        "raw_sha256": null,
+        "source": "epss",
+        "source_url": "https://api.first.org/data/v1/epss",
+        "state": "missing"
+      },
+      {
+        "attempt_id": "1082004e-3d40-4296-8a1c-ea233e893baa",
+        "available_at": "2026-01-10T12:00:30+00:00",
+        "captured_at": "2026-01-10T12:00:24+00:00",
+        "cve_id": "CVE-2026-1002",
+        "observation": {
+          "cve_id": "CVE-2026-1002",
+          "cvss_metrics": [],
+          "description": "Invented synthetic vulnerability",
+          "ingested_at": "2026-01-10T12:00:24Z",
+          "modified_at": "2026-01-02T00:00:00Z",
+          "published_at": "2026-01-01T00:00:00Z",
+          "raw_record": {
+            "descriptions": [
+              {
+                "lang": "en",
+                "value": "Invented synthetic vulnerability"
+              }
+            ],
+            "id": "CVE-2026-1002",
+            "lastModified": "2026-01-02T00:00:00.000",
+            "published": "2026-01-01T00:00:00.000",
+            "vulnStatus": "Analyzed"
+          },
+          "references": [],
+          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?hasKev=&resultsPerPage=2000&startIndex=0",
+          "status": "Analyzed",
+          "weaknesses": []
+        },
+        "observation_id": 8,
+        "observation_sha256": "8efa36bcee3f7c4b88e8b234bbf3722d4557ea480cc13f0f291baa4504a8340f",
+        "raw_sha256": "bb3e2d1e127cfd17428f246c4bb121d94d27445576711585198c3416e8f41a50",
+        "source": "nvd",
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?hasKev=&resultsPerPage=2000&startIndex=0",
+        "state": "observed"
+      },
+      {
+        "attempt_id": "1082004e-3d40-4296-8a1c-ea233e893baa",
+        "available_at": "2026-01-10T12:00:30+00:00",
+        "captured_at": "2026-01-10T12:00:24+00:00",
+        "cve_id": "CVE-2026-1005",
+        "observation": {
+          "cve_id": "CVE-2026-1005",
+          "cvss_metrics": [],
+          "description": "Invented synthetic vulnerability",
+          "ingested_at": "2026-01-10T12:00:24Z",
+          "modified_at": "2026-01-02T00:00:00Z",
+          "published_at": "2026-01-01T00:00:00Z",
+          "raw_record": {
+            "descriptions": [
+              {
+                "lang": "en",
+                "value": "Invented synthetic vulnerability"
+              }
+            ],
+            "id": "CVE-2026-1005",
+            "lastModified": "2026-01-02T00:00:00.000",
+            "published": "2026-01-01T00:00:00.000",
+            "vulnStatus": "Analyzed"
+          },
+          "references": [],
+          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=CVE-2026-1005",
+          "status": "Analyzed",
+          "weaknesses": []
+        },
+        "observation_id": 9,
+        "observation_sha256": "179c5f0364bdaef4d57c6b455043ce6b46508f5d542ef0990c9f3e3d96db0afd",
+        "raw_sha256": "0f11e83c061183d51d5a503ff8637e734de00ac6ba30b9262c2e531bd5854e75",
+        "source": "nvd",
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=CVE-2026-1005",
+        "state": "observed"
+      },
+      {
+        "attempt_id": "51d05ca3-6693-45c3-9e8f-5a6fb3fc7ccc",
+        "available_at": "2026-01-10T12:00:36+00:00",
+        "captured_at": "2026-01-10T12:00:34+00:00",
+        "cve_id": "CVE-2026-1002",
+        "observation": {
+          "kev": {
+            "cve_id": "CVE-2026-1002",
+            "date_added": "2026-01-01",
+            "due_date": "2026-02-01",
+            "ingested_at": "2026-01-10T12:00:34Z",
+            "notes": "Synthetic test fixture based on the CISA catalog format.",
+            "ransomware_use": "Known",
+            "raw_record": {
+              "cveID": "CVE-2026-1002",
+              "cwes": [
+                "CWE-502"
+              ],
+              "dateAdded": "2026-01-01",
+              "dueDate": "2026-02-01",
+              "knownRansomwareCampaignUse": "Known",
+              "notes": "Synthetic test fixture based on the CISA catalog format.",
+              "product": "Log4j",
+              "requiredAction": "Apply updates per vendor instructions.",
+              "shortDescription": "Apache Log4j2 allows remote code execution through crafted log messages.",
+              "vendorProject": "Apache",
+              "vulnerabilityName": "Apache Log4j2 Remote Code Execution Vulnerability"
+            },
+            "required_action": "Apply updates per vendor instructions.",
+            "source_url": "https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json"
+          },
+          "vulnerability": {
+            "cve_id": "CVE-2026-1002",
+            "description": "Apache Log4j2 allows remote code execution through crafted log messages.",
+            "name": "Apache Log4j2 Remote Code Execution Vulnerability",
+            "product": "Log4j",
+            "vendor": "Apache"
+          }
+        },
+        "observation_id": 10,
+        "observation_sha256": "5a85f9a8318ce8d1807100097adb5138dc7f10a2b37093589212a1ceb641b468",
+        "raw_sha256": "41c838c668c45ac6d3b3a2bf5aec6d5b4d6eb24ee920b06d38ba34f28d0da5f7",
+        "source": "kev",
+        "source_url": "https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json",
+        "state": "observed"
+      },
+      {
+        "attempt_id": "3e07bee3-5d1e-40a9-88ec-b17e8ee9d660",
+        "available_at": "2026-01-14T12:00:45+00:00",
+        "captured_at": "2026-01-14T12:00:43+00:00",
+        "cve_id": "CVE-2026-1002",
+        "observation": {
+          "kev": {
+            "cve_id": "CVE-2026-1002",
+            "date_added": "2026-01-01",
+            "due_date": "2026-02-01",
+            "ingested_at": "2026-01-14T12:00:43Z",
+            "notes": "Synthetic test fixture based on the CISA catalog format.",
+            "ransomware_use": "Known",
+            "raw_record": {
+              "cveID": "CVE-2026-1002",
+              "cwes": [
+                "CWE-502"
+              ],
+              "dateAdded": "2026-01-01",
+              "dueDate": "2026-02-01",
+              "knownRansomwareCampaignUse": "Known",
+              "notes": "Synthetic test fixture based on the CISA catalog format.",
+              "product": "Log4j",
+              "requiredAction": "Apply updates per vendor instructions.",
+              "shortDescription": "Apache Log4j2 allows remote code execution through crafted log messages.",
+              "vendorProject": "Apache",
+              "vulnerabilityName": "Apache Log4j2 Remote Code Execution Vulnerability"
+            },
+            "required_action": "Apply updates per vendor instructions.",
+            "source_url": "https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json"
+          },
+          "vulnerability": {
+            "cve_id": "CVE-2026-1002",
+            "description": "Apache Log4j2 allows remote code execution through crafted log messages.",
+            "name": "Apache Log4j2 Remote Code Execution Vulnerability",
+            "product": "Log4j",
+            "vendor": "Apache"
+          }
+        },
+        "observation_id": 11,
+        "observation_sha256": "c23fe480c4cb32a817bd9ff75adbaeb3094fffef30bea18c594ca0aa148ce48b",
+        "raw_sha256": "41c838c668c45ac6d3b3a2bf5aec6d5b4d6eb24ee920b06d38ba34f28d0da5f7",
+        "source": "kev",
+        "source_url": "https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json",
+        "state": "observed"
+      },
+      {
+        "attempt_id": "3e07bee3-5d1e-40a9-88ec-b17e8ee9d660",
+        "available_at": "2026-01-14T12:00:45+00:00",
+        "captured_at": "2026-01-14T12:00:43+00:00",
+        "cve_id": "CVE-2026-1001",
+        "observation": {
+          "kev": {
+            "cve_id": "CVE-2026-1001",
+            "date_added": "2026-01-01",
+            "due_date": "2026-02-01",
+            "ingested_at": "2026-01-14T12:00:43Z",
+            "notes": "Synthetic test fixture based on the CISA catalog format.",
+            "ransomware_use": "Known",
+            "raw_record": {
+              "cveID": "CVE-2026-1001",
+              "cwes": [
+                "CWE-502"
+              ],
+              "dateAdded": "2026-01-01",
+              "dueDate": "2026-02-01",
+              "knownRansomwareCampaignUse": "Known",
+              "notes": "Synthetic test fixture based on the CISA catalog format.",
+              "product": "Log4j",
+              "requiredAction": "Apply updates per vendor instructions.",
+              "shortDescription": "Apache Log4j2 allows remote code execution through crafted log messages.",
+              "vendorProject": "Apache",
+              "vulnerabilityName": "Apache Log4j2 Remote Code Execution Vulnerability"
+            },
+            "required_action": "Apply updates per vendor instructions.",
+            "source_url": "https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json"
+          },
+          "vulnerability": {
+            "cve_id": "CVE-2026-1001",
+            "description": "Apache Log4j2 allows remote code execution through crafted log messages.",
+            "name": "Apache Log4j2 Remote Code Execution Vulnerability",
+            "product": "Log4j",
+            "vendor": "Apache"
+          }
+        },
+        "observation_id": 12,
+        "observation_sha256": "48df0cf748bb0c73a3227f667035c8ca3c7a34e9c6bf3f902e1bea7a17f1153b",
+        "raw_sha256": "c8ce40e2f24c1a86997f28257d94dc2b8ee8056e8b2e11a2ee3bf4e059e051a9",
+        "source": "kev",
+        "source_url": "https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json",
+        "state": "observed"
+      },
+      {
+        "attempt_id": "c06b1239-be0c-4d13-a945-c1646854a45e",
+        "available_at": "2026-01-14T12:01:00+00:00",
+        "captured_at": "2026-01-14T12:00:56+00:00",
+        "cve_id": "CVE-2026-1002",
+        "observation": {
+          "cve_id": "CVE-2026-1002",
+          "epss": "0.20",
+          "ingested_at": "2026-01-14T12:00:56Z",
+          "percentile": "0.5",
+          "raw_record": {
+            "cve": "CVE-2026-1002",
+            "date": "2026-01-14",
+            "epss": "0.20",
+            "percentile": "0.5"
+          },
+          "score_date": "2026-01-14",
+          "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1001%2CCVE-2026-1002%2CCVE-2026-1005%2CCVE-2026-1006&limit=4"
+        },
+        "observation_id": 13,
+        "observation_sha256": "558fd6904ad3d5f3aab2883e5e2a8a3296c1511eddb68c4445257070b4b7e78b",
+        "raw_sha256": "300f3b8ad6d96b00fe15a0e26e391672aa4670c3fb8fe3a809904337beb3c091",
+        "source": "epss",
+        "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1001%2CCVE-2026-1002%2CCVE-2026-1005%2CCVE-2026-1006&limit=4",
+        "state": "observed"
+      },
+      {
+        "attempt_id": "c06b1239-be0c-4d13-a945-c1646854a45e",
+        "available_at": "2026-01-14T12:01:00+00:00",
+        "captured_at": "2026-01-14T12:00:56+00:00",
+        "cve_id": "CVE-2026-1005",
+        "observation": {
+          "cve_id": "CVE-2026-1005",
+          "epss": "0.20",
+          "ingested_at": "2026-01-14T12:00:56Z",
+          "percentile": "0.5",
+          "raw_record": {
+            "cve": "CVE-2026-1005",
+            "date": "2026-01-14",
+            "epss": "0.20",
+            "percentile": "0.5"
+          },
+          "score_date": "2026-01-14",
+          "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1001%2CCVE-2026-1002%2CCVE-2026-1005%2CCVE-2026-1006&limit=4"
+        },
+        "observation_id": 14,
+        "observation_sha256": "c6394cd89dcfc5bab74a5773fbc937bc569ff7cd065f25ced01c119807f11120",
+        "raw_sha256": "244f182c31bb345ee8fb2aa83d3cd2125008db8643914985bb1310f323c45a9d",
+        "source": "epss",
+        "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1001%2CCVE-2026-1002%2CCVE-2026-1005%2CCVE-2026-1006&limit=4",
+        "state": "observed"
+      },
+      {
+        "attempt_id": "c06b1239-be0c-4d13-a945-c1646854a45e",
+        "available_at": "2026-01-14T12:01:00+00:00",
+        "captured_at": "2026-01-14T12:00:56+00:00",
+        "cve_id": "CVE-2026-1006",
+        "observation": {
+          "cve_id": "CVE-2026-1006",
+          "epss": "0",
+          "ingested_at": "2026-01-14T12:00:56Z",
+          "percentile": "0.5",
+          "raw_record": {
+            "cve": "CVE-2026-1006",
+            "date": "2026-01-14",
+            "epss": "0",
+            "percentile": "0.5"
+          },
+          "score_date": "2026-01-14",
+          "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1001%2CCVE-2026-1002%2CCVE-2026-1005%2CCVE-2026-1006&limit=4"
+        },
+        "observation_id": 15,
+        "observation_sha256": "204073f21e7ea93f18f3daa41c18fc7ff876e4762ec8f0bbfe33260cbd192301",
+        "raw_sha256": "2ea94defc387dcf81eb41879024c5a611f184d7d9b3070232e80886efdb67493",
+        "source": "epss",
+        "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1001%2CCVE-2026-1002%2CCVE-2026-1005%2CCVE-2026-1006&limit=4",
+        "state": "observed"
+      },
+      {
+        "attempt_id": "c06b1239-be0c-4d13-a945-c1646854a45e",
+        "available_at": "2026-01-14T12:01:00+00:00",
+        "captured_at": "2026-01-14T12:01:00+00:00",
+        "cve_id": "CVE-2026-1001",
+        "observation": null,
+        "observation_id": 16,
+        "observation_sha256": null,
+        "raw_sha256": null,
+        "source": "epss",
+        "source_url": "https://api.first.org/data/v1/epss",
+        "state": "missing"
+      },
+      {
+        "attempt_id": "ed993132-5dc0-4a55-bcf0-3fd80f5174b7",
+        "available_at": "2026-01-14T12:01:10+00:00",
+        "captured_at": "2026-01-14T12:01:02+00:00",
+        "cve_id": "CVE-2026-1001",
+        "observation": {
+          "cve_id": "CVE-2026-1001",
+          "cvss_metrics": [],
+          "description": "Invented synthetic vulnerability",
+          "ingested_at": "2026-01-14T12:01:02Z",
+          "modified_at": "2026-01-02T00:00:00Z",
+          "published_at": "2026-01-01T00:00:00Z",
+          "raw_record": {
+            "descriptions": [
+              {
+                "lang": "en",
+                "value": "Invented synthetic vulnerability"
+              }
+            ],
+            "id": "CVE-2026-1001",
+            "lastModified": "2026-01-02T00:00:00.000",
+            "metrics": {},
+            "published": "2026-01-01T00:00:00.000",
+            "vulnStatus": "Analyzed"
+          },
+          "references": [],
+          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?hasKev=&resultsPerPage=2000&startIndex=0",
+          "status": "Analyzed",
+          "weaknesses": []
+        },
+        "observation_id": 17,
+        "observation_sha256": "5243840a6ce1222a31f32a4f2a0d0d087a12edf164dfd4bd3da52615e0392047",
+        "raw_sha256": "a3bc6cc32a818a000e50e684c3d81e72bd4ab47dfcd08ebf0f8400acca75bf5d",
+        "source": "nvd",
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?hasKev=&resultsPerPage=2000&startIndex=0",
+        "state": "observed"
+      },
+      {
+        "attempt_id": "ed993132-5dc0-4a55-bcf0-3fd80f5174b7",
+        "available_at": "2026-01-14T12:01:10+00:00",
+        "captured_at": "2026-01-14T12:01:02+00:00",
+        "cve_id": "CVE-2026-1002",
+        "observation": {
+          "cve_id": "CVE-2026-1002",
+          "cvss_metrics": [],
+          "description": "Invented synthetic vulnerability",
+          "ingested_at": "2026-01-14T12:01:02Z",
+          "modified_at": "2026-01-02T00:00:00Z",
+          "published_at": "2026-01-01T00:00:00Z",
+          "raw_record": {
+            "descriptions": [
+              {
+                "lang": "en",
+                "value": "Invented synthetic vulnerability"
+              }
+            ],
+            "id": "CVE-2026-1002",
+            "lastModified": "2026-01-02T00:00:00.000",
+            "published": "2026-01-01T00:00:00.000",
+            "vulnStatus": "Analyzed"
+          },
+          "references": [],
+          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?hasKev=&resultsPerPage=2000&startIndex=0",
+          "status": "Analyzed",
+          "weaknesses": []
+        },
+        "observation_id": 18,
+        "observation_sha256": "6838ab80b622336669018d32684e0f5c8d8eb46932ed9849d4744e3998c64a12",
+        "raw_sha256": "bb3e2d1e127cfd17428f246c4bb121d94d27445576711585198c3416e8f41a50",
+        "source": "nvd",
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?hasKev=&resultsPerPage=2000&startIndex=0",
+        "state": "observed"
+      },
+      {
+        "attempt_id": "ed993132-5dc0-4a55-bcf0-3fd80f5174b7",
+        "available_at": "2026-01-14T12:01:10+00:00",
+        "captured_at": "2026-01-14T12:01:02+00:00",
+        "cve_id": "CVE-2026-1005",
+        "observation": {
+          "cve_id": "CVE-2026-1005",
+          "cvss_metrics": [],
+          "description": "Invented synthetic vulnerability",
+          "ingested_at": "2026-01-14T12:01:02Z",
+          "modified_at": "2026-01-02T00:00:00Z",
+          "published_at": "2026-01-01T00:00:00Z",
+          "raw_record": {
+            "descriptions": [
+              {
+                "lang": "en",
+                "value": "Invented synthetic vulnerability"
+              }
+            ],
+            "id": "CVE-2026-1005",
+            "lastModified": "2026-01-02T00:00:00.000",
+            "published": "2026-01-01T00:00:00.000",
+            "vulnStatus": "Analyzed"
+          },
+          "references": [],
+          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=CVE-2026-1005",
+          "status": "Analyzed",
+          "weaknesses": []
+        },
+        "observation_id": 19,
+        "observation_sha256": "868303f3144f0b1659041bbbf6505511644a4bd42e1c054908819f77807ae48a",
+        "raw_sha256": "0f11e83c061183d51d5a503ff8637e734de00ac6ba30b9262c2e531bd5854e75",
+        "source": "nvd",
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=CVE-2026-1005",
+        "state": "observed"
+      },
+      {
+        "attempt_id": "ed993132-5dc0-4a55-bcf0-3fd80f5174b7",
+        "available_at": "2026-01-14T12:01:10+00:00",
+        "captured_at": "2026-01-14T12:01:02+00:00",
+        "cve_id": "CVE-2026-1006",
+        "observation": {
+          "cve_id": "CVE-2026-1006",
+          "cvss_metrics": [],
+          "description": "Invented synthetic vulnerability",
+          "ingested_at": "2026-01-14T12:01:02Z",
+          "modified_at": "2026-01-02T00:00:00Z",
+          "published_at": "2026-01-01T00:00:00Z",
+          "raw_record": {
+            "descriptions": [
+              {
+                "lang": "en",
+                "value": "Invented synthetic vulnerability"
+              }
+            ],
+            "id": "CVE-2026-1006",
+            "lastModified": "2026-01-02T00:00:00.000",
+            "published": "2026-01-01T00:00:00.000",
+            "vulnStatus": "Analyzed"
+          },
+          "references": [],
+          "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=CVE-2026-1006",
+          "status": "Analyzed",
+          "weaknesses": []
+        },
+        "observation_id": 20,
+        "observation_sha256": "6ad186962a6097e3b1dd523b295986a28539cbd4a45f14f0bb0ddd8364eb5991",
+        "raw_sha256": "a3e887ca0256d32fde42fe9abf83e168efe3b96cbbf182b8411bf540d6b56c18",
+        "source": "nvd",
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=CVE-2026-1006",
+        "state": "observed"
+      },
+      {
+        "attempt_id": "d737aaea-bc61-4345-a3aa-a969cd206e43",
+        "available_at": "2026-01-14T12:01:16+00:00",
+        "captured_at": "2026-01-14T12:01:14+00:00",
+        "cve_id": "CVE-2026-1002",
+        "observation": {
+          "kev": {
+            "cve_id": "CVE-2026-1002",
+            "date_added": "2026-01-01",
+            "due_date": "2026-02-01",
+            "ingested_at": "2026-01-14T12:01:14Z",
+            "notes": "Synthetic test fixture based on the CISA catalog format.",
+            "ransomware_use": "Known",
+            "raw_record": {
+              "cveID": "CVE-2026-1002",
+              "cwes": [
+                "CWE-502"
+              ],
+              "dateAdded": "2026-01-01",
+              "dueDate": "2026-02-01",
+              "knownRansomwareCampaignUse": "Known",
+              "notes": "Synthetic test fixture based on the CISA catalog format.",
+              "product": "Log4j",
+              "requiredAction": "Apply updates per vendor instructions.",
+              "shortDescription": "Apache Log4j2 allows remote code execution through crafted log messages.",
+              "vendorProject": "Apache",
+              "vulnerabilityName": "Apache Log4j2 Remote Code Execution Vulnerability"
+            },
+            "required_action": "Apply updates per vendor instructions.",
+            "source_url": "https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json"
+          },
+          "vulnerability": {
+            "cve_id": "CVE-2026-1002",
+            "description": "Apache Log4j2 allows remote code execution through crafted log messages.",
+            "name": "Apache Log4j2 Remote Code Execution Vulnerability",
+            "product": "Log4j",
+            "vendor": "Apache"
+          }
+        },
+        "observation_id": 21,
+        "observation_sha256": "45706c8fa00518667f2580f3f42498697d6fdd11aba0f7b94c396b3738fed2d9",
+        "raw_sha256": "41c838c668c45ac6d3b3a2bf5aec6d5b4d6eb24ee920b06d38ba34f28d0da5f7",
+        "source": "kev",
+        "source_url": "https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json",
+        "state": "observed"
+      },
+      {
+        "attempt_id": "d737aaea-bc61-4345-a3aa-a969cd206e43",
+        "available_at": "2026-01-14T12:01:16+00:00",
+        "captured_at": "2026-01-14T12:01:14+00:00",
+        "cve_id": "CVE-2026-1001",
+        "observation": {
+          "kev": {
+            "cve_id": "CVE-2026-1001",
+            "date_added": "2026-01-01",
+            "due_date": "2026-02-01",
+            "ingested_at": "2026-01-14T12:01:14Z",
+            "notes": "Synthetic test fixture based on the CISA catalog format.",
+            "ransomware_use": "Known",
+            "raw_record": {
+              "cveID": "CVE-2026-1001",
+              "cwes": [
+                "CWE-502"
+              ],
+              "dateAdded": "2026-01-01",
+              "dueDate": "2026-02-01",
+              "knownRansomwareCampaignUse": "Known",
+              "notes": "Synthetic test fixture based on the CISA catalog format.",
+              "product": "Log4j",
+              "requiredAction": "Apply updates per vendor instructions.",
+              "shortDescription": "Apache Log4j2 allows remote code execution through crafted log messages.",
+              "vendorProject": "Apache",
+              "vulnerabilityName": "Apache Log4j2 Remote Code Execution Vulnerability"
+            },
+            "required_action": "Apply updates per vendor instructions.",
+            "source_url": "https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json"
+          },
+          "vulnerability": {
+            "cve_id": "CVE-2026-1001",
+            "description": "Apache Log4j2 allows remote code execution through crafted log messages.",
+            "name": "Apache Log4j2 Remote Code Execution Vulnerability",
+            "product": "Log4j",
+            "vendor": "Apache"
+          }
+        },
+        "observation_id": 22,
+        "observation_sha256": "35f8628fc58f837feb54a310457ad1e544263d7a6ee6dfd625c1e146081ae7f6",
+        "raw_sha256": "c8ce40e2f24c1a86997f28257d94dc2b8ee8056e8b2e11a2ee3bf4e059e051a9",
+        "source": "kev",
+        "source_url": "https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json",
+        "state": "observed"
+      }
+    ],
+    "registry": [
+      {
+        "cve_id": "CVE-2026-1001",
+        "first_seen_at": "2026-01-10T12:00:08+00:00",
+        "origin": "nvd_window"
+      },
+      {
+        "cve_id": "CVE-2026-1002",
+        "first_seen_at": "2026-01-10T12:00:14+00:00",
+        "origin": "kev"
+      },
+      {
+        "cve_id": "CVE-2026-1005",
+        "first_seen_at": "2026-01-10T12:00:15+00:00",
+        "origin": "legacy_kev"
+      },
+      {
+        "cve_id": "CVE-2026-1006",
+        "first_seen_at": "2026-01-10T12:00:08+00:00",
+        "origin": "nvd_window"
+      }
+    ],
+    "requests": [
+      {
+        "attempt_id": "1082004e-3d40-4296-8a1c-ea233e893baa",
+        "ordinal": 1,
+        "request_id": "014ed749-4cd8-4d02-a28a-4d080917b9f7",
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=CVE-2026-1005",
+        "started_at": "2026-01-10T12:00:27+00:00"
+      },
+      {
+        "attempt_id": "1082004e-3d40-4296-8a1c-ea233e893baa",
+        "ordinal": 0,
+        "request_id": "06df8aa2-28f6-4876-b499-d771bf1370df",
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?hasKev=&resultsPerPage=2000&startIndex=0",
+        "started_at": "2026-01-10T12:00:25+00:00"
+      },
+      {
+        "attempt_id": "3e07bee3-5d1e-40a9-88ec-b17e8ee9d660",
+        "ordinal": 0,
+        "request_id": "0c39fadf-3ec0-4ae6-8a63-26bec365a8a7",
+        "source_url": "https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json",
+        "started_at": "2026-01-14T12:00:41+00:00"
+      },
+      {
+        "attempt_id": "1ac6fba1-69ae-40a0-bddf-9b652866b08c",
+        "ordinal": 0,
+        "request_id": "12a653c5-4c90-4da4-bdc8-7be7d230acbe",
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-01-01T00%3A00%3A00.000%2B00%3A00&pubEndDate=2026-01-01T23%3A59%3A59.999%2B00%3A00&resultsPerPage=2000&startIndex=0",
+        "started_at": "2026-01-10T12:00:05+00:00"
+      },
+      {
+        "attempt_id": "51d05ca3-6693-45c3-9e8f-5a6fb3fc7ccc",
+        "ordinal": 0,
+        "request_id": "575fa1ab-b3de-4fef-a04a-950e69c1dba3",
+        "source_url": "https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json",
+        "started_at": "2026-01-10T12:00:32+00:00"
+      },
+      {
+        "attempt_id": "5579435c-2dee-484b-a33b-309d56b81bba",
+        "ordinal": 0,
+        "request_id": "5f665644-8a7e-408e-9ba5-edcd0119f0fb",
+        "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1001%2CCVE-2026-1002%2CCVE-2026-1005%2CCVE-2026-1006&limit=4",
+        "started_at": "2026-01-14T12:00:50+00:00"
+      },
+      {
+        "attempt_id": "c2ef2647-bb9c-49f9-9258-5608a822994f",
+        "ordinal": 0,
+        "request_id": "64cddd20-aaec-41e2-8cb6-6d589ca022fd",
+        "source_url": "https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json",
+        "started_at": "2026-01-10T12:00:10+00:00"
+      },
+      {
+        "attempt_id": "c06b1239-be0c-4d13-a945-c1646854a45e",
+        "ordinal": 0,
+        "request_id": "678adec7-0892-446c-868b-d115d3ea574a",
+        "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1001%2CCVE-2026-1002%2CCVE-2026-1005%2CCVE-2026-1006&limit=4",
+        "started_at": "2026-01-14T12:00:57+00:00"
+      },
+      {
+        "attempt_id": "d737aaea-bc61-4345-a3aa-a969cd206e43",
+        "ordinal": 0,
+        "request_id": "69e8d7e5-419b-4a36-8791-983f426e23b4",
+        "source_url": "https://raw.githubusercontent.com/cisagov/kev-data/main/known_exploited_vulnerabilities.json",
+        "started_at": "2026-01-14T12:01:12+00:00"
+      },
+      {
+        "attempt_id": "ed993132-5dc0-4a55-bcf0-3fd80f5174b7",
+        "ordinal": 2,
+        "request_id": "8c7178a0-a03c-483b-8fa0-02153fd0a2b4",
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=CVE-2026-1006",
+        "started_at": "2026-01-14T12:01:07+00:00"
+      },
+      {
+        "attempt_id": "ed993132-5dc0-4a55-bcf0-3fd80f5174b7",
+        "ordinal": 1,
+        "request_id": "ab88080b-0a38-40dc-bd83-4722f2b1881e",
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=CVE-2026-1005",
+        "started_at": "2026-01-14T12:01:05+00:00"
+      },
+      {
+        "attempt_id": "6d8a4500-136c-4423-afc1-24410c6b134e",
+        "ordinal": 0,
+        "request_id": "c22633e7-c4f5-4159-886e-d8af0d4c5cfa",
+        "source_url": "https://api.first.org/data/v1/epss?cve=CVE-2026-1001%2CCVE-2026-1002%2CCVE-2026-1005%2CCVE-2026-1006&limit=4",
+        "started_at": "2026-01-10T12:00:19+00:00"
+      },
+      {
+        "attempt_id": "ed993132-5dc0-4a55-bcf0-3fd80f5174b7",
+        "ordinal": 0,
+        "request_id": "eca5a5c4-c263-4d78-8ef4-fc56c0ecf61a",
+        "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?hasKev=&resultsPerPage=2000&startIndex=0",
+        "started_at": "2026-01-14T12:01:03+00:00"
+      }
+    ],
+    "responses": [
+      {
+        "body_base64": "eyJ0b3RhbFJlc3VsdHMiOjEsInN0YXJ0SW5kZXgiOjAsInJlc3VsdHNQZXJQYWdlIjoxLCJ2dWxuZXJhYmlsaXRpZXMiOlt7ImN2ZSI6eyJ2dWxuU3RhdHVzIjoiQW5hbHl6ZWQiLCJkZXNjcmlwdGlvbnMiOlt7ImxhbmciOiJlbiIsInZhbHVlIjoiSW52ZW50ZWQgc3ludGhldGljIHZ1bG5lcmFiaWxpdHkifV0sImlkIjoiQ1ZFLTIwMjYtMTAwNSIsInB1Ymxpc2hlZCI6IjIwMjYtMDEtMDFUMDA6MDA6MDAuMDAwIiwibGFzdE1vZGlmaWVkIjoiMjAyNi0wMS0wMlQwMDowMDowMC4wMDAifX1dfQ==",
+        "body_sha256": "d288ae1b09d038d85cc17b086474367c7326629575ab29845ede613ad249dc9a",
+        "received_at": "2026-01-10T12:00:28+00:00",
+        "request_id": "014ed749-4cd8-4d02-a28a-4d080917b9f7",
+        "status_code": 200
+      },
+      {
+        "body_base64": "eyJ0b3RhbFJlc3VsdHMiOjEsInN0YXJ0SW5kZXgiOjAsInJlc3VsdHNQZXJQYWdlIjoxLCJ2dWxuZXJhYmlsaXRpZXMiOlt7ImN2ZSI6eyJ2dWxuU3RhdHVzIjoiQW5hbHl6ZWQiLCJkZXNjcmlwdGlvbnMiOlt7ImxhbmciOiJlbiIsInZhbHVlIjoiSW52ZW50ZWQgc3ludGhldGljIHZ1bG5lcmFiaWxpdHkifV0sImlkIjoiQ1ZFLTIwMjYtMTAwMiIsInB1Ymxpc2hlZCI6IjIwMjYtMDEtMDFUMDA6MDA6MDAuMDAwIiwibGFzdE1vZGlmaWVkIjoiMjAyNi0wMS0wMlQwMDowMDowMC4wMDAifX1dfQ==",
+        "body_sha256": "92067db0ac8adbc128f1283c8ff66cb07fb8f5aaba7f34ed93cc8c8d27ce2c7a",
+        "received_at": "2026-01-10T12:00:26+00:00",
+        "request_id": "06df8aa2-28f6-4876-b499-d771bf1370df",
+        "status_code": 200
+      },
+      {
+        "body_base64": "eyJjb3VudCI6MiwidnVsbmVyYWJpbGl0aWVzIjpbeyJjdmVJRCI6IkNWRS0yMDI2LTEwMDIiLCJ2ZW5kb3JQcm9qZWN0IjoiQXBhY2hlIiwicHJvZHVjdCI6IkxvZzRqIiwidnVsbmVyYWJpbGl0eU5hbWUiOiJBcGFjaGUgTG9nNGoyIFJlbW90ZSBDb2RlIEV4ZWN1dGlvbiBWdWxuZXJhYmlsaXR5IiwiZGF0ZUFkZGVkIjoiMjAyNi0wMS0wMSIsInNob3J0RGVzY3JpcHRpb24iOiJBcGFjaGUgTG9nNGoyIGFsbG93cyByZW1vdGUgY29kZSBleGVjdXRpb24gdGhyb3VnaCBjcmFmdGVkIGxvZyBtZXNzYWdlcy4iLCJyZXF1aXJlZEFjdGlvbiI6IkFwcGx5IHVwZGF0ZXMgcGVyIHZlbmRvciBpbnN0cnVjdGlvbnMuIiwiZHVlRGF0ZSI6IjIwMjYtMDItMDEiLCJrbm93blJhbnNvbXdhcmVDYW1wYWlnblVzZSI6Iktub3duIiwibm90ZXMiOiJTeW50aGV0aWMgdGVzdCBmaXh0dXJlIGJhc2VkIG9uIHRoZSBDSVNBIGNhdGFsb2cgZm9ybWF0LiIsImN3ZXMiOlsiQ1dFLTUwMiJdfSx7ImN2ZUlEIjoiQ1ZFLTIwMjYtMTAwMSIsInZlbmRvclByb2plY3QiOiJBcGFjaGUiLCJwcm9kdWN0IjoiTG9nNGoiLCJ2dWxuZXJhYmlsaXR5TmFtZSI6IkFwYWNoZSBMb2c0ajIgUmVtb3RlIENvZGUgRXhlY3V0aW9uIFZ1bG5lcmFiaWxpdHkiLCJkYXRlQWRkZWQiOiIyMDI2LTAxLTAxIiwic2hvcnREZXNjcmlwdGlvbiI6IkFwYWNoZSBMb2c0ajIgYWxsb3dzIHJlbW90ZSBjb2RlIGV4ZWN1dGlvbiB0aHJvdWdoIGNyYWZ0ZWQgbG9nIG1lc3NhZ2VzLiIsInJlcXVpcmVkQWN0aW9uIjoiQXBwbHkgdXBkYXRlcyBwZXIgdmVuZG9yIGluc3RydWN0aW9ucy4iLCJkdWVEYXRlIjoiMjAyNi0wMi0wMSIsImtub3duUmFuc29td2FyZUNhbXBhaWduVXNlIjoiS25vd24iLCJub3RlcyI6IlN5bnRoZXRpYyB0ZXN0IGZpeHR1cmUgYmFzZWQgb24gdGhlIENJU0EgY2F0YWxvZyBmb3JtYXQuIiwiY3dlcyI6WyJDV0UtNTAyIl19XX0=",
+        "body_sha256": "4ddb9192a1d2c2c3b635ea9d82d9393c1ed70f4a49200591cb09003692e83c0e",
+        "received_at": "2026-01-14T12:00:42+00:00",
+        "request_id": "0c39fadf-3ec0-4ae6-8a63-26bec365a8a7",
+        "status_code": 200
+      },
+      {
+        "body_base64": "eyJ0b3RhbFJlc3VsdHMiOjIsInN0YXJ0SW5kZXgiOjAsInJlc3VsdHNQZXJQYWdlIjoyLCJ2dWxuZXJhYmlsaXRpZXMiOlt7ImN2ZSI6eyJ2dWxuU3RhdHVzIjoiQW5hbHl6ZWQiLCJkZXNjcmlwdGlvbnMiOlt7ImxhbmciOiJlbiIsInZhbHVlIjoiSW52ZW50ZWQgc3ludGhldGljIHZ1bG5lcmFiaWxpdHkifV0sImlkIjoiQ1ZFLTIwMjYtMTAwMSIsInB1Ymxpc2hlZCI6IjIwMjYtMDEtMDFUMDA6MDA6MDAuMDAwIiwibGFzdE1vZGlmaWVkIjoiMjAyNi0wMS0wMlQwMDowMDowMC4wMDAiLCJtZXRyaWNzIjp7fX19LHsiY3ZlIjp7InZ1bG5TdGF0dXMiOiJBbmFseXplZCIsImRlc2NyaXB0aW9ucyI6W3sibGFuZyI6ImVuIiwidmFsdWUiOiJJbnZlbnRlZCBzeW50aGV0aWMgdnVsbmVyYWJpbGl0eSJ9XSwiaWQiOiJDVkUtMjAyNi0xMDA2IiwicHVibGlzaGVkIjoiMjAyNi0wMS0wMVQwMDowMDowMC4wMDAiLCJsYXN0TW9kaWZpZWQiOiIyMDI2LTAxLTAyVDAwOjAwOjAwLjAwMCJ9fV19",
+        "body_sha256": "a473d05287be4b66d0ca79b3d993305e1f39537c360fdcb4995fc256e4cf1dc7",
+        "received_at": "2026-01-10T12:00:06+00:00",
+        "request_id": "12a653c5-4c90-4da4-bdc8-7be7d230acbe",
+        "status_code": 200
+      },
+      {
+        "body_base64": "eyJjb3VudCI6MSwidnVsbmVyYWJpbGl0aWVzIjpbeyJjdmVJRCI6IkNWRS0yMDI2LTEwMDIiLCJ2ZW5kb3JQcm9qZWN0IjoiQXBhY2hlIiwicHJvZHVjdCI6IkxvZzRqIiwidnVsbmVyYWJpbGl0eU5hbWUiOiJBcGFjaGUgTG9nNGoyIFJlbW90ZSBDb2RlIEV4ZWN1dGlvbiBWdWxuZXJhYmlsaXR5IiwiZGF0ZUFkZGVkIjoiMjAyNi0wMS0wMSIsInNob3J0RGVzY3JpcHRpb24iOiJBcGFjaGUgTG9nNGoyIGFsbG93cyByZW1vdGUgY29kZSBleGVjdXRpb24gdGhyb3VnaCBjcmFmdGVkIGxvZyBtZXNzYWdlcy4iLCJyZXF1aXJlZEFjdGlvbiI6IkFwcGx5IHVwZGF0ZXMgcGVyIHZlbmRvciBpbnN0cnVjdGlvbnMuIiwiZHVlRGF0ZSI6IjIwMjYtMDItMDEiLCJrbm93blJhbnNvbXdhcmVDYW1wYWlnblVzZSI6Iktub3duIiwibm90ZXMiOiJTeW50aGV0aWMgdGVzdCBmaXh0dXJlIGJhc2VkIG9uIHRoZSBDSVNBIGNhdGFsb2cgZm9ybWF0LiIsImN3ZXMiOlsiQ1dFLTUwMiJdfV19",
+        "body_sha256": "dc21efec08a309202bb76041c43d369d3fdd247997dae68f279d798d95513e61",
+        "received_at": "2026-01-10T12:00:33+00:00",
+        "request_id": "575fa1ab-b3de-4fef-a04a-950e69c1dba3",
+        "status_code": 200
+      },
+      {
+        "body_base64": "eyJjb3VudCI6MSwidnVsbmVyYWJpbGl0aWVzIjpbeyJjdmVJRCI6IkNWRS0yMDI2LTEwMDIiLCJ2ZW5kb3JQcm9qZWN0IjoiQXBhY2hlIiwicHJvZHVjdCI6IkxvZzRqIiwidnVsbmVyYWJpbGl0eU5hbWUiOiJBcGFjaGUgTG9nNGoyIFJlbW90ZSBDb2RlIEV4ZWN1dGlvbiBWdWxuZXJhYmlsaXR5IiwiZGF0ZUFkZGVkIjoiMjAyNi0wMS0wMSIsInNob3J0RGVzY3JpcHRpb24iOiJBcGFjaGUgTG9nNGoyIGFsbG93cyByZW1vdGUgY29kZSBleGVjdXRpb24gdGhyb3VnaCBjcmFmdGVkIGxvZyBtZXNzYWdlcy4iLCJyZXF1aXJlZEFjdGlvbiI6IkFwcGx5IHVwZGF0ZXMgcGVyIHZlbmRvciBpbnN0cnVjdGlvbnMuIiwiZHVlRGF0ZSI6IjIwMjYtMDItMDEiLCJrbm93blJhbnNvbXdhcmVDYW1wYWlnblVzZSI6Iktub3duIiwibm90ZXMiOiJTeW50aGV0aWMgdGVzdCBmaXh0dXJlIGJhc2VkIG9uIHRoZSBDSVNBIGNhdGFsb2cgZm9ybWF0LiIsImN3ZXMiOlsiQ1dFLTUwMiJdfV19",
+        "body_sha256": "dc21efec08a309202bb76041c43d369d3fdd247997dae68f279d798d95513e61",
+        "received_at": "2026-01-10T12:00:11+00:00",
+        "request_id": "64cddd20-aaec-41e2-8cb6-6d589ca022fd",
+        "status_code": 200
+      },
+      {
+        "body_base64": "eyJzdGF0dXMiOiJPSyIsInRvdGFsIjozLCJvZmZzZXQiOjAsImRhdGEiOlt7ImN2ZSI6IkNWRS0yMDI2LTEwMDIiLCJkYXRlIjoiMjAyNi0wMS0xNCIsImVwc3MiOiIwLjIwIiwicGVyY2VudGlsZSI6IjAuNSJ9LHsiY3ZlIjoiQ1ZFLTIwMjYtMTAwNSIsImRhdGUiOiIyMDI2LTAxLTE0IiwiZXBzcyI6IjAuMjAiLCJwZXJjZW50aWxlIjoiMC41In0seyJjdmUiOiJDVkUtMjAyNi0xMDA2IiwiZGF0ZSI6IjIwMjYtMDEtMTQiLCJlcHNzIjoiMCIsInBlcmNlbnRpbGUiOiIwLjUifV19",
+        "body_sha256": "408fe7c1980c69455afbf1f1da81a3f2c49bba642a8a54c1b409953c5b18066c",
+        "received_at": "2026-01-14T12:00:58+00:00",
+        "request_id": "678adec7-0892-446c-868b-d115d3ea574a",
+        "status_code": 200
+      },
+      {
+        "body_base64": "eyJjb3VudCI6MiwidnVsbmVyYWJpbGl0aWVzIjpbeyJjdmVJRCI6IkNWRS0yMDI2LTEwMDIiLCJ2ZW5kb3JQcm9qZWN0IjoiQXBhY2hlIiwicHJvZHVjdCI6IkxvZzRqIiwidnVsbmVyYWJpbGl0eU5hbWUiOiJBcGFjaGUgTG9nNGoyIFJlbW90ZSBDb2RlIEV4ZWN1dGlvbiBWdWxuZXJhYmlsaXR5IiwiZGF0ZUFkZGVkIjoiMjAyNi0wMS0wMSIsInNob3J0RGVzY3JpcHRpb24iOiJBcGFjaGUgTG9nNGoyIGFsbG93cyByZW1vdGUgY29kZSBleGVjdXRpb24gdGhyb3VnaCBjcmFmdGVkIGxvZyBtZXNzYWdlcy4iLCJyZXF1aXJlZEFjdGlvbiI6IkFwcGx5IHVwZGF0ZXMgcGVyIHZlbmRvciBpbnN0cnVjdGlvbnMuIiwiZHVlRGF0ZSI6IjIwMjYtMDItMDEiLCJrbm93blJhbnNvbXdhcmVDYW1wYWlnblVzZSI6Iktub3duIiwibm90ZXMiOiJTeW50aGV0aWMgdGVzdCBmaXh0dXJlIGJhc2VkIG9uIHRoZSBDSVNBIGNhdGFsb2cgZm9ybWF0LiIsImN3ZXMiOlsiQ1dFLTUwMiJdfSx7ImN2ZUlEIjoiQ1ZFLTIwMjYtMTAwMSIsInZlbmRvclByb2plY3QiOiJBcGFjaGUiLCJwcm9kdWN0IjoiTG9nNGoiLCJ2dWxuZXJhYmlsaXR5TmFtZSI6IkFwYWNoZSBMb2c0ajIgUmVtb3RlIENvZGUgRXhlY3V0aW9uIFZ1bG5lcmFiaWxpdHkiLCJkYXRlQWRkZWQiOiIyMDI2LTAxLTAxIiwic2hvcnREZXNjcmlwdGlvbiI6IkFwYWNoZSBMb2c0ajIgYWxsb3dzIHJlbW90ZSBjb2RlIGV4ZWN1dGlvbiB0aHJvdWdoIGNyYWZ0ZWQgbG9nIG1lc3NhZ2VzLiIsInJlcXVpcmVkQWN0aW9uIjoiQXBwbHkgdXBkYXRlcyBwZXIgdmVuZG9yIGluc3RydWN0aW9ucy4iLCJkdWVEYXRlIjoiMjAyNi0wMi0wMSIsImtub3duUmFuc29td2FyZUNhbXBhaWduVXNlIjoiS25vd24iLCJub3RlcyI6IlN5bnRoZXRpYyB0ZXN0IGZpeHR1cmUgYmFzZWQgb24gdGhlIENJU0EgY2F0YWxvZyBmb3JtYXQuIiwiY3dlcyI6WyJDV0UtNTAyIl19XX0=",
+        "body_sha256": "4ddb9192a1d2c2c3b635ea9d82d9393c1ed70f4a49200591cb09003692e83c0e",
+        "received_at": "2026-01-14T12:01:13+00:00",
+        "request_id": "69e8d7e5-419b-4a36-8791-983f426e23b4",
+        "status_code": 200
+      },
+      {
+        "body_base64": "eyJ0b3RhbFJlc3VsdHMiOjEsInN0YXJ0SW5kZXgiOjAsInJlc3VsdHNQZXJQYWdlIjoxLCJ2dWxuZXJhYmlsaXRpZXMiOlt7ImN2ZSI6eyJ2dWxuU3RhdHVzIjoiQW5hbHl6ZWQiLCJkZXNjcmlwdGlvbnMiOlt7ImxhbmciOiJlbiIsInZhbHVlIjoiSW52ZW50ZWQgc3ludGhldGljIHZ1bG5lcmFiaWxpdHkifV0sImlkIjoiQ1ZFLTIwMjYtMTAwNiIsInB1Ymxpc2hlZCI6IjIwMjYtMDEtMDFUMDA6MDA6MDAuMDAwIiwibGFzdE1vZGlmaWVkIjoiMjAyNi0wMS0wMlQwMDowMDowMC4wMDAifX1dfQ==",
+        "body_sha256": "5556b6c97c1fe2513ed0557caa4b5cf8ebf408d70b6c02cb90244b4bd2fa706d",
+        "received_at": "2026-01-14T12:01:08+00:00",
+        "request_id": "8c7178a0-a03c-483b-8fa0-02153fd0a2b4",
+        "status_code": 200
+      },
+      {
+        "body_base64": "eyJ0b3RhbFJlc3VsdHMiOjEsInN0YXJ0SW5kZXgiOjAsInJlc3VsdHNQZXJQYWdlIjoxLCJ2dWxuZXJhYmlsaXRpZXMiOlt7ImN2ZSI6eyJ2dWxuU3RhdHVzIjoiQW5hbHl6ZWQiLCJkZXNjcmlwdGlvbnMiOlt7ImxhbmciOiJlbiIsInZhbHVlIjoiSW52ZW50ZWQgc3ludGhldGljIHZ1bG5lcmFiaWxpdHkifV0sImlkIjoiQ1ZFLTIwMjYtMTAwNSIsInB1Ymxpc2hlZCI6IjIwMjYtMDEtMDFUMDA6MDA6MDAuMDAwIiwibGFzdE1vZGlmaWVkIjoiMjAyNi0wMS0wMlQwMDowMDowMC4wMDAifX1dfQ==",
+        "body_sha256": "d288ae1b09d038d85cc17b086474367c7326629575ab29845ede613ad249dc9a",
+        "received_at": "2026-01-14T12:01:06+00:00",
+        "request_id": "ab88080b-0a38-40dc-bd83-4722f2b1881e",
+        "status_code": 200
+      },
+      {
+        "body_base64": "eyJzdGF0dXMiOiJPSyIsInRvdGFsIjozLCJvZmZzZXQiOjAsImRhdGEiOlt7ImN2ZSI6IkNWRS0yMDI2LTEwMDIiLCJkYXRlIjoiMjAyNi0wMS0xMCIsImVwc3MiOiIwLjIwIiwicGVyY2VudGlsZSI6IjAuNSJ9LHsiY3ZlIjoiQ1ZFLTIwMjYtMTAwNSIsImRhdGUiOiIyMDI2LTAxLTEwIiwiZXBzcyI6IjAuMjAiLCJwZXJjZW50aWxlIjoiMC41In0seyJjdmUiOiJDVkUtMjAyNi0xMDA2IiwiZGF0ZSI6IjIwMjYtMDEtMTAiLCJlcHNzIjoiMCIsInBlcmNlbnRpbGUiOiIwLjUifV19",
+        "body_sha256": "c6dbbabe35193b8b10b342cd9cf16951c10672daca8c9cdc24a1c263d65b2d8c",
+        "received_at": "2026-01-10T12:00:20+00:00",
+        "request_id": "c22633e7-c4f5-4159-886e-d8af0d4c5cfa",
+        "status_code": 200
+      },
+      {
+        "body_base64": "eyJ0b3RhbFJlc3VsdHMiOjIsInN0YXJ0SW5kZXgiOjAsInJlc3VsdHNQZXJQYWdlIjoyLCJ2dWxuZXJhYmlsaXRpZXMiOlt7ImN2ZSI6eyJ2dWxuU3RhdHVzIjoiQW5hbHl6ZWQiLCJkZXNjcmlwdGlvbnMiOlt7ImxhbmciOiJlbiIsInZhbHVlIjoiSW52ZW50ZWQgc3ludGhldGljIHZ1bG5lcmFiaWxpdHkifV0sImlkIjoiQ1ZFLTIwMjYtMTAwMiIsInB1Ymxpc2hlZCI6IjIwMjYtMDEtMDFUMDA6MDA6MDAuMDAwIiwibGFzdE1vZGlmaWVkIjoiMjAyNi0wMS0wMlQwMDowMDowMC4wMDAifX0seyJjdmUiOnsidnVsblN0YXR1cyI6IkFuYWx5emVkIiwiZGVzY3JpcHRpb25zIjpbeyJsYW5nIjoiZW4iLCJ2YWx1ZSI6IkludmVudGVkIHN5bnRoZXRpYyB2dWxuZXJhYmlsaXR5In1dLCJpZCI6IkNWRS0yMDI2LTEwMDEiLCJwdWJsaXNoZWQiOiIyMDI2LTAxLTAxVDAwOjAwOjAwLjAwMCIsImxhc3RNb2RpZmllZCI6IjIwMjYtMDEtMDJUMDA6MDA6MDAuMDAwIiwibWV0cmljcyI6e319fV19",
+        "body_sha256": "1b56748910a601adbb4f0c89d7300bfab258beaee37504de78ece1384ee32f4a",
+        "received_at": "2026-01-14T12:01:04+00:00",
+        "request_id": "eca5a5c4-c263-4d78-8ef4-fc56c0ecf61a",
+        "status_code": 200
+      }
+    ],
+    "run_members": [
+      {
+        "cve_id": "CVE-2026-1001",
+        "run_id": 1
+      },
+      {
+        "cve_id": "CVE-2026-1002",
+        "run_id": 1
+      },
+      {
+        "cve_id": "CVE-2026-1005",
+        "run_id": 1
+      },
+      {
+        "cve_id": "CVE-2026-1006",
+        "run_id": 1
+      },
+      {
+        "cve_id": "CVE-2026-1001",
+        "run_id": 2
+      },
+      {
+        "cve_id": "CVE-2026-1002",
+        "run_id": 2
+      },
+      {
+        "cve_id": "CVE-2026-1005",
+        "run_id": 2
+      },
+      {
+        "cve_id": "CVE-2026-1006",
+        "run_id": 2
+      }
+    ],
+    "runs": [
+      {
+        "cohort_id": "5afd48bf-d3dc-5378-9222-8faf1a563e9e",
+        "error_type": null,
+        "finished_at": "2026-01-10T12:00:37+00:00",
+        "kind": "enrollment",
+        "run_date": "2026-01-10",
+        "run_id": 1,
+        "started_at": "2026-01-10T12:00:01+00:00",
+        "status": "succeeded"
+      },
+      {
+        "cohort_id": null,
+        "error_type": null,
+        "finished_at": "2026-01-14T12:01:17+00:00",
+        "kind": "daily",
+        "run_date": "2026-01-14",
+        "run_id": 2,
+        "started_at": "2026-01-14T12:00:38+00:00",
+        "status": "succeeded"
+      }
+    ]
+  }
+}

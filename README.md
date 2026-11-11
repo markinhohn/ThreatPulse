@@ -387,7 +387,7 @@ remains pending; dashboard priority explanations remain in Phase 5.
 ### Phase 4B — Machine Learning Research and Integration
 
 - [x] Define the prediction target, dataset contract, and evaluation plan
-- [ ] Track a defined NVD non-KEV cohort alongside KEV with immutable daily history
+- [x] Track a defined NVD non-KEV cohort alongside KEV with immutable daily history
 - [ ] Build versioned features available at prediction time and censored 30-day labels
 - [ ] Train scikit-learn logistic regression and gradient boosting models
 - [ ] Validate on later unseen CVEs against EPSS and baseline priority rules
@@ -396,8 +396,10 @@ remains pending; dashboard priority explanations remain in Phase 5.
 - [ ] Integrate a validated advisory model with KEV overrides and baseline fallback
 - [ ] Monitor drift, coverage, calibration, and model availability
 
-The next task is to track a defined NVD non-KEV cohort alongside KEV with immutable
-daily history. The baseline engine is available as a benchmark and fallback.
+The [longitudinal collector](docs/longitudinal-tracking.md) now freezes publication
+cohorts, exclusions, source versions, daily coverage, and KEV reference history.
+The next task is to build versioned features available at prediction time and
+censored 30-day labels. The baseline engine is available as a benchmark and fallback.
 Training depends on mature outcome labels; model adoption depends on held-out
 evaluation and an implemented baseline engine. See [the ML study design](docs/ml-study-design.md).
 
@@ -408,9 +410,15 @@ evaluation and an implemented baseline engine. See [the ML study design](docs/ml
 - [x] CVE detail pages
 - [x] KEV analytics
 - [x] EPSS analytics
+- [x] Scanner/format selector and native Nessus, OpenVAS, and Nmap imports
+- [x] Asset/CVE review worklists with reasons, evidence, and CSV/JSON exports
+- [x] Offline synthetic scanner demos and saved import/assessment history
 - [ ] Threat Velocity visualization
 - [ ] Explain priority tiers with source freshness, coverage, and decision reasons
 - [ ] Display validated model advice with its target, version, and limitations
+- [ ] Add advisory product/CPE/version-to-CVE matching for service-only imports
+- [ ] Add owner/status workflows and coverage-aware rescan comparison
+- [ ] Extend scanner adapters to additional enterprise and package scanners
 
 ### Phase 6 — Threat Intelligence
 
@@ -489,6 +497,21 @@ threatpulse/
 
 ## Running ThreatPulse
 
+For a quick scanner demo, install the locked dependencies and start Streamlit:
+
+```bash
+uv sync --locked
+uv run --locked streamlit run src/threatpulse/dashboard.py \
+  --server.address=127.0.0.1 --server.port=8501 --browser.gatherUsageStats=false
+```
+
+Open `http://localhost:8501`, choose **Scanner** and **Export format**, and click
+**Load synthetic sample**. This default **Scan imports** workspace runs without
+a database or API keys. You can also upload native Nessus XML/CSV, OpenVAS XML/CSV,
+or Nmap XML, inspect evidence, and download an asset review worklist. PostgreSQL
+enables saved imports and explicit public CVE enrichment. See
+[the scanner guide](docs/scan-imports.md) for formats, limits, and replay.
+
 The current command-line pipeline collects CISA KEV, stores it in PostgreSQL,
 and enriches stored CVEs with EPSS and NVD data. Python 3.12, uv, Docker Engine,
 and Docker Compose are required. See the [development guide](docs/development.md)
@@ -516,8 +539,9 @@ uv run --locked streamlit run src/threatpulse/dashboard.py \
   --server.headless=true --browser.gatherUsageStats=false
 ```
 
-The dashboard provides an overview, filtered vulnerability explorer, CVE
-details with EPSS history, and dedicated KEV/EPSS descriptive analytics.
+Choose **Vulnerability intelligence** in the sidebar for an overview, filtered
+vulnerability explorer, CVE details with EPSS history, and dedicated KEV/EPSS
+descriptive analytics.
 Run `uv run --locked python -m threatpulse.storage ingest-daily` for checkpointed
 daily collection with KEV/NVD snapshots. See [scheduling and recovery](docs/scheduling.md)
 for the systemd timer, retries, and run inspection.
@@ -557,6 +581,13 @@ Use `--previous PRIOR_ANALYSIS_JSON` on subsequent runs to preserve downgrade
 review state. [The engine guide](docs/prioritization.md) includes the synthetic
 demo and approval workflow. [The ML study design](docs/ml-study-design.md) defines the separate
 data collection, training, validation, and advisory integration milestones.
+
+Use `python -m threatpulse.tracking enroll` with an explicit publication interval
+to define a separate prospective research cohort,
+then `python -m threatpulse.tracking run` for immutable daily EPSS/NVD/KEV
+monitoring. [The tracking guide](docs/longitudinal-tracking.md) explains recovery,
+source timing, request budgets, the optional timer, and offline coverage exports.
+It does not create training features, outcome labels, or fitted models.
 
 ---
 

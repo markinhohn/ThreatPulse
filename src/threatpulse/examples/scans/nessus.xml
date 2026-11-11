@@ -1,0 +1,6 @@
+<?xml version="1.0"?><NessusClientData_v2><Report name="Synthetic demonstration">
+<ReportHost name="192.0.2.10"><HostProperties><tag name="host-ip">192.0.2.10</tag><tag name="host-fqdn">lab-web.example.test</tag><tag name="HOST_END_TIMESTAMP">1768042800</tag><tag name="Credentialed_Scan">true</tag></HostProperties>
+<ReportItem pluginID="90001" pluginName="Invented web finding" port="443" protocol="tcp" severity="3"><cve>CVE-2026-3001</cve><cve>CVE-2026-3002</cve><description>Synthetic scanner finding, not a real advisory.</description><solution>Verify installed package and apply the vendor update in this lab scenario.</solution><plugin_output>Invented package evidence.</plugin_output><cvss3_base_score>7.5</cvss3_base_score><cvss3_vector>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N</cvss3_vector></ReportItem>
+</ReportHost><ReportHost name="192.0.2.20"><HostProperties><tag name="HOST_END_TIMESTAMP">1768042800</tag></HostProperties>
+<ReportItem pluginID="90002" pluginName="Invented moderate finding" port="80" protocol="tcp" severity="2"><cve>CVE-2026-3003</cve><solution>Review the lab package update.</solution></ReportItem>
+<ReportItem pluginID="90003" pluginName="Invented TLS configuration finding" port="443" protocol="tcp" severity="3"><solution>Review the lab TLS configuration.</solution></ReportItem></ReportHost></Report></NessusClientData_v2>

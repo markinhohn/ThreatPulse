@@ -149,6 +149,14 @@ def main():
         "Known exploited vulnerabilities, severity, and exploitation probability"
     )
     database_url = os.environ.get("DATABASE_URL")
+    workspace = st.sidebar.radio(
+        "Workspace", ["Scan imports", "Vulnerability intelligence"], key="workspace"
+    )
+    if workspace == "Scan imports":
+        from threatpulse.scan_dashboard import show_scan_imports
+
+        show_scan_imports(database_url)
+        return
     if not database_url:
         st.error(
             "Set DATABASE_URL before starting the dashboard. See docs/development.md."

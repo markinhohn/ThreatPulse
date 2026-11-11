@@ -11,7 +11,8 @@ uv run --locked ruff format --check .
 
 `uv sync` installs the package in editable mode and includes development tools.
 Application code belongs in `src/threatpulse/`; tests belong in `tests/`.
-Pydantic validates the data models. There are no running services yet.
+Pydantic validates the data models. The scanner preview runs without services;
+PostgreSQL supports stored intelligence and saved imports.
 
 To add a dependency, use `uv add <package>` (or `uv add --dev <package>`
 for a development tool), and commit both `pyproject.toml` and `uv.lock`.
@@ -433,3 +434,38 @@ evidence is carried forward, missing prior-cohort CVEs stay visible, and weaker
 candidates retain the prior tier until an evidence-bound recorded review.
 [The engine guide](prioritization.md) covers review records, frozen-source replay,
 availability and freshness, audited source corrections, and operational limits.
+
+## Prospective cohort monitoring
+
+Migration 6 adds append-only research tables, separate from dashboard CVEs and
+frozen comparison studies. Use `python -m threatpulse.tracking enroll` to collect
+a complete bounded NVD publication census, `run` to monitor the frozen registry
+daily, and `export` to inspect/replay source history and coverage. Existing
+`DATABASE_URL` and optional `NVD_API_KEY` configuration is reused.
+
+The workflow freezes raw public responses, normalized records, explicit missing
+results, exclusions, capture/availability times, and source checkpoints. HTTP
+requests are journaled before sending; credentials/headers and error bodies are
+omitted. Failed/interrupted runs resume without rewriting committed history.
+Database triggers reject ordinary updates, deletions, and truncations of evidence.
+
+[The tracking guide](longitudinal-tracking.md) documents enrollment definitions,
+request budgets, collection ordering, a separate optional systemd timer, and
+offline replay. Keep collectors under the shared ingestion lock; integration
+tests use real isolated PostgreSQL schemas and source clients over mocked HTTP.
+Feature construction, prediction samples, censored labels, and scikit-learn
+training remain subsequent milestones.
+
+## Scanner import workspace
+
+The dashboard defaults to **Scan imports**, with scanner and format selectors,
+file preview, packaged synthetic samples, and an asset/CVE review worklist.
+Choose **Vulnerability intelligence** in the sidebar to access existing database
+analytics. [The scanner guide](scan-imports.md) documents Nessus/OpenVAS XML/CSV,
+Nmap XML, scanner evidence versus intelligence priority, input limits, and the CLI.
+
+`scan_import.py` owns the shared model and native adapters; `scan_worklist.py`
+joins public intelligence and exports/persists assessments; `scan_dashboard.py`
+implements the user flow. Migration 7 adds separate immutable scan/assessment
+tables. The defusedxml dependency blocks entity expansion while accepting ordinary
+Nmap DOCTYPE declarations. Upload/preview does not contact scanned hosts or APIs.

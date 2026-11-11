@@ -250,5 +250,6 @@ state that distinction and document training/evaluation data and limitations.
 
 See [decision 011](decisions/011-prioritization-methodology.md) for the design
 choice and roadmap dependencies, and [decision 013](decisions/013-baseline-priority-engine.md)
-for the implementation. The next roadmap task is the defined NVD non-KEV cohort
-with immutable daily history. Model training still requires mature outcome labels.
+for the implementation. The [longitudinal collector](longitudinal-tracking.md)
+now tracks a defined NVD non-KEV cohort with immutable daily history. Versioned
+features and censored outcome labels are next; training still requires mature labels.

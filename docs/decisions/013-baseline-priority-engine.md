@@ -39,6 +39,7 @@ checksums. Require a new output directory. Ship a synthetic demo covering every
 queue and test the documented scenarios, boundary/availability cases, correction
 and review safeguards, read-only database snapshots, and deterministic replay.
 
-See [the guide](../prioritization.md). Immutable non-KEV cohort tracking is next;
+See [the guide](../prioritization.md). Immutable non-KEV cohort tracking is
+implemented in [decision 014](014-longitudinal-cohort-tracking.md);
 prospective validation, dashboard integration, and advisory local ML remain
 separate roadmap milestones.

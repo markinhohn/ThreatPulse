@@ -1,0 +1,18 @@
+[Unit]
+Description=ThreatPulse prospective cohort and KEV reference monitoring
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=12h
+StartLimitBurst=4
+
+[Service]
+Type=oneshot
+User=threatpulse
+WorkingDirectory=/opt/ThreatPulse
+EnvironmentFile=/etc/threatpulse/ingestion.env
+ExecStart=/opt/ThreatPulse/.venv/bin/python -m threatpulse.tracking run
+TimeoutStartSec=8h
+Restart=on-failure
+RestartSec=15min
+UMask=0077
+NoNewPrivileges=true

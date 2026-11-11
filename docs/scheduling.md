@@ -1,5 +1,9 @@
 # Daily ingestion and recovery
 
+This schedule maintains dashboard storage. Separate prospective research cohorts
+use [the longitudinal tracking service](longitudinal-tracking.md); enabling one
+timer does not activate the other. Both use the same overlap-prevention lock.
+
 Run from the installed repository with DATABASE_URL exported:
 
 ```bash

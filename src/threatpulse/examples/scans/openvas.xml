@@ -1,0 +1,4 @@
+<?xml version="1.0"?><get_reports_response status="200"><report><report id="synthetic-report"><scan_end>2026-01-10T11:00:00Z</scan_end><result_count><full>3</full><filtered>2</filtered></result_count><results>
+<result id="example-1"><name>Invented lower signal finding</name><host>192.0.2.30<hostname>lab-app.example.test</hostname></host><port>443/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.990001"><refs><ref type="cve" id="CVE-2026-3004"/></refs><tags>summary=Synthetic finding|solution=Review the lab package.</tags></nvt><threat>Low</threat><severity>1.6</severity><qod><value>80</value></qod><description>Invented evidence.</description></result>
+<result id="example-2"><name>Invented incomplete intelligence finding</name><host>192.0.2.30</host><port>general/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.990002"><cve>CVE-2026-3005</cve></nvt><threat>High</threat><severity>7.5</severity><qod><value>70</value></qod></result>
+</results></report></report></get_reports_response>

@@ -1,9 +1,10 @@
 # ML study design v0.1
 
-Status: accepted prospective design. No local classifier, longitudinal non-KEV
-collector, feature builder, or model-serving path is implemented by this task.
-The existing frozen comparison studies and KEV-based daily history are useful
-research inputs, but do not provide the complete longitudinal training set.
+Status: accepted prospective design, with the
+[longitudinal collection milestone implemented](longitudinal-tracking.md).
+Feature construction, index samples, censored outcome labels, local classifiers,
+and model serving remain planned. Collected source history alone is not a
+complete training set.
 
 ## Research question and target
 
@@ -48,12 +49,13 @@ CVEs. Record source/vendor/age/analysis-status coverage and selection effects.
 Historical NVD metrics fetched now cannot become features for an old prediction
 date. Backdated daily run labels do not reconstruct past KEV membership.
 
-The upcoming collector should use the existing source validation, bounded
-requests, pacing, shared ingestion lock, source checkpoints, and atomic recovery
-patterns. It needs its own cohort/observation storage; inserting every non-KEV
-CVE into the existing KEV dashboard tables would change their meaning. A failed
-or missing source is a recorded coverage state, not a fabricated observation.
-Source checkpoints remain recoverable without overwriting prior versions.
+The collector uses existing source validation, bounded requests, pacing, shared
+ingestion lock, source checkpoints, and atomic recovery patterns. Migration 6
+provides separate cohort/observation storage, without inserting non-KEV CVEs into
+the existing dashboard tables. Failed, missing, and unattempted sources have
+distinct coverage states. Checkpoints recover without overwriting versions.
+Enrollment records an absence boundary; actual index predictions and their
+feature/label dataset remain the next milestone.
 
 ## Dataset contract and prediction boundary
 
@@ -234,7 +236,7 @@ evaluation before treating their scores as validated probabilities.
 
 The roadmap explicitly separates cohort tracking, dataset construction, training,
 validation, experiment/model publication, advisory integration, and monitoring.
-Collection is the next roadmap task after the implemented baseline engine.
+Collection is implemented; versioned feature and censored-label construction is next.
 Training needs mature labels; integration needs both accepted model evidence and
 a working baseline. See [the prioritization methodology](prioritization-methodology.md)
 and [decision 011](decisions/011-prioritization-methodology.md).

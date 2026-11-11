@@ -1,0 +1,3 @@
+Plugin ID,CVE,Risk,Host,Protocol,Port,Name,Solution,Plugin Output,CVSS v3.0 Base Score
+90001,"CVE-2026-3001, CVE-2026-3002",High,192.0.2.10,tcp,443,Invented web finding,Review the lab package.,Invented evidence.,7.5
+90003,,High,192.0.2.20,tcp,443,Invented TLS configuration,Review lab TLS settings.,,
