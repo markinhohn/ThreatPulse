@@ -166,9 +166,10 @@ an HTTP failure, inconsistent date, invalid score, duplicate response, or partia
 API page prevents any EPSS observations from being written.
 
 Allow HTTPS access to `api.first.org`; no API key is required. Requests retain
-TLS verification and have 30-second per-operation timeouts. There is no automatic
-retry or daily scheduler. Run enrichment on each desired date to build history;
-this does not automatically backfill dates or retain changes to KEV attributes.
+TLS verification and have 30-second per-operation timeouts. The daily runner provides checkpointed retries through the documented scheduler;
+see [scheduling and recovery](scheduling.md). Run enrichment on each desired date to build history;
+this does not automatically backfill dates. The daily runner also retains KEV/NVD
+observations.
 
 Inspect coverage by date:
 
@@ -333,6 +334,102 @@ These views describe the stored KEV-based dataset; they do not establish a
 KEV/non-KEV comparison or generalize to all vulnerabilities. Dates may differ
 across latest-score distributions and scatter points. Historical comparisons do
 not normalize by elapsed days, interpolate gaps, or account for EPSS model
-version changes. They are descriptive deltas, not the planned Threat Velocity
-methodology. Current KEV membership and preferred NVD metrics are not historical
-snapshots. See [the analytics decision](decisions/006-kev-epss-analytics.md).
+version changes. They are descriptive deltas, not the separate Threat Velocity
+methodology. These analytics use current KEV membership and preferred NVD metrics; daily
+historical snapshots are stored separately. See [the analytics decision](decisions/006-kev-epss-analytics.md).
+
+## Reproducible exploratory reports
+
+Run `uv run --locked python -m threatpulse.exploration --output data/exploration`
+with DATABASE_URL configured to export a standalone report from existing data.
+See [the analysis guide](exploration.md) for common-date coverage, version-specific
+associations, historical comparisons, offline replay, and limitations. This
+command reads a consistent database snapshot and does not ingest or migrate.
+
+If the cloud home directory is read-only, use writable plotting caches:
+
+```bash
+export MPLCONFIGDIR=/tmp/threatpulse-mpl-cache
+export XDG_CACHE_HOME=/tmp/threatpulse-cache
+```
+
+## KEV versus non-KEV studies
+
+The [comparison guide](comparison.md) documents NVD publication-window collection,
+one-date EPSS enrichment for both groups, separate frozen PostgreSQL study
+storage, distribution reports, and offline replay. Collection uses the same
+ingestion lock as daily/manual commands. The current dashboard cohort is kept
+separate from study data.
+
+## Historical vulnerability trends
+
+Run `uv run --locked python -m threatpulse.trends --output data/trends` after
+collecting history with the daily runner. This reads KEV/NVD snapshots and all
+stored EPSS dates in one consistent read-only transaction; it never collects
+data or runs migrations. The [trend guide](trends.md) documents date windows,
+coverage, metric comparability, missing calendar dates, standalone charts, and
+offline replay. An empty database produces an explicit insufficient-history
+report. The checked roadmap item means the analysis workflow is implemented;
+real conclusions still require repeated source captures and adequate coverage.
+
+## Statistical comparison reports
+
+Run this command on a frozen comparison study:
+
+```bash
+uv run --locked python -m threatpulse.statistics \
+  --input SOURCE_JSON --output data/statistical-comparison
+```
+
+Alternatively, supply `--study-id STUDY_UUID` with `DATABASE_URL` configured. The
+[statistical guide](statistical-testing.md) documents the five planned endpoints,
+minimum scored samples, tied-rank permutation tests, effect sizes, nominal
+bootstrap intervals, Holm correction, reproducible settings, and observational
+assumptions. The command reads existing data without collection or migration.
+
+## Prioritization and machine learning design
+
+[The baseline methodology](prioritization-methodology.md) specifies review tiers,
+source freshness, missing/conflicting evidence, trend promotion, and worked
+examples. Its JSON references document the versioned rules implemented by
+`threatpulse.priority`; tests exercise every worked scenario. The engine freezes
+its executable policy in each report, rather than loading editable policy JSON.
+
+[The ML study design](ml-study-design.md) defines the separate prospective
+non-KEV cohort, immutable available-at features, 30-day observed-listing labels,
+censoring, temporal validation, and advisory model adoption. Scikit-learn remains
+planned, with no fitted local model or training dataset yet. Follow the roadmap's
+explicit collection, dataset, training, validation, publication, integration,
+and monitoring tasks; baseline delivery does not depend on a learned model.
+
+## Threat Velocity reports
+
+Run `uv run --locked python -m threatpulse.velocity --output data/velocity`
+for descriptive EPSS rates and quality-gated rising signals. This reads stored
+history without collection/migration and exports frozen inputs, policy thresholds,
+JSON/CSV tables, a standalone HTML report, SVG/PNG charts, and an integrity manifest.
+[The guide](threat-velocity.md) documents reviewed model-regime declarations,
+source availability, UTC freshness, gaps, synthetic examples, and offline replay.
+An empty model registry permits descriptive output but disables promotion; the
+current EPSS tables cannot prove shared model identity or all earlier revisions.
+
+## Baseline prioritization reports
+
+Run `uv run --locked python -m threatpulse.priority --output data/priority`
+to evaluate stored evidence in a consistent read-only transaction. It publishes
+six visible queues, full JSON/CSV decisions, frozen inputs, executable policy,
+and a checksum manifest. No schema migration, collector call, or new key is needed.
+
+Run the public synthetic example without a database:
+
+```sh
+uv run --locked python -m threatpulse.priority \
+  --input tests/fixtures/priority_dataset.json --output data/priority-demo
+```
+
+Supply `--previous PREVIOUS_REPORT/analysis.json` on each subsequent evaluation;
+priority state lives in report files rather than PostgreSQL. Historical CISA
+evidence is carried forward, missing prior-cohort CVEs stay visible, and weaker
+candidates retain the prior tier until an evidence-bound recorded review.
+[The engine guide](prioritization.md) covers review records, frozen-source replay,
+availability and freshness, audited source corrections, and operational limits.

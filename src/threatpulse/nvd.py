@@ -3,7 +3,8 @@
 import os
 import time
 from copy import deepcopy
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime, timedelta
+from datetime import time as datetime_time
 from decimal import Decimal
 from typing import Annotated, Any, Literal
 
@@ -345,3 +346,99 @@ def collect_nvd(
         records=[records[cve_id] for cve_id in sorted(records)],
         missing_cves=sorted(ids - records.keys()),
     )
+
+
+def collect_nvd_window(
+    published_start: date,
+    published_end: date,
+    *,
+    max_records: int = 10000,
+    api_key: str | None = None,
+    client: httpx.Client | None = None,
+    timeout: float = 30.0,
+    sleep=time.sleep,
+    clock=time.monotonic,
+) -> NvdBatch:
+    """Collect ALL NVD CVEs published in [start, end), at UTC midnight.
+
+    The window is bounded by NVD's 120-day API maximum. The record cap is a
+    rejection threshold, never a truncation or a first-page sample. Every page
+    and record must validate before a batch is returned. No KEV filter is used.
+    """
+    days = (published_end - published_start).days
+    if not 0 < days <= 120:
+        raise ValueError("Publication window must be between 1 and 120 days")
+    if type(max_records) is not int or max_records <= 0 or timeout <= 0:
+        raise ValueError("max_records and timeout must be positive")
+    if api_key is None:
+        api_key = os.environ.get("NVD_API_KEY") or None
+    if client is None:
+        with httpx.Client() as owned_client:
+            return collect_nvd_window(
+                published_start,
+                published_end,
+                max_records=max_records,
+                api_key=api_key,
+                client=owned_client,
+                timeout=timeout,
+                sleep=sleep,
+                clock=clock,
+            )
+    start_time = datetime.combine(published_start, datetime_time(), tzinfo=UTC)
+    end_time = datetime.combine(published_end, datetime_time(), tzinfo=UTC)
+    params = {
+        "pubStartDate": start_time.isoformat(timespec="milliseconds"),
+        "pubEndDate": (end_time - timedelta(milliseconds=1)).isoformat(
+            timespec="milliseconds"
+        ),
+        "resultsPerPage": "2000",
+    }
+    requests = _NvdRequests(client, api_key, timeout, sleep, clock)
+    records = {}
+    start, total = 0, None
+    ingested_at = datetime.now(UTC)
+    while True:
+        payload, source_url = requests.fetch({**params, "startIndex": str(start)})
+        if (
+            not isinstance(payload, dict)
+            or type(payload.get("totalResults")) is not int
+            or payload["totalResults"] < 0
+            or type(payload.get("startIndex")) is not int
+            or payload["startIndex"] != start
+            or type(payload.get("resultsPerPage")) is not int
+            or not 0 <= payload["resultsPerPage"] <= 2000
+            or not isinstance(payload.get("vulnerabilities"), list)
+        ):
+            raise NvdCollectionError("Invalid NVD publication-window envelope")
+        observed_total = payload["totalResults"]
+        if observed_total > max_records:
+            raise NvdCollectionError(
+                "NVD window exceeds max_records; narrow the window"
+            )
+        if total is not None and total != observed_total:
+            raise NvdCollectionError("NVD window changed during pagination; retry")
+        total = observed_total
+        rows = payload["vulnerabilities"]
+        page_size = payload["resultsPerPage"]
+        if (
+            start > total
+            or (start < total and page_size == 0)
+            or len(rows) != min(page_size, total - start)
+        ):
+            raise NvdCollectionError("Incomplete NVD publication-window page")
+        for wrapper in rows:
+            try:
+                record = parse_nvd_record(
+                    wrapper["cve"], source_url=source_url, ingested_at=ingested_at
+                )
+                if not start_time <= record.published_at < end_time:
+                    raise ValueError("CVE outside publication window")
+                if record.cve_id in records:
+                    raise ValueError("Duplicate CVE across NVD pages")
+                records[record.cve_id] = record
+            except (ValueError, KeyError, TypeError, AttributeError) as exc:
+                raise NvdCollectionError("NVD window record failed validation") from exc
+        start += len(rows)
+        if start == total:
+            break
+    return NvdBatch(records=[records[key] for key in sorted(records)], missing_cves=[])

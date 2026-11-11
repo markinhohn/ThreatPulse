@@ -29,6 +29,11 @@ The initial development focus is:
 
 Future versions will introduce IOC intelligence, workflow automation, asset-aware prioritization, and automated security reporting.
 
+The baseline prioritization engine implements the documented policy with source
+freshness checks, quality flags, Threat Velocity promotion, and reviewed
+downgrades. Its replayable reports include decision reasons and limitations.
+Locally trained ML models remain planned.
+
 ---
 
 ## Project Goals
@@ -147,6 +152,11 @@ The project will analyze relationships between:
 - Scikit-learn
 - Jupyter
 
+Scikit-learn is planned for logistic regression and gradient boosting experiments
+on longitudinal KEV/non-KEV data. It is not yet a project dependency. Its role,
+prediction target, evaluation, and adoption criteria are defined in
+[the ML study design](docs/ml-study-design.md).
+
 ### Visualization
 
 - Streamlit
@@ -200,7 +210,8 @@ The analytics layer will investigate questions such as:
 
 ### Threat Velocity
 
-ThreatPulse will track changes in exploitation probability over time.
+ThreatPulse tracks dated EPSS observations and calculates changes in exploitation
+probability over time.
 
 Example:
 
@@ -210,41 +221,35 @@ CVE-XXXX-XXXX
 EPSS
 
 Day 1      4%
-Day 3      8%
-Day 5     21%
-Day 7     49%
-Day 9     81%
+Day 2      8%
+Day 3     21%
+Day 5     49%
+Day 7     81%
 
-Threat Velocity: RAPIDLY INCREASING
+Threat Velocity: RISING (illustrative)
 ```
 
-This feature is intended to help identify vulnerabilities whose exploitation signals are changing rapidly rather than relying only on static scores.
+The calculation reports EPSS change in percentage points per day, with coverage,
+freshness, and model-regime comparability checks. The example assumes those
+checks pass. See [the Threat Velocity guide](docs/threat-velocity.md) for the
+read-only command, model-review requirements, and reproducible outputs.
 
 ---
 
 ### Threat Prioritization
 
-ThreatPulse will develop a prioritization model using multiple security signals.
+The baseline will assign explainable intelligence review tiers using ordered
+rules over known exploitation, EPSS probability, CVSS severity, and qualified
+historical trends. Later asset-aware analysis will add applicability, internet
+exposure, and business criticality to support a remediation queue.
 
-Potential factors include:
-
-```text
-Vulnerability Severity
-        +
-Exploitation Probability
-        +
-Known Exploitation
-        +
-Threat Velocity
-        +
-Internet Exposure
-        +
-Asset Criticality
-        ↓
-ThreatPulse Priority
-```
-
-The purpose is not to replace existing security scoring systems, but to provide additional context for vulnerability prioritization.
+[The prioritization methodology](docs/prioritization-methodology.md) defines
+transparent baseline tiers, data-quality rules, provisional trend promotion,
+and worked examples. [The engine guide](docs/prioritization.md) explains database
+evaluation, the synthetic demo, offline replay, and recorded downgrade reviews.
+A future learned score will be evaluated against this
+baseline and EPSS before advisory integration. KEV inclusion predictions will
+be labeled separately from EPSS exploitation probabilities.
 
 ---
 
@@ -355,23 +360,46 @@ The eventual goal is to produce an actionable remediation queue based on vulnera
 - [x] Integrate CISA KEV
 - [x] Normalize vulnerability records
 - [x] Implement data validation
-- [ ] Store vulnerability history
+- [x] Store vulnerability history
 
 ### Phase 3 — Analytics
 
-- [ ] Exploratory data analysis
-- [ ] KEV vs. non-KEV comparison
-- [ ] CVSS vs. EPSS analysis
-- [ ] Vulnerability trend analysis
-- [ ] Statistical testing
-- [ ] Historical EPSS analysis
+- [x] Exploratory data analysis
+- [x] KEV vs. non-KEV comparison
+- [x] CVSS vs. EPSS analysis
+- [x] Vulnerability trend analysis
+- [x] Statistical testing
+- [x] Historical EPSS analysis
 
 ### Phase 4 — Prioritization
 
-- [ ] Develop prioritization methodology
-- [ ] Implement Threat Velocity
-- [ ] Build prioritization engine
-- [ ] Document model assumptions and limitations
+- [x] Develop prioritization methodology
+- [x] Implement Threat Velocity
+- [x] Build prioritization engine
+- [x] Document baseline policy assumptions and limitations
+
+The engine applies versioned provisional rules and quality-gated Threat Velocity
+signals, preserving prior tiers until matching downgrade reviews. See
+[the engine guide](docs/prioritization.md) and
+[the methodology](docs/prioritization-methodology.md). Prospective risk validation
+remains pending; dashboard priority explanations remain in Phase 5.
+
+### Phase 4B — Machine Learning Research and Integration
+
+- [x] Define the prediction target, dataset contract, and evaluation plan
+- [ ] Track a defined NVD non-KEV cohort alongside KEV with immutable daily history
+- [ ] Build versioned features available at prediction time and censored 30-day labels
+- [ ] Train scikit-learn logistic regression and gradient boosting models
+- [ ] Validate on later unseen CVEs against EPSS and baseline priority rules
+- [ ] Evaluate calibration, missingness, subgroup performance, and incremental value
+- [ ] Publish reproducible experiments, dataset examples, and model cards
+- [ ] Integrate a validated advisory model with KEV overrides and baseline fallback
+- [ ] Monitor drift, coverage, calibration, and model availability
+
+The next task is to track a defined NVD non-KEV cohort alongside KEV with immutable
+daily history. The baseline engine is available as a benchmark and fallback.
+Training depends on mature outcome labels; model adoption depends on held-out
+evaluation and an implemented baseline engine. See [the ML study design](docs/ml-study-design.md).
 
 ### Phase 5 — Dashboard
 
@@ -381,6 +409,8 @@ The eventual goal is to produce an actionable remediation queue based on vulnera
 - [x] KEV analytics
 - [x] EPSS analytics
 - [ ] Threat Velocity visualization
+- [ ] Explain priority tiers with source freshness, coverage, and decision reasons
+- [ ] Display validated model advice with its target, version, and limitations
 
 ### Phase 6 — Threat Intelligence
 
@@ -393,7 +423,7 @@ The eventual goal is to produce an actionable remediation queue based on vulnera
 ### Phase 7 — Automation
 
 - [ ] Deploy n8n
-- [ ] Automate ingestion
+- [x] Automate ingestion
 - [ ] Build alert workflows
 - [ ] Generate daily threat summaries
 
@@ -414,6 +444,9 @@ The eventual goal is to produce an actionable remediation queue based on vulnera
 - [ ] Architecture diagrams
 - [ ] API documentation
 - [ ] Project demonstration video
+- [ ] Publish versioned policy examples and complete dataset/model reproduction guides
+- [ ] Document source attribution, redistribution terms, and supported data/model scope
+- [ ] Verify model cards, degraded-data behavior, and baseline fallback in the public demo
 
 ---
 
@@ -485,8 +518,45 @@ uv run --locked streamlit run src/threatpulse/dashboard.py \
 
 The dashboard provides an overview, filtered vulnerability explorer, CVE
 details with EPSS history, and dedicated KEV/EPSS descriptive analytics.
-Prioritization, deeper analytics, and scheduled
-automation are still planned.
+Run `uv run --locked python -m threatpulse.storage ingest-daily` for checkpointed
+daily collection with KEV/NVD snapshots. See [scheduling and recovery](docs/scheduling.md)
+for the systemd timer, retries, and run inspection.
+
+Generate a reproducible exploratory report from the stored data:
+
+```bash
+uv run --locked python -m threatpulse.exploration --output data/exploration
+```
+
+Open `data/exploration/report.html` for coverage, CVSS/EPSS distributions,
+version-specific associations, and historical EPSS changes. The export includes
+CSV tables, SVG/PNG figures, and an offline replay dataset. See
+[the analysis guide](docs/exploration.md) for dates, methods, and limitations.
+Collect a defined NVD publication-window cohort and compare KEV/non-KEV
+CVSS and same-date EPSS distributions with `python -m threatpulse.comparison`.
+See [the comparison guide](docs/comparison.md) for collection, frozen study
+storage, coverage, offline replay, and selection bias.
+Generate snapshot and multi-date EPSS trends with
+`python -m threatpulse.trends --output data/trends`. The report tracks observed
+KEV membership changes, comparable preferred CVSS changes, calendar gaps,
+matched EPSS changes, and a balanced EPSS panel. See
+[the trend guide](docs/trends.md) for reproducible exports and limitations.
+Run `python -m threatpulse.statistics --input SOURCE_JSON --output data/statistics`
+for exploratory permutation tests, effect sizes, nominal bootstrap confidence
+intervals, and Holm correction across the five planned endpoints. See
+[the statistical guide](docs/statistical-testing.md) for sample requirements,
+coverage, reproducible plans, and observational assumptions.
+The [prioritization methodology](docs/prioritization-methodology.md) now specifies
+baseline decisions and data-quality handling. Run
+`python -m threatpulse.velocity --output data/velocity` for EPSS change rates,
+coverage/freshness checks, audited model comparability, and offline replay.
+See [the Threat Velocity guide](docs/threat-velocity.md). Run
+`python -m threatpulse.priority --output data/priority` for baseline intelligence
+review queues, data-quality reasons, provenance, and reproducible decisions.
+Use `--previous PRIOR_ANALYSIS_JSON` on subsequent runs to preserve downgrade
+review state. [The engine guide](docs/prioritization.md) includes the synthetic
+demo and approval workflow. [The ML study design](docs/ml-study-design.md) defines the separate
+data collection, training, validation, and advisory integration milestones.
 
 ---
 
